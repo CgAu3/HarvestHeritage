@@ -1,0 +1,13 @@
+{
+  "itemGroup.harvestheritage": "Example Mod Tab",
+  "block.harvestheritage.example_block": "Example Block",
+  "item.harvestheritage.example_item": "Example Item",
+
+  "harvestheritage.configuration.title": "HarvestHeritage Configs",
+  "harvestheritage.configuration.section.harvestheritage.common.toml": "HarvestHeritage Configs",
+  "harvestheritage.configuration.section.harvestheritage.common.toml.title": "HarvestHeritage Configs",
+  "harvestheritage.configuration.items": "Item List",
+  "harvestheritage.configuration.logDirtBlock": "Log Dirt Block",
+  "harvestheritage.configuration.magicNumberIntroduction": "Magic Number Text",
+  "harvestheritage.configuration.magicNumber": "Magic Number"
+}
