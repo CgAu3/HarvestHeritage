@@ -1,6 +1,10 @@
 {
-  "block.harvestheritage.example_block": "Test Block",
+  "block.harvestheritage.test_block": "Test Block",
   "item.harvestheritage.grass_shear": "Grass Shear",
+  "item.harvestheritage.grass_shear.tooltip": "Try using this to destroy some grass?",
+  "item.harvestheritage.known_seed": "Known Seed",
+  "item.harvestheritage.magnifying_glass": "Magnifying Glass",
   "item.harvestheritage.unknown_seed": "Unknown Seed",
+  "item.harvestheritage.unknown_seed.tooltip": "Maybe you need to throw it on the ground and look at it with a magnifying glass...",
   "modmenu.nameTranslation.harvestheritage": "Harvest Heritage"
 }

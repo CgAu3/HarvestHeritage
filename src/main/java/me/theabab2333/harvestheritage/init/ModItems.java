@@ -1,5 +1,8 @@
 package me.theabab2333.harvestheritage.init;
 
+import me.theabab2333.harvestheritage.item.GrassShearItem;
+import me.theabab2333.harvestheritage.item.KnownSeedItem;
+import me.theabab2333.harvestheritage.item.MagnifyingGlassItem;
 import me.theabab2333.harvestheritage.item.UnknownSeedItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -11,9 +14,13 @@ import static me.theabab2333.harvestheritage.HarvestHeritage.MODID;
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
-    public static final DeferredItem<Item> GRASS_SHEAR = ITEMS.registerSimpleItem("grass_shear", p -> p);
+    public static final DeferredItem<Item> GRASS_SHEAR = ITEMS.registerItem("grass_shear", GrassShearItem::new);
+
+    public static final DeferredItem<Item> MAGNIFYING_GLASS = ITEMS.registerItem("magnifying_glass", MagnifyingGlassItem::new);
 
     public static final DeferredItem<Item> UNKNOWN_SEED = ITEMS.registerItem("unknown_seed", UnknownSeedItem::new);
+
+    public static final DeferredItem<Item> KNOWN_SEED = ITEMS.registerItem("known_seed", KnownSeedItem::new);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

@@ -16,8 +16,10 @@ public class ModModelProvider extends ModelProvider {
 
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        blockModels.createTrivialCube(ModBlocks.EXAMPLE_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.TEST_BLOCK.get());
         itemModels.generateFlatItem(ModItems.GRASS_SHEAR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.UNKNOWN_SEED.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.MAGNIFYING_GLASS.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.KNOWN_SEED.get(), ModelTemplates.FLAT_ITEM);
     }
 }

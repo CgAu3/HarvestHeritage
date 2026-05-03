@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "harvestheritage:block/example_block"
+    "all": "harvestheritage:block/test_block"
   }
 }

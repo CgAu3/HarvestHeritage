@@ -20,8 +20,8 @@ import static me.theabab2333.harvestheritage.HarvestHeritage.MODID;
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
 
-    public static final DeferredBlock<Block> EXAMPLE_BLOCK = registerBlockWithItem(
-        "example_block",
+    public static final DeferredBlock<Block> TEST_BLOCK = registerBlockWithItem(
+        "test_block",
         p -> new Block(p.mapColor(MapColor.STONE))
     );
 

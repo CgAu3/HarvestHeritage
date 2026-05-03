@@ -1,6 +1,10 @@
 {
-  "block.harvestheritage.example_block": "测试方块",
+  "block.harvestheritage.test_block": "测试方块",
   "item.harvestheritage.grass_shear": "除草剪",
+  "item.harvestheritage.grass_shear.tooltip": "用这个破坏点草试试?",
+  "item.harvestheritage.known_seed": "已知种子",
+  "item.harvestheritage.magnifying_glass": "放大镜",
   "item.harvestheritage.unknown_seed": "未知种子",
-  "modmenu.nameTranslation.harvestheritage": "收获：遗产"
+  "item.harvestheritage.unknown_seed.tooltip": "或许需要丢在地上用放大镜看看...",
+  "modmenu.nameTranslation.harvestheritage": "Harvest Heritage"
 }

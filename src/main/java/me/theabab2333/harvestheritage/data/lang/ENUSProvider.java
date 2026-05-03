@@ -16,7 +16,11 @@ public class ENUSProvider extends LanguageProvider {
     protected void addTranslations() {
         addItem(ModItems.GRASS_SHEAR, "Grass Shear");
         addItem(ModItems.UNKNOWN_SEED, "Unknown Seed");
-        addBlock(ModBlocks.EXAMPLE_BLOCK, "Test Block");
+        addItem(ModItems.MAGNIFYING_GLASS, "Magnifying Glass");
+        addItem(ModItems.KNOWN_SEED, "Known Seed");
+        addBlock(ModBlocks.TEST_BLOCK, "Test Block");
         add("modmenu.nameTranslation.harvestheritage", "Harvest Heritage");
+        add("item.harvestheritage.unknown_seed.tooltip", "Maybe you need to throw it on the ground and look at it with a magnifying glass...");
+        add("item.harvestheritage.grass_shear.tooltip", "Try using this to destroy some grass?");
     }
 }
