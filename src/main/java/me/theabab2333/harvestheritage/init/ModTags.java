@@ -17,7 +17,7 @@ public class ModTags {
     }
 
     public static class ItemTags {
-
+        public static TagKey<Item> CAN_FIND_SEEDS = createItemTag("can_find_seeds");
     }
 
     public static class BlockTags {

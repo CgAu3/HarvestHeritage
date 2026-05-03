@@ -21,6 +21,5 @@ public class ZHCNProvider extends LanguageProvider {
         add("modmenu.nameTranslation.harvestheritage", "Harvest Heritage");
         add("item.harvestheritage.unknown_seed.tooltip", "或许需要丢在地上用放大镜看看...");
         add("item.harvestheritage.grass_shear.tooltip", "用这个破坏点草试试?");
-        add("item.harvestheritage.grass_shear.tooltip", "用这个破坏点草试试?");
     }
 }
