@@ -1,12 +1,12 @@
 package me.theabab2333.harvestheritage;
 
 import com.mojang.logging.LogUtils;
+import me.theabab2333.harvestheritage.data.loot.ModLootModifiers;
 import me.theabab2333.harvestheritage.init.ModBlocks;
 import me.theabab2333.harvestheritage.init.ModConfig;
 import me.theabab2333.harvestheritage.init.ModCreativeModeTab;
 import me.theabab2333.harvestheritage.init.ModItems;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -27,22 +27,19 @@ public class HarvestHeritage {
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);
         ModCreativeModeTab.register(eventBus);
+        ModLootModifiers.register(eventBus);
 
         NeoForge.EVENT_BUS.register(this);
 
         modContainer.registerConfig(net.neoforged.fml.config.ModConfig.Type.COMMON, ModConfig.SPEC);
     }
 
+    public static Identifier of(String path) {
+        return Identifier.fromNamespaceAndPath(MODID, path);
+    }
+
     private void commonSetup(FMLCommonSetupEvent event) {
-        LOGGER.info("HELLO FROM COMMON SETUP");
 
-        if (ModConfig.LOG_DIRT_BLOCK.getAsBoolean()) {
-            LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
-        }
-
-        LOGGER.info("{}{}", ModConfig.MAGIC_NUMBER_INTRODUCTION.get(), ModConfig.MAGIC_NUMBER.getAsInt());
-
-        ModConfig.ITEM_STRINGS.get().forEach((item) -> LOGGER.info("ITEM >> {}", item));
     }
 
     @SubscribeEvent

@@ -16,8 +16,8 @@ import static me.theabab2333.harvestheritage.HarvestHeritage.MODID;
 
 public class ModCreativeModeTab {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATIVEMODE_TAB = CREATIVE_MODE_TABS.register(
-        "example_tab", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATIVE_MODE_TAB = CREATIVE_MODE_TABS.register(
+        "creative_mode_tab", () -> CreativeModeTab.builder()
             .displayItems((_, output) -> getItem().forEach(output::accept))
             .icon(() -> new ItemStack(ModItems.GRASS_SHEAR.get()))
             .title(Component.translatable("modmenu.nameTranslation.harvestheritage"))

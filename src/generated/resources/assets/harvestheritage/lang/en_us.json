@@ -1,5 +1,6 @@
 {
   "block.harvestheritage.example_block": "Test Block",
   "item.harvestheritage.grass_shear": "Grass Shear",
+  "item.harvestheritage.unknown_seed": "Unknown Seed",
   "modmenu.nameTranslation.harvestheritage": "Harvest Heritage"
 }

@@ -1,5 +1,6 @@
 {
   "block.harvestheritage.example_block": "测试方块",
   "item.harvestheritage.grass_shear": "除草剪",
-  "modmenu.nameTranslation.harvestheritage": "Harvest Heritage"
+  "item.harvestheritage.unknown_seed": "未知种子",
+  "modmenu.nameTranslation.harvestheritage": "收获：遗产"
 }

@@ -14,7 +14,8 @@ public class ZHCNProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         addItem(ModItems.GRASS_SHEAR, "除草剪");
+        addItem(ModItems.UNKNOWN_SEED, "未知种子");
         addBlock(ModBlocks.EXAMPLE_BLOCK, "测试方块");
-        add("modmenu.nameTranslation.harvestheritage", "Harvest Heritage");
+        add("modmenu.nameTranslation.harvestheritage", "收获：遗产");
     }
 }

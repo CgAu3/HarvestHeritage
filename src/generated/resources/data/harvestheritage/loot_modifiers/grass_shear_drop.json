@@ -1,0 +1,21 @@
+{
+  "type": "harvestheritage:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:blocks/short_grass"
+    },
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "items": "harvestheritage:grass_shear"
+      }
+    },
+    {
+      "chance": 0.15,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": "harvestheritage:unknown_seed",
+  "priority": 0
+}
