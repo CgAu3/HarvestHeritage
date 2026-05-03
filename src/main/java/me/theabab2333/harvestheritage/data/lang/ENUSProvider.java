@@ -15,6 +15,7 @@ public class ENUSProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         addItem(ModItems.GRASS_SHEAR, "Grass Shear");
+        addItem(ModItems.UNKNOWN_SEED, "Unknown Seed");
         addBlock(ModBlocks.EXAMPLE_BLOCK, "Test Block");
         add("modmenu.nameTranslation.harvestheritage", "Harvest Heritage");
     }
