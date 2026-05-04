@@ -1,7 +1,7 @@
 package me.theabab2333.harvestheritage;
 
 import com.mojang.logging.LogUtils;
-import me.theabab2333.harvestheritage.data.loot.ModLootModifiers;
+import me.theabab2333.harvestheritage.datagen.loot.ModLootModifiers;
 import me.theabab2333.harvestheritage.init.ModBlocks;
 import me.theabab2333.harvestheritage.init.ModConfig;
 import me.theabab2333.harvestheritage.init.ModCreativeModeTab;

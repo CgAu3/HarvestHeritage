@@ -1,13 +1,13 @@
-package me.theabab2333.harvestheritage.data;
+package me.theabab2333.harvestheritage.datagen;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
-import me.theabab2333.harvestheritage.data.lang.ENUSProvider;
-import me.theabab2333.harvestheritage.data.lang.ZHCNProvider;
-import me.theabab2333.harvestheritage.data.loot.ModGlobalLootModifierProvider;
-import me.theabab2333.harvestheritage.data.model.ModModelProvider;
-import me.theabab2333.harvestheritage.data.recipe.ModRecipeProvider;
-import me.theabab2333.harvestheritage.data.tag.ModBlockTagsProvider;
-import me.theabab2333.harvestheritage.data.tag.ModItemTagsProvider;
+import me.theabab2333.harvestheritage.datagen.lang.ENUSProvider;
+import me.theabab2333.harvestheritage.datagen.lang.ZHCNProvider;
+import me.theabab2333.harvestheritage.datagen.loot.ModGlobalLootModifierProvider;
+import me.theabab2333.harvestheritage.datagen.model.ModModelProvider;
+import me.theabab2333.harvestheritage.datagen.recipe.ModRecipeProvider;
+import me.theabab2333.harvestheritage.datagen.tag.ModBlockTagsProvider;
+import me.theabab2333.harvestheritage.datagen.tag.ModItemTagsProvider;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

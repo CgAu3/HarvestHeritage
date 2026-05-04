@@ -1,6 +1,6 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package me.theabab2333.harvestheritage.data.loot;
+package me.theabab2333.harvestheritage.datagen.loot;
 
 import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
 

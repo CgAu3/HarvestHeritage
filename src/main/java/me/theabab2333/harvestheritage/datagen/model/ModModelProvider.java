@@ -1,4 +1,4 @@
-package me.theabab2333.harvestheritage.data.model;
+package me.theabab2333.harvestheritage.datagen.model;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
 import me.theabab2333.harvestheritage.init.ModBlocks;

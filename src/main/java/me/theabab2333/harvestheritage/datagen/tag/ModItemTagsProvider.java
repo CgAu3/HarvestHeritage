@@ -1,15 +1,15 @@
-package me.theabab2333.harvestheritage.data.tag;
+package me.theabab2333.harvestheritage.datagen.tag;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModBlockTagsProvider extends BlockTagsProvider {
-    public ModBlockTagsProvider(
+public class ModItemTagsProvider extends ItemTagsProvider {
+    public ModItemTagsProvider(
         PackOutput output,
         CompletableFuture<HolderLookup.Provider> lookupProvider
     ) {

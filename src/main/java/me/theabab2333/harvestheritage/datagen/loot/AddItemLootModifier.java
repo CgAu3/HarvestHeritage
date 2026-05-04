@@ -1,4 +1,4 @@
-package me.theabab2333.harvestheritage.data.loot;
+package me.theabab2333.harvestheritage.datagen.loot;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

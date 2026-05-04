@@ -4,32 +4,52 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "seed": "minecraft:wheat_seeds"
+        "harvestheritage:seed_packet_component": {
+          "output": 1,
+          "result": [
+            "minecraft:wheat_seeds"
+          ],
+          "seed": "minecraft:wheat_seeds",
+          "speed": 1
         }
       },
       "id": "harvestheritage:known_seed"
     },
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "seed": "minecraft:beetroot_seeds"
+        "harvestheritage:seed_packet_component": {
+          "output": 1,
+          "result": [
+            "minecraft:beetroot_seeds"
+          ],
+          "seed": "minecraft:beetroot_seeds",
+          "speed": 1
         }
       },
       "id": "harvestheritage:known_seed"
     },
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "seed": "minecraft:melon_seeds"
+        "harvestheritage:seed_packet_component": {
+          "output": 1,
+          "result": [
+            "minecraft:melon_seeds"
+          ],
+          "seed": "minecraft:melon_seeds",
+          "speed": 1
         }
       },
       "id": "harvestheritage:known_seed"
     },
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "seed": "minecraft:pumpkin_seeds"
+        "harvestheritage:seed_packet_component": {
+          "output": 1,
+          "result": [
+            "minecraft:pumpkin_seeds"
+          ],
+          "seed": "minecraft:pumpkin_seeds",
+          "speed": 1
         }
       },
       "id": "harvestheritage:known_seed"

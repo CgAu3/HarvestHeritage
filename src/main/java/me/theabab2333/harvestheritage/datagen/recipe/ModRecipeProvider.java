@@ -1,4 +1,4 @@
-package me.theabab2333.harvestheritage.data.recipe;
+package me.theabab2333.harvestheritage.datagen.recipe;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
 import net.minecraft.core.HolderLookup;

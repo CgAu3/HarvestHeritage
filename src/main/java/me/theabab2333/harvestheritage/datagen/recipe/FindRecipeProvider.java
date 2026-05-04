@@ -1,7 +1,7 @@
-package me.theabab2333.harvestheritage.data.recipe;
+package me.theabab2333.harvestheritage.datagen.recipe;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
-import me.theabab2333.harvestheritage.component.SeedComponent;
+import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.recipe.FindRecipe;
@@ -30,8 +30,9 @@ public class FindRecipeProvider extends ModRecipeProvider {
     private static void buildCommonSeed(RecipeOutput output) {
         List<ItemStackTemplate> list = new ArrayList<>();
         for (var item : COMMON_SEEDS) {
-            var component = SeedComponent.setSeed(item.builtInRegistryHolder());
-            var patch = DataComponentPatch.builder().set(ModDataComponents.SEED_COMPONENT.get(), component).build();
+            var holder = item.builtInRegistryHolder();
+            var component = SeedPacketComponent.createSeedPacket(holder, List.of(holder), 1, 1);
+            var patch = DataComponentPatch.builder().set(ModDataComponents.SEED_PACKET_COMPONENT.get(), component).build();
             var stack = new ItemStackTemplate(ModItems.KNOWN_SEED.get(), 1, patch);
             list.add(stack);
         }
