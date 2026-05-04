@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "harvestheritage:block/arable_land_block"
+      }
+    }
+  ]
+}

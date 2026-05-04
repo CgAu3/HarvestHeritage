@@ -19,6 +19,7 @@ import java.util.function.Consumer;
 
 public class GrassShearItem extends Item {
     public GrassShearItem(Properties properties) {
+        properties.stacksTo(1);
         super(properties);
     }
 

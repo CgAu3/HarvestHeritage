@@ -22,5 +22,11 @@ public class ENUSProvider extends LanguageProvider {
         add("modmenu.nameTranslation.harvestheritage", "Harvest Heritage");
         add("item.harvestheritage.unknown_seed.tooltip", "Maybe you need to throw it on the ground and look at it with a magnifying glass...");
         add("item.harvestheritage.grass_shear.tooltip", "Try using this to destroy some grass?");
+        add("item.harvestheritage.seed_packet.tooltip.fail", "Sorry, this item does not have a seed component");
+        add("item.harvestheritage.seed_packet.tooltip.seed", "Seed: %s");
+        add("item.harvestheritage.seed_packet.tooltip.result", "Output: %s");
+        add("item.harvestheritage.seed_packet.tooltip.speed", "Growth Speed: %s");
+        add("item.harvestheritage.seed_packet.tooltip.output", "Output Amount: %s");
+        add("item.harvestheritage.seed_packet.tooltip.iterate", "Iteration Count: %s");
     }
 }

@@ -1,5 +1,6 @@
 package me.theabab2333.harvestheritage.init;
 
+import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -14,6 +15,13 @@ public class ModDataComponents {
     public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(
         Registries.DATA_COMPONENT_TYPE,
         MODID
+    );
+
+    public static final Supplier<DataComponentType<SeedComponent>> SEED_COMPONENT = DATA_COMPONENTS.registerComponentType(
+        "seed_component",
+        builder -> builder
+            .networkSynchronized(SeedComponent.STREAM_CODEC)
+            .persistent(SeedComponent.CODEC)
     );
 
     public static final Supplier<DataComponentType<SeedPacketComponent>> SEED_PACKET_COMPONENT = DATA_COMPONENTS.registerComponentType(

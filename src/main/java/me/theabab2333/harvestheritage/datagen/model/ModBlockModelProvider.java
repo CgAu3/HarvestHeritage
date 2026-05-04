@@ -1,0 +1,18 @@
+package me.theabab2333.harvestheritage.datagen.model;
+
+import me.theabab2333.harvestheritage.HarvestHeritage;
+import me.theabab2333.harvestheritage.init.ModBlocks;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
+
+import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant;
+
+public class ModBlockModelProvider {
+    public static void registerModels(BlockModelGenerators blockModels) {
+        var blockStateOutput = blockModels.blockStateOutput;
+
+        blockModels.createTrivialCube(ModBlocks.TEST_BLOCK.get());
+
+        blockStateOutput.accept(MultiPartGenerator.multiPart(ModBlocks.ARABLE_LAND_BLOCK.get()).with(plainVariant(HarvestHeritage.of("block/arable_land_block"))));
+    }
+}

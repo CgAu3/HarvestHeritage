@@ -10,19 +10,16 @@ import net.minecraft.world.item.Item;
 
 import java.util.List;
 
-public record SeedPacketComponent(Holder<Item> seed, List<Holder<Item>> result, int speed, int output) {
+public record SeedPacketComponent(SeedComponent seedComponent, int speed, int output) {
     public static final Codec<SeedPacketComponent> CODEC = RecordCodecBuilder.create(inst -> inst.group(
-        Item.CODEC.fieldOf("seed").forGetter(SeedPacketComponent::seed),
-        Item.CODEC.listOf().fieldOf("result").forGetter(SeedPacketComponent::result),
+        SeedComponent.CODEC.fieldOf("seed_component").forGetter(SeedPacketComponent::seedComponent),
         Codec.INT.fieldOf("speed").forGetter(SeedPacketComponent::speed),
         Codec.INT.fieldOf("output").forGetter(SeedPacketComponent::output)
     ).apply(inst, SeedPacketComponent::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SeedPacketComponent> STREAM_CODEC = StreamCodec.composite(
-        Item.STREAM_CODEC,
-        SeedPacketComponent::seed,
-        Item.STREAM_CODEC.apply(ByteBufCodecs.list()),
-        SeedPacketComponent::result,
+        SeedComponent.STREAM_CODEC,
+        SeedPacketComponent::seedComponent,
         ByteBufCodecs.INT,
         SeedPacketComponent::speed,
         ByteBufCodecs.INT,
@@ -30,11 +27,15 @@ public record SeedPacketComponent(Holder<Item> seed, List<Holder<Item>> result, 
         SeedPacketComponent::new
     );
 
-    public static SeedPacketComponent createSeedPacket(Holder<Item> seed, List<Holder<Item>> result, int speed, int output) {
-        return new SeedPacketComponent(seed, result, speed, output);
+    public static SeedPacketComponent createSeedPacket(Holder<Item> seed, List<Holder<Item>> holders, int speed, int output) {
+        return new SeedPacketComponent(SeedComponent.createSeed(seed, holders), speed, output);
+    }
+
+    public static SeedPacketComponent createSeedPacket(SeedComponent seedComponent, int speed, int output) {
+        return new SeedPacketComponent(seedComponent, speed, output);
     }
 
     public static SeedPacketComponent undateSeedPacket(SeedPacketComponent component, int speed, int output) {
-        return new SeedPacketComponent(component.seed(), component.result, speed, output);
+        return new SeedPacketComponent(component.seedComponent, speed, output);
     }
 }

@@ -4,6 +4,7 @@ import me.theabab2333.harvestheritage.HarvestHeritage;
 import me.theabab2333.harvestheritage.datagen.lang.ENUSProvider;
 import me.theabab2333.harvestheritage.datagen.lang.ZHCNProvider;
 import me.theabab2333.harvestheritage.datagen.loot.ModGlobalLootModifierProvider;
+import me.theabab2333.harvestheritage.datagen.loot.ModLootTables;
 import me.theabab2333.harvestheritage.datagen.model.ModModelProvider;
 import me.theabab2333.harvestheritage.datagen.recipe.ModRecipeProvider;
 import me.theabab2333.harvestheritage.datagen.tag.ModBlockTagsProvider;
@@ -29,6 +30,7 @@ public class Datagen {
 
         // LootTab
         event.createProvider(ModGlobalLootModifierProvider::new);
+        event.createProvider(ModLootTables::new);
 
         // Lang
         event.createProvider(ENUSProvider::new);

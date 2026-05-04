@@ -3,6 +3,7 @@ package me.theabab2333.harvestheritage.init;
 import me.theabab2333.harvestheritage.item.GrassShearItem;
 import me.theabab2333.harvestheritage.item.KnownSeedItem;
 import me.theabab2333.harvestheritage.item.MagnifyingGlassItem;
+import me.theabab2333.harvestheritage.item.SeedPacketItem;
 import me.theabab2333.harvestheritage.item.UnknownSeedItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -21,6 +22,8 @@ public class ModItems {
     public static final DeferredItem<Item> UNKNOWN_SEED = ITEMS.registerItem("unknown_seed", UnknownSeedItem::new);
 
     public static final DeferredItem<Item> KNOWN_SEED = ITEMS.registerItem("known_seed", KnownSeedItem::new);
+
+    public static final DeferredItem<Item> SEED_PACKET = ITEMS.registerItem("seed_packet", SeedPacketItem::new);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

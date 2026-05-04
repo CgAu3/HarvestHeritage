@@ -13,6 +13,7 @@ import net.minecraft.world.phys.AABB;
 
 public class MagnifyingGlassItem extends Item {
     public MagnifyingGlassItem(Properties properties) {
+        properties.stacksTo(1);
         super(properties);
     }
 
