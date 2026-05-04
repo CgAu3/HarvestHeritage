@@ -1,7 +1,7 @@
 package me.theabab2333.harvestheritage.init;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
-import me.theabab2333.harvestheritage.block.ArableLandBlock;
+import me.theabab2333.harvestheritage.block.CropStandBlock;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -20,9 +20,9 @@ import static me.theabab2333.harvestheritage.HarvestHeritage.MODID;
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
 
-    public static final DeferredBlock<Block> ARABLE_LAND_BLOCK = registerBlockWithItem(
-        "arable_land_block",
-        ArableLandBlock::new
+    public static final DeferredBlock<Block> CROP_STAND_BLOCK = registerBlockWithItem(
+        "crop_stand_block",
+        CropStandBlock::new
     );
 
     public static final DeferredBlock<Block> TEST_BLOCK = registerBlockWithItem(

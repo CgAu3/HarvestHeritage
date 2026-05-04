@@ -1,9 +1,11 @@
 {
+  "block.harvestheritage.crop_stand_block": "Crop Stand",
   "block.harvestheritage.test_block": "Test Block",
   "item.harvestheritage.grass_shear": "Grass Shear",
   "item.harvestheritage.grass_shear.tooltip": "Try using this to destroy some grass?",
   "item.harvestheritage.known_seed": "Known Seed",
   "item.harvestheritage.magnifying_glass": "Magnifying Glass",
+  "item.harvestheritage.seed_packet": "Seed Packet",
   "item.harvestheritage.seed_packet.tooltip.fail": "Sorry, this item does not have a seed component",
   "item.harvestheritage.seed_packet.tooltip.iterate": "Iteration Count: %s",
   "item.harvestheritage.seed_packet.tooltip.output": "Output Amount: %s",

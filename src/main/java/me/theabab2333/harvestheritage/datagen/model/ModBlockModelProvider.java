@@ -13,6 +13,6 @@ public class ModBlockModelProvider {
 
         blockModels.createTrivialCube(ModBlocks.TEST_BLOCK.get());
 
-        blockStateOutput.accept(MultiPartGenerator.multiPart(ModBlocks.ARABLE_LAND_BLOCK.get()).with(plainVariant(HarvestHeritage.of("block/arable_land_block"))));
+        blockStateOutput.accept(MultiPartGenerator.multiPart(ModBlocks.CROP_STAND_BLOCK.get()).with(plainVariant(HarvestHeritage.of("block/crop_stand_block"))));
     }
 }

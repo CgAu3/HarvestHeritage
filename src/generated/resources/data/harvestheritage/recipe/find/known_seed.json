@@ -8,9 +8,9 @@
           "output": 2,
           "seed_component": {
             "result": [
-              "minecraft:melon"
+              "minecraft:pumpkin"
             ],
-            "seed": "minecraft:melon_seeds"
+            "seed": "minecraft:pumpkin_seeds"
           },
           "speed": 1
         }
@@ -38,9 +38,9 @@
           "output": 2,
           "seed_component": {
             "result": [
-              "minecraft:beetroot"
+              "minecraft:melon"
             ],
-            "seed": "minecraft:beetroot_seeds"
+            "seed": "minecraft:melon_seeds"
           },
           "speed": 1
         }
@@ -53,9 +53,9 @@
           "output": 2,
           "seed_component": {
             "result": [
-              "minecraft:pumpkin"
+              "minecraft:beetroot"
             ],
-            "seed": "minecraft:pumpkin_seeds"
+            "seed": "minecraft:beetroot_seeds"
           },
           "speed": 1
         }

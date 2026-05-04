@@ -18,9 +18,14 @@ public class ENUSProvider extends LanguageProvider {
         addItem(ModItems.UNKNOWN_SEED, "Unknown Seed");
         addItem(ModItems.MAGNIFYING_GLASS, "Magnifying Glass");
         addItem(ModItems.KNOWN_SEED, "Known Seed");
+        addItem(ModItems.SEED_PACKET, "Seed Packet");
         addBlock(ModBlocks.TEST_BLOCK, "Test Block");
+        addBlock(ModBlocks.CROP_STAND_BLOCK, "Crop Stand");
         add("modmenu.nameTranslation.harvestheritage", "Harvest Heritage");
-        add("item.harvestheritage.unknown_seed.tooltip", "Maybe you need to throw it on the ground and look at it with a magnifying glass...");
+        add(
+            "item.harvestheritage.unknown_seed.tooltip",
+            "Maybe you need to throw it on the ground and look at it with a magnifying glass..."
+        );
         add("item.harvestheritage.grass_shear.tooltip", "Try using this to destroy some grass?");
         add("item.harvestheritage.seed_packet.tooltip.fail", "Sorry, this item does not have a seed component");
         add("item.harvestheritage.seed_packet.tooltip.seed", "Seed: %s");

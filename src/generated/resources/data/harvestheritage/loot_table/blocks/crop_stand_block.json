@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "harvestheritage:arable_land_block"
+          "name": "harvestheritage:crop_stand_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "harvestheritage:blocks/arable_land_block"
+  "random_sequence": "harvestheritage:blocks/crop_stand_block"
 }

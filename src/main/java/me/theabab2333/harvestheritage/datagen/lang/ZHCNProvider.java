@@ -17,7 +17,9 @@ public class ZHCNProvider extends LanguageProvider {
         addItem(ModItems.UNKNOWN_SEED, "未知种子");
         addItem(ModItems.MAGNIFYING_GLASS, "放大镜");
         addItem(ModItems.KNOWN_SEED, "已知种子");
+        addItem(ModItems.SEED_PACKET, "种子袋");
         addBlock(ModBlocks.TEST_BLOCK, "测试方块");
+        addBlock(ModBlocks.CROP_STAND_BLOCK, "作物架");
         add("modmenu.nameTranslation.harvestheritage", "Harvest Heritage");
         add("item.harvestheritage.unknown_seed.tooltip", "或许需要丢在地上用放大镜看看...");
         add("item.harvestheritage.grass_shear.tooltip", "用这个破坏点草试试?");

@@ -2,7 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "harvestheritage:block/arable_land_block"
+        "model": "harvestheritage:block/crop_stand_block"
       }
     }
   ]
