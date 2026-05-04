@@ -1,29 +1,34 @@
 package me.theabab2333.harvestheritage.init;
 
+import me.theabab2333.harvestheritage.component.SeedComponent;
+import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 import static me.theabab2333.harvestheritage.HarvestHeritage.MODID;
 
 public class ModDataComponents {
-    public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENTS = DeferredRegister.create(
+    public static final DeferredRegister.DataComponents DATA_COMPONENTS = DeferredRegister.createDataComponents(
         Registries.DATA_COMPONENT_TYPE,
         MODID
     );
 
-    public static final Supplier<DataComponentType<Identifier>> SEED_TYPE = DATA_COMPONENTS.register(
-        "seed_type",
-        () -> DataComponentType.<Identifier>builder().persistent(Identifier.CODEC).networkSynchronized(Identifier.STREAM_CODEC).build()
+    public static final Supplier<DataComponentType<SeedComponent>> SEED_COMPONENT = DATA_COMPONENTS.registerComponentType(
+        "seed_component",
+        builder -> builder
+            .networkSynchronized(SeedComponent.STREAM_CODEC)
+            .persistent(SeedComponent.CODEC)
     );
-    public static final Supplier<DataComponentType<List<Identifier>>> SEED_TYPE_LIST = DATA_COMPONENTS.register(
-        "seed_type_list",
-        () -> DataComponentType.<List<Identifier>>builder().persistent(Identifier.CODEC.listOf()).cacheEncoding().build()
+
+    public static final Supplier<DataComponentType<SeedPacketComponent>> SEED_PACKET_COMPONENT = DATA_COMPONENTS.registerComponentType(
+        "seed_packet_component",
+        builder -> builder
+            .networkSynchronized(SeedPacketComponent.STREAM_CODEC)
+            .persistent(SeedPacketComponent.CODEC)
     );
 
     public static void register(IEventBus event) {

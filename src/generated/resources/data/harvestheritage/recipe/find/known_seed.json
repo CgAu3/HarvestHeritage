@@ -1,0 +1,38 @@
+{
+  "type": "harvestheritage:find_type",
+  "ingredient": "harvestheritage:unknown_seed",
+  "result": [
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "seed": "minecraft:wheat_seeds"
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    },
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "seed": "minecraft:beetroot_seeds"
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    },
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "seed": "minecraft:melon_seeds"
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    },
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "seed": "minecraft:pumpkin_seeds"
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    }
+  ]
+}

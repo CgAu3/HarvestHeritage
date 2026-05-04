@@ -5,6 +5,7 @@ import me.theabab2333.harvestheritage.data.lang.ENUSProvider;
 import me.theabab2333.harvestheritage.data.lang.ZHCNProvider;
 import me.theabab2333.harvestheritage.data.loot.ModGlobalLootModifierProvider;
 import me.theabab2333.harvestheritage.data.model.ModModelProvider;
+import me.theabab2333.harvestheritage.data.recipe.ModRecipeProvider;
 import me.theabab2333.harvestheritage.data.tag.ModBlockTagsProvider;
 import me.theabab2333.harvestheritage.data.tag.ModItemTagsProvider;
 import net.neoforged.api.distmarker.Dist;
@@ -22,6 +23,9 @@ public class Datagen {
         // Tag
         event.createProvider(ModItemTagsProvider::new);
         event.createProvider(ModBlockTagsProvider::new);
+
+        // Recipe
+        event.createProvider(ModRecipeProvider.Runner::new);
 
         // LootTab
         event.createProvider(ModGlobalLootModifierProvider::new);
