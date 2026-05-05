@@ -2,10 +2,12 @@ package me.theabab2333.harvestheritage.init;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
 import me.theabab2333.harvestheritage.recipe.FindRecipe;
+import me.theabab2333.harvestheritage.recipe.SeedPacketRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -26,6 +28,10 @@ public class ModRecipes {
         "find_type",
         () -> new RecipeSerializer<>(FindRecipe.CODEC, FindRecipe.STREAM_CODEC)
     );
+    public static final DeferredHolder<RecipeSerializer<?>, ?> SEED_PACKET_SERIALIZERS = RECIPE_SERIALIZERS.register(
+            "seed_packet",
+            () -> SeedPacketRecipe.SERIALIZER
+        );
 
     public static void register(IEventBus eventBus) {
         RECIPE_TYPES.register(eventBus);
