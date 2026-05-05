@@ -23,7 +23,6 @@ public class GrassShearItem extends Item {
         super(properties);
     }
 
-    // 可以写战利品表，但是我还是选择这样
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState state, BlockPos pos, LivingEntity owner) {
         if (!level.isClientSide()) {
