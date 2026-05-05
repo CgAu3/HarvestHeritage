@@ -1,7 +1,7 @@
 package me.theabab2333.harvestheritage.datagen.recipe;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
-import me.theabab2333.harvestheritage.component.SeedPacketComponent;
+import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.recipe.FindRecipe;
@@ -40,10 +40,9 @@ public class FindRecipeProvider extends ModRecipeProvider {
 
             Holder<Item> seedHolder = seedItem.builtInRegistryHolder();
             List<Holder<Item>> resultHolders = resultItems.stream().map(item -> (Holder<Item>) item.builtInRegistryHolder()).toList();
-            System.out.println(resultHolders);
 
-            var component = SeedPacketComponent.createSeedPacket(seedHolder, resultHolders, 1, 2);
-            var patch = DataComponentPatch.builder().set(ModDataComponents.SEED_PACKET_COMPONENT.get(), component).build();
+            var component = SeedComponent.createSeed(seedHolder, resultHolders);
+            var patch = DataComponentPatch.builder().set(ModDataComponents.SEED_COMPONENT.get(), component).build();
             var stack = new ItemStackTemplate(ModItems.KNOWN_SEED.get(), 1, patch);
             list.add(stack);
         }

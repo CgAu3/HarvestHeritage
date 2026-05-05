@@ -4,60 +4,44 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_packet_component": {
-          "output": 2,
-          "seed_component": {
-            "result": [
-              "minecraft:melon"
-            ],
-            "seed": "minecraft:melon_seeds"
-          },
-          "speed": 1
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:pumpkin"
+          ],
+          "seed": "minecraft:pumpkin_seeds"
         }
       },
       "id": "harvestheritage:known_seed"
     },
     {
       "components": {
-        "harvestheritage:seed_packet_component": {
-          "output": 2,
-          "seed_component": {
-            "result": [
-              "minecraft:pumpkin"
-            ],
-            "seed": "minecraft:pumpkin_seeds"
-          },
-          "speed": 1
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:beetroot"
+          ],
+          "seed": "minecraft:beetroot_seeds"
         }
       },
       "id": "harvestheritage:known_seed"
     },
     {
       "components": {
-        "harvestheritage:seed_packet_component": {
-          "output": 2,
-          "seed_component": {
-            "result": [
-              "minecraft:beetroot"
-            ],
-            "seed": "minecraft:beetroot_seeds"
-          },
-          "speed": 1
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:melon"
+          ],
+          "seed": "minecraft:melon_seeds"
         }
       },
       "id": "harvestheritage:known_seed"
     },
     {
       "components": {
-        "harvestheritage:seed_packet_component": {
-          "output": 2,
-          "seed_component": {
-            "result": [
-              "minecraft:wheat"
-            ],
-            "seed": "minecraft:wheat_seeds"
-          },
-          "speed": 1
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:wheat"
+          ],
+          "seed": "minecraft:wheat_seeds"
         }
       },
       "id": "harvestheritage:known_seed"

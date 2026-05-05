@@ -28,7 +28,8 @@ public abstract class ModRecipeProvider extends RecipeProvider {
     public static class Runner extends RecipeProvider.Runner {
 
         private static final List<RecipeProviderFactory> PROVIDERS = List.of(
-            FindRecipeProvider::new
+            FindRecipeProvider::new,
+            ModItemRecipe::new
         );
 
         public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {

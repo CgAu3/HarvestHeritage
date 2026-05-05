@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": "minecraft:glass_pane",
+    "B": "minecraft:amethyst_shard",
+    "C": "minecraft:stick"
+  },
+  "pattern": [
+    " A ",
+    "ABA",
+    " AC"
+  ],
+  "result": {
+    "id": "harvestheritage:magnifying_glass"
+  }
+}
