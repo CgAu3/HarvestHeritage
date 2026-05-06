@@ -1,7 +1,18 @@
 {
-  "type": "harvestheritage:find_type",
+  "type": "harvestheritage:find",
   "ingredient": "harvestheritage:unknown_seed",
   "result": [
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:melon"
+          ],
+          "seed": "minecraft:melon_seeds"
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    },
     {
       "components": {
         "harvestheritage:seed_component": {
@@ -20,17 +31,6 @@
             "minecraft:beetroot"
           ],
           "seed": "minecraft:beetroot_seeds"
-        }
-      },
-      "id": "harvestheritage:known_seed"
-    },
-    {
-      "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:melon"
-          ],
-          "seed": "minecraft:melon_seeds"
         }
       },
       "id": "harvestheritage:known_seed"

@@ -1,6 +1,6 @@
 package me.theabab2333.harvestheritage.mixin;
 
-import me.theabab2333.harvestheritage.hook.SeedPacketGuiHook;
+import me.theabab2333.harvestheritage.hook.ItemDisplayHook;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -19,7 +19,7 @@ public abstract class GuiGraphicsExtractorMixin {
     )
     protected void renderGuiItem(LivingEntity owner, Level level, ItemStack itemStack, int x, int y, int seed, CallbackInfo ci) {
         GuiGraphicsExtractor graphicsExtractor = (GuiGraphicsExtractor) (Object) this;
-        if (SeedPacketGuiHook.onRenderGuiItem(graphicsExtractor, owner, level, itemStack, x, y, seed)) {
+        if (ItemDisplayHook.onRenderGuiItem(graphicsExtractor, owner, level, itemStack, x, y, seed)) {
             ci.cancel();
         }
     }

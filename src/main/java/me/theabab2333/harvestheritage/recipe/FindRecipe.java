@@ -27,7 +27,7 @@ import java.util.List;
 @Getter
 public class FindRecipe extends BaseAbstractRecipe<RecipeInput> {
 
-    public static final MapCodec<FindRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
+    public static final MapCodec<FindRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
         Ingredient.CODEC.fieldOf("ingredient")
             .forGetter(FindRecipe::getIngredient),
         ItemStackTemplate.CODEC.listOf().fieldOf("result").forGetter(FindRecipe::getResult)

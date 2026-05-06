@@ -1,15 +1,20 @@
 package me.theabab2333.harvestheritage.item;
 
-import me.theabab2333.harvestheritage.client.render.IItemDisplayInHand;
+import me.theabab2333.harvestheritage.api.render.IItemDisplayInHand;
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class SeedPacketItem extends KnownSeedItem implements IItemDisplayInHand {
@@ -55,11 +60,36 @@ public class SeedPacketItem extends KnownSeedItem implements IItemDisplayInHand 
 
     @Override
     public int offsetX(ItemStack stack) {
-        return 0;
+        return 5;
     }
 
     @Override
     public int offsetY(ItemStack stack) {
-        return 0;
+        return 2;
+    }
+
+    @Override
+    public int scale(ItemStack stack) {
+        return 16;
+    }
+
+    @Override
+    public Holder<@NotNull Item> seed(ItemStack itemStack) {
+        return super.seed(itemStack);
+    }
+
+    @Override
+    public List<Holder<@NotNull Item>> result(ItemStack itemStack) {
+        return super.result(itemStack);
+    }
+
+    @Override
+    public int speed(ItemStack itemStack) {
+        return Objects.requireNonNull(this.getSeedPacketComponent(itemStack)).speed();
+    }
+
+    @Override
+    public int output(ItemStack itemStack) {
+        return Objects.requireNonNull(this.getSeedPacketComponent(itemStack)).output();
     }
 }

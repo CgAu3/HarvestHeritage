@@ -3,44 +3,68 @@ package me.theabab2333.harvestheritage.recipe;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import lombok.Getter;
+import me.theabab2333.harvestheritage.init.ModItems;
+import me.theabab2333.harvestheritage.init.ModRecipes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.CraftingInput;
-import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.NormalCraftingRecipe;
+import net.minecraft.world.item.crafting.PlacementInfo;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.TransmuteRecipe;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 @Getter
-public class SeedPacketRecipe extends CustomRecipe {
-    public static final MapCodec<SeedPacketRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(
-        (i) -> i.group(
-                Ingredient.CODEC.fieldOf("known_seed").forGetter(SeedPacketRecipe::getKnownSeed),
-                Ingredient.CODEC.fieldOf("accept_paper").forGetter(SeedPacketRecipe::getAcceptPaper),
-                ItemStackTemplate.CODEC.fieldOf("result").forGetter(SeedPacketRecipe::getResult)
-            )
-            .apply(i, SeedPacketRecipe::new)
+public class SeedPacketRecipe extends NormalCraftingRecipe {
+
+    public static final MapCodec<SeedPacketRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec((i) -> i.group(
+        Recipe.CommonInfo.MAP_CODEC.forGetter(o -> o.commonInfo),
+        CraftingRecipe.CraftingBookInfo.MAP_CODEC.forGetter(o -> o.bookInfo),
+        Ingredient.CODEC.fieldOf("known_seed").forGetter(SeedPacketRecipe::getKnownSeed),
+        Ingredient.CODEC.fieldOf("accept_paper").forGetter(SeedPacketRecipe::getAcceptPaper),
+        ItemStackTemplate.CODEC.fieldOf("result").forGetter(SeedPacketRecipe::getResult)
+    ).apply(i, SeedPacketRecipe::new));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, SeedPacketRecipe> STREAM_CODEC = StreamCodec.composite(
+        Recipe.CommonInfo.STREAM_CODEC,
+        o -> o.commonInfo,
+        CraftingRecipe.CraftingBookInfo.STREAM_CODEC,
+        o -> o.bookInfo,
+        Ingredient.CONTENTS_STREAM_CODEC,
+        SeedPacketRecipe::getKnownSeed,
+        Ingredient.CONTENTS_STREAM_CODEC,
+        SeedPacketRecipe::getAcceptPaper,
+        ItemStackTemplate.STREAM_CODEC,
+        SeedPacketRecipe::getResult,
+        SeedPacketRecipe::new
     );
-    public static final StreamCodec<RegistryFriendlyByteBuf, SeedPacketRecipe> STREAM_CODEC =
-        StreamCodec.composite(
-            Ingredient.CONTENTS_STREAM_CODEC,
-            SeedPacketRecipe::getKnownSeed,
-            Ingredient.CONTENTS_STREAM_CODEC,
-            SeedPacketRecipe::getAcceptPaper,
-            ItemStackTemplate.STREAM_CODEC,
-            SeedPacketRecipe::getResult,
-            SeedPacketRecipe::new
-        );
-    public static final RecipeSerializer<@NotNull SeedPacketRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
+
+    @Getter
     private final Ingredient knownSeed;
+    @Getter
     private final Ingredient acceptPaper;
+    @Getter
     private final ItemStackTemplate result;
 
-    public SeedPacketRecipe(Ingredient knownSeed, Ingredient acceptPaper, ItemStackTemplate result) {
+    public SeedPacketRecipe(
+        Recipe.CommonInfo commonInfo,
+        CraftingRecipe.CraftingBookInfo bookInfo,
+        Ingredient knownSeed,
+        Ingredient acceptPaper,
+        ItemStackTemplate result
+    ) {
+        super(commonInfo, bookInfo);
         this.knownSeed = knownSeed;
         this.acceptPaper = acceptPaper;
         this.result = result;
@@ -92,7 +116,21 @@ public class SeedPacketRecipe extends CustomRecipe {
     }
 
     @Override
-    public RecipeSerializer<? extends CustomRecipe> getSerializer() {
-        return SERIALIZER;
+    public List<RecipeDisplay> display() {
+        return List.of(new ShapelessCraftingRecipeDisplay(
+            Stream.of(this.knownSeed, this.acceptPaper).map(Ingredient::display).toList(),
+            new SlotDisplay.ItemStackSlotDisplay(this.result),
+            new SlotDisplay.ItemSlotDisplay(ModItems.KNOWN_SEED.asItem())
+        ));
+    }
+
+    @Override
+    public RecipeSerializer<SeedPacketRecipe> getSerializer() {
+        return ModRecipes.SEED_PACKET_SERIALIZERS.get();
+    }
+
+    @Override
+    protected PlacementInfo createPlacementInfo() {
+        return PlacementInfo.create(List.of(knownSeed, acceptPaper));
     }
 }
