@@ -16,7 +16,7 @@ public class ModBlockEntities {
     );
 
     public static final Supplier<BlockEntityType<CropStandStandBlockEntity>> CROP_STAND_BLOCK_ENTITY = BLOCK_ENTITY_TYPES.register(
-        "my_block_entity",
+        "crop_stand_block_entity",
         () -> new BlockEntityType<>(CropStandStandBlockEntity::new, ModBlocks.CROP_STAND_BLOCK.get())
     );
 

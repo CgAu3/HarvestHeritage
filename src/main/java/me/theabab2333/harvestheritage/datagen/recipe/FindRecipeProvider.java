@@ -19,13 +19,16 @@ import java.util.List;
 import java.util.Map;
 
 public class FindRecipeProvider extends ModRecipeProvider {
-    public static Map<Item, List<Item>> COMMON_SEEDS = new HashMap<>();
+    public record SeedInfo(List<Item> results, int stage) {
+    }
+
+    public static Map<Item, SeedInfo> COMMON_SEEDS = new HashMap<>();
 
     static {
-        COMMON_SEEDS.put(Items.WHEAT_SEEDS, List.of(Items.WHEAT));
-        COMMON_SEEDS.put(Items.BEETROOT_SEEDS, List.of(Items.BEETROOT));
-        COMMON_SEEDS.put(Items.MELON_SEEDS, List.of(Items.MELON));
-        COMMON_SEEDS.put(Items.PUMPKIN_SEEDS, List.of(Items.PUMPKIN));
+        COMMON_SEEDS.put(Items.WHEAT_SEEDS, new SeedInfo(List.of(Items.WHEAT), 3));
+        COMMON_SEEDS.put(Items.BEETROOT_SEEDS, new SeedInfo(List.of(Items.BEETROOT), 3));
+        COMMON_SEEDS.put(Items.MELON_SEEDS, new SeedInfo(List.of(Items.MELON), 3));
+        COMMON_SEEDS.put(Items.PUMPKIN_SEEDS, new SeedInfo(List.of(Items.PUMPKIN), 3));
     }
 
     protected FindRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
@@ -36,12 +39,14 @@ public class FindRecipeProvider extends ModRecipeProvider {
         List<ItemStackTemplate> list = new ArrayList<>();
         for (var entry : COMMON_SEEDS.entrySet()) {
             var seedItem = entry.getKey();
-            var resultItems = entry.getValue();
+            var seedInfo = entry.getValue();
+            var resultItems = seedInfo.results();
+            var stage = seedInfo.stage();
 
             Holder<Item> seedHolder = seedItem.builtInRegistryHolder();
             List<Holder<Item>> resultHolders = resultItems.stream().map(item -> (Holder<Item>) item.builtInRegistryHolder()).toList();
 
-            var component = SeedComponent.createSeed(seedHolder, resultHolders);
+            var component = SeedComponent.createSeed(seedHolder, resultHolders, stage);
             var patch = DataComponentPatch.builder().set(ModDataComponents.SEED_COMPONENT.get(), component).build();
             var stack = new ItemStackTemplate(ModItems.KNOWN_SEED.get(), 1, patch);
             list.add(stack);

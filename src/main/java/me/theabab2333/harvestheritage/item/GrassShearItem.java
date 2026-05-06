@@ -1,5 +1,6 @@
 package me.theabab2333.harvestheritage.item;
 
+import me.theabab2333.harvestheritage.api.item.ITooltipItem;
 import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.init.ModTags;
 import net.minecraft.ChatFormatting;
@@ -10,14 +11,12 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.function.Consumer;
+import java.util.List;
 
-public class GrassShearItem extends Item {
+public class GrassShearItem extends Item implements ITooltipItem {
     public GrassShearItem(Properties properties) {
         properties.stacksTo(1);
         super(properties);
@@ -38,13 +37,7 @@ public class GrassShearItem extends Item {
     }
 
     @Override
-    public void appendHoverText(
-        ItemStack itemStack,
-        TooltipContext context,
-        TooltipDisplay display,
-        Consumer<Component> builder,
-        TooltipFlag tooltipFlag
-    ) {
-        builder.accept(Component.translatable("item.harvestheritage.grass_shear.tooltip").withStyle(ChatFormatting.GRAY));
+    public List<Component> getTooltip(ItemStack itemStack) {
+        return List.of(Component.translatable("item.harvestheritage.grass_shear.tooltip").withStyle(ChatFormatting.GRAY));
     }
 }

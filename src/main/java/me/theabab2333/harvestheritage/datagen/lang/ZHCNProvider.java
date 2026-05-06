@@ -6,6 +6,7 @@ import me.theabab2333.harvestheritage.init.ModItems;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
+@SuppressWarnings("checkstyle:AbbreviationAsWordInName")
 public class ZHCNProvider extends LanguageProvider {
     public ZHCNProvider(PackOutput output) {
         super(output, HarvestHeritage.MODID, "zh_cn");
@@ -23,8 +24,9 @@ public class ZHCNProvider extends LanguageProvider {
         add("modmenu.nameTranslation.harvestheritage", "Harvest Heritage");
         add("item.harvestheritage.unknown_seed.tooltip", "或许需要丢在地上用放大镜看看...");
         add("item.harvestheritage.grass_shear.tooltip", "用这个破坏点草试试?");
-        add("item.harvestheritage.seed_packet.tooltip.fail", "抱歉，这个物品没有种子组件");
-        add("item.harvestheritage.seed_packet.tooltip.seed", "种子：%s");
+        add("item.harvestheritage.seed.tooltip.fail", "抱歉，这个物品没有种子组件");
+        add("item.harvestheritage.seed.tooltip.seed", "种子：%s");
+        add("item.harvestheritage.seed.tooltip.stage", "生长阶段：%s");
         add("item.harvestheritage.seed_packet.tooltip.result", "产出：%s");
         add("item.harvestheritage.seed_packet.tooltip.speed", "生长速度：%s");
         add("item.harvestheritage.seed_packet.tooltip.output", "产出数量：%s");

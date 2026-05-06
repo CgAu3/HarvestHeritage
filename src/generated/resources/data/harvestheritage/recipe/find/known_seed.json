@@ -8,29 +8,8 @@
           "result": [
             "minecraft:melon"
           ],
-          "seed": "minecraft:melon_seeds"
-        }
-      },
-      "id": "harvestheritage:known_seed"
-    },
-    {
-      "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:pumpkin"
-          ],
-          "seed": "minecraft:pumpkin_seeds"
-        }
-      },
-      "id": "harvestheritage:known_seed"
-    },
-    {
-      "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:beetroot"
-          ],
-          "seed": "minecraft:beetroot_seeds"
+          "seed": "minecraft:melon_seeds",
+          "stage": 3
         }
       },
       "id": "harvestheritage:known_seed"
@@ -41,7 +20,32 @@
           "result": [
             "minecraft:wheat"
           ],
-          "seed": "minecraft:wheat_seeds"
+          "seed": "minecraft:wheat_seeds",
+          "stage": 3
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    },
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:beetroot"
+          ],
+          "seed": "minecraft:beetroot_seeds",
+          "stage": 3
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    },
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:pumpkin"
+          ],
+          "seed": "minecraft:pumpkin_seeds",
+          "stage": 3
         }
       },
       "id": "harvestheritage:known_seed"

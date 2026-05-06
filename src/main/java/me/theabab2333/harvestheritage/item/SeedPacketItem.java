@@ -9,29 +9,20 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Consumer;
 
+@SuppressWarnings("checkstyle:AbbreviationAsWordInName")
 public class SeedPacketItem extends KnownSeedItem implements IItemDisplayInHand {
     public SeedPacketItem(Properties properties) {
         super(properties);
     }
 
     @Override
-    public void appendHoverText(
-        ItemStack itemStack,
-        TooltipContext context,
-        TooltipDisplay display,
-        Consumer<Component> builder,
-        TooltipFlag tooltipFlag
-    ) {
-        super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
-
+    public List<Component> getTooltip(ItemStack itemStack) {
+        List<Component> list = super.getTooltip(itemStack);
         SeedPacketComponent seedInfo = itemStack.get(ModDataComponents.SEED_PACKET_COMPONENT);
         if (seedInfo != null) {
             StringBuilder resultBuilder = new StringBuilder();
@@ -39,14 +30,18 @@ public class SeedPacketItem extends KnownSeedItem implements IItemDisplayInHand 
                 if (i > 0) resultBuilder.append(", ");
                 resultBuilder.append(getName(seedInfo.seedComponent().result().get(i).value()).getString());
             }
-            builder.accept(Component.translatable("item.harvestheritage.seed_packet.tooltip.result", resultBuilder.toString())
+            list.add(Component.translatable("item.harvestheritage.seed_packet.tooltip.result", resultBuilder.toString())
                 .withStyle(ChatFormatting.YELLOW));
 
-            builder.accept(Component.translatable("item.harvestheritage.seed_packet.tooltip.speed", seedInfo.speed())
+            list.add(Component.translatable("item.harvestheritage.seed_packet.tooltip.speed", seedInfo.speed())
                 .withStyle(ChatFormatting.BLUE));
-            builder.accept(Component.translatable("item.harvestheritage.seed_packet.tooltip.output", seedInfo.output())
+            list.add(Component.translatable("item.harvestheritage.seed_packet.tooltip.output", seedInfo.output())
                 .withStyle(ChatFormatting.GOLD));
+            list.add(Component.translatable("item.harvestheritage.seed_packet.tooltip.iterate", seedInfo.iterate())
+                .withStyle(ChatFormatting.AQUA));
         }
+
+        return list;
     }
 
     @Override

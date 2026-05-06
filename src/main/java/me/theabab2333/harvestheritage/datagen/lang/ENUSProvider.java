@@ -6,6 +6,7 @@ import me.theabab2333.harvestheritage.init.ModItems;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
+@SuppressWarnings("checkstyle:AbbreviationAsWordInName")
 public class ENUSProvider extends LanguageProvider {
 
     public ENUSProvider(PackOutput output) {
@@ -27,8 +28,9 @@ public class ENUSProvider extends LanguageProvider {
             "Maybe you need to throw it on the ground and look at it with a magnifying glass..."
         );
         add("item.harvestheritage.grass_shear.tooltip", "Try using this to destroy some grass?");
-        add("item.harvestheritage.seed_packet.tooltip.fail", "Sorry, this item does not have a seed component");
-        add("item.harvestheritage.seed_packet.tooltip.seed", "Seed: %s");
+        add("item.harvestheritage.seed.tooltip.fail", "Sorry, this item does not have a seed component");
+        add("item.harvestheritage.seed.tooltip.seed", "Seed: %s");
+        add("item.harvestheritage.seed.tooltip.stage", "Stage：%s");
         add("item.harvestheritage.seed_packet.tooltip.result", "Output: %s");
         add("item.harvestheritage.seed_packet.tooltip.speed", "Growth Speed: %s");
         add("item.harvestheritage.seed_packet.tooltip.output", "Output Amount: %s");

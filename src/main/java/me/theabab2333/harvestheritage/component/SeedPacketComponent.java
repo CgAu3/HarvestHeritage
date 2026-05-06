@@ -10,11 +10,12 @@ import net.minecraft.world.item.Item;
 
 import java.util.List;
 
-public record SeedPacketComponent(SeedComponent seedComponent, int speed, int output) {
+public record SeedPacketComponent(SeedComponent seedComponent, int speed, int output, int iterate) {
     public static final Codec<SeedPacketComponent> CODEC = RecordCodecBuilder.create(inst -> inst.group(
         SeedComponent.CODEC.fieldOf("seed_component").forGetter(SeedPacketComponent::seedComponent),
         Codec.INT.fieldOf("speed").forGetter(SeedPacketComponent::speed),
-        Codec.INT.fieldOf("output").forGetter(SeedPacketComponent::output)
+        Codec.INT.fieldOf("output").forGetter(SeedPacketComponent::output),
+        Codec.INT.fieldOf("iterate").forGetter(SeedPacketComponent::iterate)
     ).apply(inst, SeedPacketComponent::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SeedPacketComponent> STREAM_CODEC = StreamCodec.composite(
@@ -24,18 +25,20 @@ public record SeedPacketComponent(SeedComponent seedComponent, int speed, int ou
         SeedPacketComponent::speed,
         ByteBufCodecs.INT,
         SeedPacketComponent::output,
+        ByteBufCodecs.INT,
+        SeedPacketComponent::iterate,
         SeedPacketComponent::new
     );
 
-    public static SeedPacketComponent createSeedPacket(Holder<Item> seed, List<Holder<Item>> holders, int speed, int output) {
-        return new SeedPacketComponent(SeedComponent.createSeed(seed, holders), speed, output);
+    public static SeedPacketComponent createSeedPacket(Holder<Item> seed, List<Holder<Item>> holders, int stage, int speed, int output) {
+        return new SeedPacketComponent(SeedComponent.createSeed(seed, holders, stage), speed, output, 0);
     }
 
     public static SeedPacketComponent createSeedPacket(SeedComponent seedComponent, int speed, int output) {
-        return new SeedPacketComponent(seedComponent, speed, output);
+        return new SeedPacketComponent(seedComponent, speed, output, 0);
     }
 
-    public static SeedPacketComponent undateSeedPacket(SeedPacketComponent component, int speed, int output) {
-        return new SeedPacketComponent(component.seedComponent, speed, output);
+    public static SeedPacketComponent undateSeedPacket(SeedPacketComponent component, int speed, int output, int iterate) {
+        return new SeedPacketComponent(component.seedComponent, speed, output, iterate);
     }
 }

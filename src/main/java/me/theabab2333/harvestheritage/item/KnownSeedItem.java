@@ -1,6 +1,7 @@
 package me.theabab2333.harvestheritage.item;
 
 import me.theabab2333.harvestheritage.api.item.ISeedItem;
+import me.theabab2333.harvestheritage.api.item.ITooltipItem;
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
@@ -13,37 +14,16 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipDisplay;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
-public class KnownSeedItem extends Item implements ISeedItem {
+public class KnownSeedItem extends Item implements ISeedItem, ITooltipItem {
     public KnownSeedItem(Properties properties) {
         super(properties);
-    }
-
-    @Override
-    public void appendHoverText(
-        ItemStack itemStack,
-        TooltipContext context,
-        TooltipDisplay display,
-        Consumer<Component> builder,
-        TooltipFlag tooltipFlag
-    ) {
-        SeedComponent seedInfo = itemStack.get(ModDataComponents.SEED_COMPONENT);
-        if (seedInfo == null) {
-            Component component = Component.translatable("item.harvestheritage.seed_packet.tooltip.fail")
-                .withStyle(ChatFormatting.DARK_RED);
-            builder.accept(component);
-        } else {
-            builder.accept(Component.translatable("item.harvestheritage.seed_packet.tooltip.seed", getName(seedInfo.seed().value()))
-                .withStyle(ChatFormatting.GREEN));
-        }
     }
 
     @Override
@@ -83,12 +63,28 @@ public class KnownSeedItem extends Item implements ISeedItem {
             return seedComponent;
         } else {
             Holder<@NotNull Item> holder = Items.AIR.builtInRegistryHolder();
-            return SeedComponent.createSeed(holder, List.of(holder));
+            return SeedComponent.createSeed(holder, List.of(holder), 0);
         }
     }
 
     @Nullable
     protected SeedPacketComponent getSeedPacketComponent(ItemStack itemStack) {
         return itemStack.get(ModDataComponents.SEED_PACKET_COMPONENT);
+    }
+
+    @Override
+    public List<Component> getTooltip(ItemStack itemStack) {
+        List<Component> list = new ArrayList<>();
+        SeedComponent seedInfo = itemStack.get(ModDataComponents.SEED_COMPONENT);
+        if (seedInfo == null) {
+            Component component = Component.translatable("item.harvestheritage.seed.tooltip.fail").withStyle(ChatFormatting.DARK_RED);
+            list.add(component);
+        } else {
+            list.add(Component.translatable("item.harvestheritage.seed.tooltip.seed", getName(seedInfo.seed().value()))
+                .withStyle(ChatFormatting.GREEN));
+            list.add(Component.translatable("item.harvestheritage.seed.tooltip.stage", seedInfo.stage())
+                .withStyle(ChatFormatting.LIGHT_PURPLE));
+        }
+        return list;
     }
 }
