@@ -37,7 +37,7 @@ public class HarvestHeritage {
 
         NeoForge.EVENT_BUS.register(this);
 
-        modContainer.registerConfig(net.neoforged.fml.config.ModConfig.Type.COMMON, ModConfig.SPEC);
+        ModConfig.register(modContainer);
     }
 
     public static Identifier of(String path) {

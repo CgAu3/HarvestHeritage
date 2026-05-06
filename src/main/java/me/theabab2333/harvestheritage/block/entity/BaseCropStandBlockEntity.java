@@ -5,6 +5,8 @@ import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -42,6 +44,15 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
     protected void saveAdditional(ValueOutput output) {
         if (seedPacketComponent != null) {
             output.store("component", SeedPacketComponent.CODEC, this.seedPacketComponent);
+        }
+    }
+
+    public void tick(ServerLevel level, BlockPos pos, BlockState state, RandomSource random) {
+        if (this.seedPacketComponent != null) {
+            int speed = seedPacketComponent.speed();
+            int output = seedPacketComponent.output();
+            SeedComponent seedComponent = seedPacketComponent.seedComponent();
+            int needStage = seedComponent.stage();
         }
     }
 }
