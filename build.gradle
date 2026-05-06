@@ -20,7 +20,10 @@ sourceSets.main.resources {
 }
 
 repositories {
-
+    maven {
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
 }
 
 base {
@@ -69,6 +72,7 @@ configurations {
 }
 
 dependencies {
+    runtimeOnly("mezz.jei:jei-26.1.2-neoforge:29.5.0.28")
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"

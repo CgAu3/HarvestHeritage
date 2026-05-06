@@ -2,6 +2,7 @@ package me.theabab2333.harvestheritage;
 
 import com.mojang.logging.LogUtils;
 import me.theabab2333.harvestheritage.datagen.loot.ModLootModifiers;
+import me.theabab2333.harvestheritage.init.ModBlockEntities;
 import me.theabab2333.harvestheritage.init.ModBlocks;
 import me.theabab2333.harvestheritage.init.ModConfig;
 import me.theabab2333.harvestheritage.init.ModCreativeModeTab;
@@ -27,6 +28,7 @@ public class HarvestHeritage {
         eventBus.addListener(this::commonSetup);
 
         ModBlocks.register(eventBus);
+        ModBlockEntities.register(eventBus);
         ModItems.register(eventBus);
         ModCreativeModeTab.register(eventBus);
         ModDataComponents.register(eventBus);

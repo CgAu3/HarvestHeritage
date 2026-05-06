@@ -79,6 +79,8 @@ public class KnownSeedItem extends Item implements ISeedItem {
         SeedPacketComponent component = this.getSeedPacketComponent(itemStack);
         if (component != null) {
             return component.seedComponent();
+        } else if (itemStack.get(ModDataComponents.SEED_COMPONENT) instanceof SeedComponent seedComponent) {
+            return seedComponent;
         } else {
             Holder<@NotNull Item> holder = Items.AIR.builtInRegistryHolder();
             return SeedComponent.createSeed(holder, List.of(holder));

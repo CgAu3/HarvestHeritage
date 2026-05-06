@@ -1,0 +1,26 @@
+package me.theabab2333.harvestheritage.init;
+
+import me.theabab2333.harvestheritage.HarvestHeritage;
+import me.theabab2333.harvestheritage.block.entity.CropStandStandBlockEntity;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
+
+public class ModBlockEntities {
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(
+        Registries.BLOCK_ENTITY_TYPE,
+        HarvestHeritage.MODID
+    );
+
+    public static final Supplier<BlockEntityType<CropStandStandBlockEntity>> CROP_STAND_BLOCK_ENTITY = BLOCK_ENTITY_TYPES.register(
+        "my_block_entity",
+        () -> new BlockEntityType<>(CropStandStandBlockEntity::new, ModBlocks.CROP_STAND_BLOCK.get())
+    );
+
+    public static void register(IEventBus eventBus) {
+        BLOCK_ENTITY_TYPES.register(eventBus);
+    }
+}
