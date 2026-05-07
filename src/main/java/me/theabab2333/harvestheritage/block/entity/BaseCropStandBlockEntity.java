@@ -26,7 +26,6 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
 
     public void seedUseOn(ItemStack itemStack) {
         if (seedPacketComponent == null) {
-            itemStack.shrink(1);
             if (itemStack.get(ModDataComponents.SEED_COMPONENT) instanceof SeedComponent component) {
                 this.seedPacketComponent = SeedPacketComponent.createSeedPacket(component, 1, 1);
             } else if (itemStack.get(ModDataComponents.SEED_PACKET_COMPONENT) instanceof SeedPacketComponent component) {
@@ -38,6 +37,7 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
     @Override
     protected void loadAdditional(ValueInput input) {
         this.seedPacketComponent = input.read("component", SeedPacketComponent.CODEC).orElse(null);
+        this.stage = input.getIntOr("stage", 0);
     }
 
     @Override
@@ -45,14 +45,10 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
         if (seedPacketComponent != null) {
             output.store("component", SeedPacketComponent.CODEC, this.seedPacketComponent);
         }
+        output.putInt("stage", this.stage);
     }
 
     public void tick(ServerLevel level, BlockPos pos, BlockState state, RandomSource random) {
-        if (this.seedPacketComponent != null) {
-            int speed = seedPacketComponent.speed();
-            int output = seedPacketComponent.output();
-            SeedComponent seedComponent = seedPacketComponent.seedComponent();
-            int needStage = seedComponent.stage();
-        }
+
     }
 }
