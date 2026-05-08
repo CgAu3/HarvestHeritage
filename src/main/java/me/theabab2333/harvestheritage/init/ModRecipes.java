@@ -2,6 +2,7 @@ package me.theabab2333.harvestheritage.init;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
 import me.theabab2333.harvestheritage.recipe.FindRecipe;
+import me.theabab2333.harvestheritage.recipe.HybridRecipe;
 import me.theabab2333.harvestheritage.recipe.SeedPacketRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -22,8 +23,11 @@ public class ModRecipes {
         HarvestHeritage.MODID
     );
 
-    public static final Supplier<RecipeType<FindRecipe>> FIND_TYPE = RECIPE_TYPES.register("find_type", RecipeType::simple);
-    public static final Supplier<RecipeSerializer<FindRecipe>> FIND_TYPE_SERIALIZERS = RECIPE_SERIALIZERS.register(
+    public static final Supplier<RecipeType<FindRecipe>> FIND_TYPE = RECIPE_TYPES.register(
+        "find_type",
+        RecipeType::simple
+    );
+    public static final Supplier<RecipeSerializer<FindRecipe>> FIND_SERIALIZERS = RECIPE_SERIALIZERS.register(
         "find",
         () -> new RecipeSerializer<>(FindRecipe.MAP_CODEC, FindRecipe.STREAM_CODEC)
     );
@@ -34,6 +38,14 @@ public class ModRecipes {
     public static final Supplier<RecipeSerializer<SeedPacketRecipe>> SEED_PACKET_SERIALIZERS = RECIPE_SERIALIZERS.register(
         "seed_packet",
         () -> new RecipeSerializer<>(SeedPacketRecipe.MAP_CODEC, SeedPacketRecipe.STREAM_CODEC)
+    );
+    public static final Supplier<RecipeType<HybridRecipe>> HYBRID_TYPE = RECIPE_TYPES.register(
+        "hybrid",
+        RecipeType::simple
+    );
+    public static final Supplier<RecipeSerializer<HybridRecipe>> HYBRID_SERIALIZERS = RECIPE_SERIALIZERS.register(
+        "hybrid",
+        () -> new RecipeSerializer<>(HybridRecipe.MAP_CODEC, HybridRecipe.STREAM_CODEC)
     );
 
     public static void register(IEventBus eventBus) {

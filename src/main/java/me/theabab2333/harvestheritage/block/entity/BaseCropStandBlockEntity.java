@@ -1,10 +1,12 @@
 package me.theabab2333.harvestheritage.block.entity;
 
 import lombok.Getter;
+import me.theabab2333.harvestheritage.block.BaseCropStandBlock;
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -88,10 +90,35 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
             int speed = seedPacketComponent.speed();
             SeedComponent seedComponent = seedPacketComponent.seedComponent();
             int needStage = seedComponent.stage();
-            if (random.nextInt(5) < speed && this.stage < needStage) {
-                int output = seedPacketComponent.output();
-                this.stage++;
-                System.out.println(this.stage);
+            if (random.nextInt(3) < speed) {
+                if (this.stage < needStage) {
+                    this.stage++;
+                } else {
+                    hybrid(level, pos);
+                }
+            }
+        }
+    }
+
+    @SuppressWarnings("ConstantValue")
+    public void hybrid(ServerLevel level, BlockPos pos) {
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            BlockPos pos1 = pos.relative(direction, 1);
+            BlockState state1 = level.getBlockState(pos1);
+            if (state1.getBlock() instanceof BaseCropStandBlock) {
+                BaseCropStandBlockEntity be1 = (BaseCropStandBlockEntity) level.getBlockEntity(pos1);
+                if (be1 == null) return;
+                if (be1.getSeedPacketComponent() == null) {
+                    BlockPos pos2 = pos.relative(direction, 2);
+                    BlockState state2 = level.getBlockState(pos2);
+                    if (state2.getBlock() instanceof BaseCropStandBlock) {
+                        BaseCropStandBlockEntity be2 = (BaseCropStandBlockEntity) level.getBlockEntity(pos2);
+                        if (be2.getSeedPacketComponent() != null) {
+
+                            return;
+                        }
+                    }
+                }
             }
         }
     }

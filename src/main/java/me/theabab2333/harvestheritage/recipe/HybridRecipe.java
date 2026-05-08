@@ -1,0 +1,77 @@
+package me.theabab2333.harvestheritage.recipe;
+
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import lombok.Getter;
+import me.theabab2333.harvestheritage.component.SeedComponent;
+import me.theabab2333.harvestheritage.init.ModRecipes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+
+import java.util.List;
+
+@Getter
+public class HybridRecipe extends BaseAbstractRecipe<RecipeInput> {
+
+    public static final MapCodec<HybridRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
+        SeedComponent.CODEC.listOf().fieldOf("input_seeds").forGetter(HybridRecipe::getInputSeeds),
+        SeedComponent.CODEC.listOf().fieldOf("output_seeds").forGetter(HybridRecipe::getOutputSeeds)
+    ).apply(inst, HybridRecipe::new));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, HybridRecipe> STREAM_CODEC = StreamCodec.composite(
+        SeedComponent.STREAM_CODEC.apply(ByteBufCodecs.list()),
+        HybridRecipe::getInputSeeds,
+        SeedComponent.STREAM_CODEC.apply(ByteBufCodecs.list()),
+        HybridRecipe::getOutputSeeds,
+        HybridRecipe::new
+    );
+
+    private final List<SeedComponent> inputSeeds;
+    private final List<SeedComponent> outputSeeds;
+
+    public HybridRecipe(List<SeedComponent> inputSeeds, List<SeedComponent> outputSeeds) {
+        this.inputSeeds = inputSeeds;
+        this.outputSeeds = outputSeeds;
+    }
+
+    @Override
+    public RecipeSerializer<HybridRecipe> getSerializer() {
+        return ModRecipes.HYBRID_SERIALIZERS.get();
+    }
+
+    @Override
+    public RecipeType<HybridRecipe> getType() {
+        return ModRecipes.HYBRID_TYPE.get();
+    }
+
+    public static class Builder {
+        private final List<SeedComponent> inputSeeds;
+        private final List<SeedComponent> outputSeeds;
+
+        public Builder(List<SeedComponent> inputSeeds, List<SeedComponent> outputSeeds) {
+            this.inputSeeds = inputSeeds;
+            this.outputSeeds = outputSeeds;
+        }
+
+        public static Builder builder(List<SeedComponent> inputSeeds, SeedComponent outputSeed) {
+            return new Builder(inputSeeds, List.of(outputSeed));
+        }
+
+        public static Builder builder(List<SeedComponent> inputSeeds, List<SeedComponent> outputSeeds) {
+            return new Builder(inputSeeds, outputSeeds);
+        }
+
+        public void save(RecipeOutput consumer, Identifier id) {
+            var recipe = new HybridRecipe(inputSeeds, outputSeeds);
+            consumer.accept(ResourceKey.create(Registries.RECIPE, id), recipe, null);
+        }
+    }
+}

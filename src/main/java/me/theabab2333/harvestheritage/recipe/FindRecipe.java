@@ -28,11 +28,9 @@ import java.util.List;
 public class FindRecipe extends BaseAbstractRecipe<RecipeInput> {
 
     public static final MapCodec<FindRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
-        Ingredient.CODEC.fieldOf("ingredient")
-            .forGetter(FindRecipe::getIngredient),
+        Ingredient.CODEC.fieldOf("ingredient").forGetter(FindRecipe::getIngredient),
         ItemStackTemplate.CODEC.listOf().fieldOf("result").forGetter(FindRecipe::getResult)
     ).apply(inst, FindRecipe::new));
-
 
     public static final StreamCodec<RegistryFriendlyByteBuf, FindRecipe> STREAM_CODEC = StreamCodec.composite(
         Ingredient.CONTENTS_STREAM_CODEC,
@@ -52,7 +50,7 @@ public class FindRecipe extends BaseAbstractRecipe<RecipeInput> {
 
     @Override
     public RecipeSerializer<? extends Recipe<RecipeInput>> getSerializer() {
-        return ModRecipes.FIND_TYPE_SERIALIZERS.get();
+        return ModRecipes.FIND_SERIALIZERS.get();
     }
 
     @Override
