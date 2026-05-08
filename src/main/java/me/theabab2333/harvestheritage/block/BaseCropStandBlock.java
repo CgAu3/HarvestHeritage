@@ -22,6 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public abstract class BaseCropStandBlock extends Block implements EntityBlock {
     public BaseCropStandBlock(Properties properties) {
+        properties.randomTicks();
         super(properties);
     }
 

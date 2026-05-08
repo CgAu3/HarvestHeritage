@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @EventBusSubscriber(modid = HarvestHeritage.MODID)
-public class RecipeSyncEvent {
+public class ModRecipeSyncEvent {
     @Getter
     private static final List<RecipeHolder<@NotNull FindRecipe>> FIND_SEED_RECIPES = new ArrayList<>();
     @Getter
