@@ -51,12 +51,30 @@ public class CropStandBlockEntityRenderer implements BlockEntityRenderer<CropSta
         if (seedComponent == null) return;
 
         state.stage = blockEntity.getStage();
-        int seedStage = seedComponent.stage();
-        int maxStage = CropBlock.MAX_AGE;
-        int renderStage = Math.clamp(state.stage + maxStage - seedStage, state.stage, maxStage);
+        int renderStage = getRenderStage(blockEntity, seedComponent);
 
         BlockState blockState = Blocks.WHEAT.defaultBlockState().setValue(CropBlock.AGE, renderStage);
         this.blockModelResolver.update(state.block, blockState, BLOCK_DISPLAY_CONTEXT);
+    }
+
+    private static int getRenderStage(CropStandStandBlockEntity blockEntity, SeedComponent seedComponent) {
+        int maxStage = 7;
+        int stateStage = blockEntity.getStage();
+        int seedStage = seedComponent.stage();
+
+        int renderStage;
+        if (seedStage == 0) {
+            renderStage = 0;
+        } else if (seedStage >= stateStage) {
+            if (seedStage == stateStage) {
+                renderStage = maxStage;
+            } else {
+                renderStage = stateStage + (maxStage - stateStage) * stateStage / seedStage;
+            }
+        } else {
+            renderStage = seedStage + (maxStage - seedStage) * seedStage / stateStage;
+        }
+        return renderStage;
     }
 
     @Override
