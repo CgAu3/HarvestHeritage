@@ -2,8 +2,12 @@ package me.theabab2333.harvestheritage.block;
 
 import me.theabab2333.harvestheritage.api.item.ISeedItem;
 import me.theabab2333.harvestheritage.block.entity.BaseCropStandBlockEntity;
+import me.theabab2333.harvestheritage.component.SeedPacketComponent;
+import me.theabab2333.harvestheritage.item.MagnifyingGlassItem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -72,8 +76,25 @@ public abstract class BaseCropStandBlock extends Block implements EntityBlock {
         if (itemStack.getItem() instanceof ISeedItem) {
             blockEntity.seedUseOn(itemStack);
             return InteractionResult.SUCCESS;
-        } else {
+        } else if (itemStack.getItem() instanceof MagnifyingGlassItem) {
+            SeedPacketComponent component = blockEntity.getSeedPacketComponent();
+
+            if (component == null) return InteractionResult.FAIL;
+            player.sendSystemMessage(Component.translatable(
+                    "item.harvestheritage.seed.tooltip.seed",
+                    component.seedComponent().seed().value().getDescriptionId()
+                )
+                .withStyle(ChatFormatting.GREEN));
+            player.sendSystemMessage(Component.translatable("item.harvestheritage.seed.tooltip.stage", component.seedComponent().stage())
+                .withStyle(ChatFormatting.LIGHT_PURPLE));
+            player.sendSystemMessage(Component.translatable("item.harvestheritage.seed_packet.tooltip.speed", component.speed())
+                .withStyle(ChatFormatting.BLUE));
+            player.sendSystemMessage(Component.translatable("item.harvestheritage.seed_packet.tooltip.output", component.output())
+                .withStyle(ChatFormatting.GOLD));
+
             return InteractionResult.PASS;
+        } else {
+            return InteractionResult.FAIL;
         }
     }
 }

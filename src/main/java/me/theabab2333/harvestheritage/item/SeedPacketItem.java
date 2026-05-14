@@ -37,8 +37,6 @@ public class SeedPacketItem extends KnownSeedItem implements IItemDisplayInHand 
                 .withStyle(ChatFormatting.BLUE));
             list.add(Component.translatable("item.harvestheritage.seed_packet.tooltip.output", seedInfo.output())
                 .withStyle(ChatFormatting.GOLD));
-            list.add(Component.translatable("item.harvestheritage.seed_packet.tooltip.iterate", seedInfo.iterate())
-                .withStyle(ChatFormatting.AQUA));
         }
 
         return list;

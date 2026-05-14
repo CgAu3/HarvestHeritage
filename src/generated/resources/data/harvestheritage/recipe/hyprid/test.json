@@ -1,0 +1,23 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:wheat_seeds",
+    "minecraft:melon_seeds"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:pumpkin"
+      ],
+      "seed": "minecraft:pumpkin_seeds",
+      "stage": 3
+    },
+    {
+      "result": [
+        "minecraft:beetroot"
+      ],
+      "seed": "minecraft:beetroot_seeds",
+      "stage": 3
+    }
+  ]
+}
