@@ -11,6 +11,8 @@ import me.theabab2333.harvestheritage.util.SeedUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -20,6 +22,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -67,6 +70,7 @@ public abstract class BaseCropStandBlock extends Block implements EntityBlock {
         return belowState.is(BlockTags.SUPPORTS_VEGETATION);
     }
 
+    // SHIT?
     @Override
     @SuppressWarnings("ConstantValue")
     protected InteractionResult useItemOn(
@@ -105,6 +109,7 @@ public abstract class BaseCropStandBlock extends Block implements EntityBlock {
 
             return InteractionResult.PASS;
         } else if (itemStack.getItem() instanceof GrassShearItem) {
+
             if (component == null) return InteractionResult.FAIL;
             if (component.seedComponent().stage() == blockEntity.getStage()) {
                 DataComponentPatch patch = DataComponentPatch.builder()
@@ -118,8 +123,28 @@ public abstract class BaseCropStandBlock extends Block implements EntityBlock {
                 blockEntity.setStage(0);
             }
             return InteractionResult.PASS;
+        } else if (component != null && component.seedComponent().stage() == blockEntity.getStage()) {
+            NonNullList<ItemStack> itemStacks = getSeedOutput(component, level);
+            Containers.dropContents(level, pos, itemStacks);
+            blockEntity.setStage(0);
+            return InteractionResult.PASS;
         } else {
             return InteractionResult.FAIL;
         }
+    }
+
+    public NonNullList<ItemStack> getSeedOutput(
+        SeedPacketComponent component,
+        Level level
+    ) {
+        if (level.isClientSide()) return NonNullList.create();
+        NonNullList<ItemStack> itemStacks = NonNullList.create();
+        int output = component.output();
+        RandomSource random = level.getRandom();
+        int count = random.nextInt(output) + 1;
+        for (Holder<Item> itemHolder : component.seedComponent().result()) {
+            itemStacks.add(new ItemStack(itemHolder, count));
+        }
+        return itemStacks;
     }
 }

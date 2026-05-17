@@ -190,18 +190,13 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
             }
         });
 
-        if (seed1 == seed2) {
+        if (seed1.seed().value() == seed2.seed().value()) {
             SeedPacketComponent component = this.updateSeed(level, component1, component2, seed1);
             cropStandBlock.setSeedPacketComponent(component);
         }
     }
 
-    public SeedPacketComponent updateSeed(
-        Level level,
-        SeedPacketComponent component1,
-        SeedPacketComponent component2,
-        SeedComponent seed
-    ) {
+    public SeedPacketComponent updateSeed(Level level, SeedPacketComponent component1, SeedPacketComponent component2, SeedComponent seed) {
         int speed1 = component1.speed();
         int output1 = component1.output();
 

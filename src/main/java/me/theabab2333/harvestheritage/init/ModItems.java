@@ -25,6 +25,8 @@ public class ModItems {
 
     public static final DeferredItem<Item> SEED_PACKET = ITEMS.registerItem("seed_packet", SeedPacketItem::new);
 
+    public static final DeferredItem<Item> GRAPE = ITEMS.registerSimpleItem("grape");
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

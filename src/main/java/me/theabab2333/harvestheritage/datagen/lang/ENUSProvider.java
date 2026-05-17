@@ -20,6 +20,7 @@ public class ENUSProvider extends LanguageProvider {
         addItem(ModItems.MAGNIFYING_GLASS, "Magnifying Glass");
         addItem(ModItems.KNOWN_SEED, "Known Seed");
         addItem(ModItems.SEED_PACKET, "Seed Packet");
+        addItem(ModItems.GRAPE, "Grape");
         addBlock(ModBlocks.TEST_BLOCK, "Test Block");
         addBlock(ModBlocks.CROP_STAND_BLOCK, "Crop Stand");
         add("item.harvestheritage.magnifying_glass.tooltip", "Can you see crop attributes and seeds...?");

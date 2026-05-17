@@ -19,6 +19,7 @@ public class ZHCNProvider extends LanguageProvider {
         addItem(ModItems.MAGNIFYING_GLASS, "放大镜");
         addItem(ModItems.KNOWN_SEED, "已知种子");
         addItem(ModItems.SEED_PACKET, "种子袋");
+        addItem(ModItems.GRAPE, "葡萄");
         addBlock(ModBlocks.TEST_BLOCK, "测试方块");
         addBlock(ModBlocks.CROP_STAND_BLOCK, "作物架");
         add("modmenu.nameTranslation.harvestheritage", "收获：遗产");
