@@ -5,10 +5,9 @@ import me.theabab2333.harvestheritage.api.item.ITooltipItem;
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
+import me.theabab2333.harvestheritage.util.SeedUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
@@ -31,10 +30,6 @@ public class KnownSeedItem extends Item implements ISeedItem, ITooltipItem {
         return super.getTooltipImage(itemStack);
     }
 
-    public Component getName(Item item) {
-        return item.getDefaultInstance().getComponents().getOrDefault(DataComponents.ITEM_NAME, CommonComponents.EMPTY);
-    }
-
     @Override
     public Holder<@NotNull Item> seed(ItemStack itemStack) {
         return this.getSeedComponent(itemStack).seed();
@@ -47,12 +42,12 @@ public class KnownSeedItem extends Item implements ISeedItem, ITooltipItem {
 
     @Override
     public int speed(ItemStack itemStack) {
-        return 1;
+        return 0;
     }
 
     @Override
     public int output(ItemStack itemStack) {
-        return 1;
+        return 0;
     }
 
     protected SeedComponent getSeedComponent(ItemStack itemStack) {
@@ -62,7 +57,7 @@ public class KnownSeedItem extends Item implements ISeedItem, ITooltipItem {
         } else if (itemStack.get(ModDataComponents.SEED_COMPONENT) instanceof SeedComponent seedComponent) {
             return seedComponent;
         } else {
-            Holder<@NotNull Item> holder = Items.AIR.builtInRegistryHolder();
+            Holder<Item> holder = Items.AIR.builtInRegistryHolder();
             return SeedComponent.createSeed(holder, List.of(holder), 0);
         }
     }
@@ -80,7 +75,7 @@ public class KnownSeedItem extends Item implements ISeedItem, ITooltipItem {
             Component component = Component.translatable("item.harvestheritage.seed.tooltip.fail").withStyle(ChatFormatting.DARK_RED);
             list.add(component);
         } else {
-            list.add(Component.translatable("item.harvestheritage.seed.tooltip.seed", getName(seedInfo.seed().value()))
+            list.add(Component.translatable("item.harvestheritage.seed.tooltip.seed", SeedUtil.getSeedName(seedInfo.seed().value()))
                 .withStyle(ChatFormatting.GREEN));
             list.add(Component.translatable("item.harvestheritage.seed.tooltip.stage", seedInfo.stage())
                 .withStyle(ChatFormatting.LIGHT_PURPLE));

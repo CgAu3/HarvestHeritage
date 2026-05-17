@@ -6,9 +6,9 @@
       "components": {
         "harvestheritage:seed_component": {
           "result": [
-            "minecraft:melon"
+            "minecraft:beetroot"
           ],
-          "seed": "minecraft:melon_seeds",
+          "seed": "minecraft:beetroot_seeds",
           "stage": 3
         }
       },
@@ -42,9 +42,9 @@
       "components": {
         "harvestheritage:seed_component": {
           "result": [
-            "minecraft:beetroot"
+            "minecraft:melon"
           ],
-          "seed": "minecraft:beetroot_seeds",
+          "seed": "minecraft:melon_seeds",
           "stage": 3
         }
       },

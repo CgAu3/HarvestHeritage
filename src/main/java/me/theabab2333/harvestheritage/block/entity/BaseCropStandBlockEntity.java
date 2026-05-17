@@ -1,6 +1,7 @@
 package me.theabab2333.harvestheritage.block.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 import me.theabab2333.harvestheritage.block.BaseCropStandBlock;
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
@@ -38,6 +39,7 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
     @Getter
     protected SeedPacketComponent seedPacketComponent;
     @Getter
+    @Setter
     protected int stage = 0;
 
     public void seedUseOn(ItemStack itemStack) {
@@ -107,43 +109,35 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
             if (random.nextInt(3) < speed) {
                 if (this.stage < needStage) {
                     this.stage++;
-                } else {
-                    if (can_hybrid(level, pos)) {
-                    }
+                } else if (needStage == this.stage) {
+                    find(level, pos);
                 }
             }
         }
     }
 
-    @SuppressWarnings(
-        {
-            "ConstantValue",
-            "checkstyle:MethodName",
-            "checkstyle:Indentation"
-        }
-    )
-    public boolean can_hybrid(ServerLevel level, BlockPos pos) {
+    @SuppressWarnings("ConstantValue")
+    public void find(ServerLevel level, BlockPos pos) {
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             BlockPos pos1 = pos.relative(direction, 1);
             BlockState state1 = level.getBlockState(pos1);
             if (state1.getBlock() instanceof BaseCropStandBlock) {
                 BaseCropStandBlockEntity be1 = (BaseCropStandBlockEntity) level.getBlockEntity(pos1);
-                if (be1 == null) return false;
+                if (be1 == null) return;
                 if (be1.getSeedPacketComponent() == null) {
                     BlockPos pos2 = pos.relative(direction, 2);
                     BlockState state2 = level.getBlockState(pos2);
                     if (state2.getBlock() instanceof BaseCropStandBlock) {
                         BaseCropStandBlockEntity be2 = (BaseCropStandBlockEntity) level.getBlockEntity(pos2);
                         SeedPacketComponent component = be2.getSeedPacketComponent();
-                        if (component != null) {
+                        if (component != null && component.seedComponent().stage() == be2.stage) {
                             hybrid(be1, this.seedPacketComponent, component, level);
-                            return true;
+                            return;
                         }
                     }
                 }
             }
         }
-        return false;
     }
 
     public void hybrid(
@@ -159,82 +153,76 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
             return;
         }
 
-        holders.forEach(
-            holder -> {
-                HybridRecipe recipe = holder.value();
-                List<Holder<Item>> inputList = recipe.getInputSeeds();
+        holders.forEach(holder -> {
+            HybridRecipe recipe = holder.value();
+            List<Holder<Item>> inputList = recipe.getInputSeeds();
 
-                SeedComponent seed1 = component1.seedComponent();
-                SeedComponent seed2 = component2.seedComponent();
-                Holder<Item> input1 = seed1.seed();
-                Holder<Item> input2 = seed2.seed();
-                if (
-                    inputList.size() == 2
-                    && inputList.contains(input1)
-                    && inputList.contains(input2)
-                ) {
-                    List<SeedComponent> outputs = recipe.getOutputSeeds();
+            SeedComponent seed1 = component1.seedComponent();
+            SeedComponent seed2 = component2.seedComponent();
+            Holder<Item> input1 = seed1.seed();
+            Holder<Item> input2 = seed2.seed();
+            if (inputList.size() == 2) {
+                boolean match1 = inputList.contains(input1);
+                boolean match2 = inputList.contains(input2);
 
-                    int speed1 = component1.speed();
-                    int output1 = component1.output();
+                if (match1 && match2) {
+                    if (!input1.equals(input2)) {
+                        List<SeedComponent> outputs = recipe.getOutputSeeds();
 
-                    int speed2 = component2.speed();
-                    int output2 = component2.output();
+                        int speed1 = component1.speed();
+                        int output1 = component1.output();
 
-                    RandomSource random = level.getRandom();
+                        int speed2 = component2.speed();
+                        int output2 = component2.output();
 
-                    // speed
-                    int minSpeed = Math.min(speed1, speed2);
-                    int maxSpeed = Math.max(speed1, speed2);
-                    int avgSpeed = (speed1 + speed2) / 2;
-                    int finalSpeed;
+                        RandomSource random = level.getRandom();
 
-                    double speedRoll = random.nextDouble();
-                    if (speedRoll < 0.2) {
-                        finalSpeed = Math.max(1, minSpeed - random.nextInt(minSpeed));
-                    } else if (speedRoll < 0.7) {
-                        finalSpeed = Math.min(31, maxSpeed + random.nextInt(31 - maxSpeed + 1));
-                    } else {
-                        finalSpeed = avgSpeed;
-                    }
+                        // speed
+                        int minSpeed = Math.min(speed1, speed2);
+                        int avgSpeed = (speed1 + speed2) / 2;
+                        int finalSpeed;
 
-                    // output
-                    int minOutput = Math.min(output1, output2);
-                    int maxOutput = Math.max(output1, output2);
-                    int avgOutput = (output1 + output2) / 2;
-                    int finalOutput;
-
-                    double outputRoll = random.nextDouble();
-                    if (outputRoll < 0.2) {
-                        finalOutput = Math.max(1, minOutput - random.nextInt(minOutput));
-                    } else if (outputRoll < 0.7) {
-                        finalOutput = Math.min(31, maxOutput + random.nextInt(31 - maxOutput + 1));
-                    } else {
-                        finalOutput = avgOutput;
-                    }
-
-                    // component
-                    SeedComponent finalSeedComponent;
-                    double seedRoll = random.nextDouble();
-                    if (seedRoll < 0.5) {
-                        finalSeedComponent = random.nextBoolean() ? seed1 : seed2;
-                    } else {
-                        if (!outputs.isEmpty()) {
-                            finalSeedComponent = outputs.get(random.nextInt(outputs.size()));
+                        double speedRoll = random.nextDouble();
+                        if (speedRoll < 0.05) {
+                            finalSpeed = Math.max(1, minSpeed - random.nextInt(2) - 1);
+                        } else if (speedRoll < 0.8) {
+                            finalSpeed = Math.min(31, avgSpeed + random.nextInt(2) + 1);
                         } else {
-                            finalSeedComponent = seed1;
+                            finalSpeed = avgSpeed;
                         }
+
+                        // output
+                        int minOutput = Math.min(output1, output2);
+                        int avgOutput = (output1 + output2) / 2;
+                        int finalOutput;
+
+                        double outputRoll = random.nextDouble();
+                        if (outputRoll < 0.05) {
+                            finalOutput = Math.max(1, minOutput - random.nextInt(2) - 1);
+                        } else if (outputRoll < 0.8) {
+                            finalOutput = Math.min(31, avgOutput + random.nextInt(2) + 1);
+                        } else {
+                            finalOutput = avgOutput;
+                        }
+
+                        SeedComponent finalSeedComponent;
+                        double seedRoll = random.nextDouble();
+                        if (seedRoll < 0.5) {
+                            finalSeedComponent = random.nextBoolean() ? seed1 : seed2;
+                        } else {
+                            if (!outputs.isEmpty()) {
+                                finalSeedComponent = outputs.get(random.nextInt(outputs.size()));
+                            } else {
+                                finalSeedComponent = seed1;
+                            }
+                        }
+
+                        SeedPacketComponent component = new SeedPacketComponent(finalSeedComponent, finalSpeed, finalOutput);
+
+                        cropStandBlock.setSeedPacketComponent(component);
                     }
-
-                    SeedPacketComponent component = new SeedPacketComponent(
-                        finalSeedComponent,
-                        finalSpeed,
-                        finalOutput
-                    );
-
-                    cropStandBlock.setSeedPacketComponent(component);
                 }
             }
-        );
+        });
     }
 }

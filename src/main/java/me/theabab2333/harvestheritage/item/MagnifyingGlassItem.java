@@ -1,7 +1,10 @@
 package me.theabab2333.harvestheritage.item;
 
+import me.theabab2333.harvestheritage.api.item.ITooltipItem;
 import me.theabab2333.harvestheritage.init.ModRecipes;
 import me.theabab2333.harvestheritage.recipe.FindRecipe;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -19,7 +22,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class MagnifyingGlassItem extends Item {
+public class MagnifyingGlassItem extends Item implements ITooltipItem {
     public MagnifyingGlassItem(Properties properties) {
         properties.stacksTo(1);
         super(properties);
@@ -72,5 +75,10 @@ public class MagnifyingGlassItem extends Item {
             }
         }
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public List<Component> getTooltip(ItemStack itemStack) {
+        return List.of(Component.translatable("item.harvestheritage.magnifying_glass.tooltip").withStyle(ChatFormatting.GRAY));
     }
 }
