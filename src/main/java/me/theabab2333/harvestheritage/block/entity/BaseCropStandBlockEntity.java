@@ -22,6 +22,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -149,19 +150,18 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
         RecipeManager recipeManager = level.recipeAccess();
         var holders = recipeManager.recipeMap().byType(ModRecipes.HYBRID_TYPE.get());
 
-        if (holders.isEmpty()) {
-            return;
-        }
+        if (holders.isEmpty()) return;
+
+        SeedComponent seed1 = component1.seedComponent();
+        SeedComponent seed2 = component2.seedComponent();
 
         holders.forEach(holder -> {
             HybridRecipe recipe = holder.value();
             List<Holder<Item>> inputList = recipe.getInputSeeds();
-
-            SeedComponent seed1 = component1.seedComponent();
-            SeedComponent seed2 = component2.seedComponent();
-            Holder<Item> input1 = seed1.seed();
-            Holder<Item> input2 = seed2.seed();
             if (inputList.size() == 2) {
+                Holder<Item> input1 = seed1.seed();
+                Holder<Item> input2 = seed2.seed();
+
                 boolean match1 = inputList.contains(input1);
                 boolean match2 = inputList.contains(input2);
 
@@ -169,41 +169,7 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
                     if (!input1.equals(input2)) {
                         List<SeedComponent> outputs = recipe.getOutputSeeds();
 
-                        int speed1 = component1.speed();
-                        int output1 = component1.output();
-
-                        int speed2 = component2.speed();
-                        int output2 = component2.output();
-
                         RandomSource random = level.getRandom();
-
-                        // speed
-                        int minSpeed = Math.min(speed1, speed2);
-                        int avgSpeed = (speed1 + speed2) / 2;
-                        int finalSpeed;
-
-                        double speedRoll = random.nextDouble();
-                        if (speedRoll < 0.05) {
-                            finalSpeed = Math.max(1, minSpeed - random.nextInt(2) - 1);
-                        } else if (speedRoll < 0.8) {
-                            finalSpeed = Math.min(31, avgSpeed + random.nextInt(2) + 1);
-                        } else {
-                            finalSpeed = avgSpeed;
-                        }
-
-                        // output
-                        int minOutput = Math.min(output1, output2);
-                        int avgOutput = (output1 + output2) / 2;
-                        int finalOutput;
-
-                        double outputRoll = random.nextDouble();
-                        if (outputRoll < 0.05) {
-                            finalOutput = Math.max(1, minOutput - random.nextInt(2) - 1);
-                        } else if (outputRoll < 0.8) {
-                            finalOutput = Math.min(31, avgOutput + random.nextInt(2) + 1);
-                        } else {
-                            finalOutput = avgOutput;
-                        }
 
                         SeedComponent finalSeedComponent;
                         double seedRoll = random.nextDouble();
@@ -217,12 +183,61 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
                             }
                         }
 
-                        SeedPacketComponent component = new SeedPacketComponent(finalSeedComponent, finalSpeed, finalOutput);
-
+                        SeedPacketComponent component = this.updateSeed(level, component1, component2, finalSeedComponent);
                         cropStandBlock.setSeedPacketComponent(component);
                     }
                 }
             }
         });
+
+        if (seed1 == seed2) {
+            SeedPacketComponent component = this.updateSeed(level, component1, component2, seed1);
+            cropStandBlock.setSeedPacketComponent(component);
+        }
+    }
+
+    public SeedPacketComponent updateSeed(
+        Level level,
+        SeedPacketComponent component1,
+        SeedPacketComponent component2,
+        SeedComponent seed
+    ) {
+        int speed1 = component1.speed();
+        int output1 = component1.output();
+
+        int speed2 = component2.speed();
+        int output2 = component2.output();
+
+        RandomSource random = level.getRandom();
+
+        // speed
+        int minSpeed = Math.min(speed1, speed2);
+        int avgSpeed = (speed1 + speed2) / 2;
+        int finalSpeed;
+
+        double speedRoll = random.nextDouble();
+        if (speedRoll < 0.05) {
+            finalSpeed = Math.max(1, minSpeed - random.nextInt(2) - 1);
+        } else if (speedRoll < 0.8) {
+            finalSpeed = Math.min(31, avgSpeed + random.nextInt(2) + 1);
+        } else {
+            finalSpeed = avgSpeed;
+        }
+
+        // output
+        int minOutput = Math.min(output1, output2);
+        int avgOutput = (output1 + output2) / 2;
+        int finalOutput;
+
+        double outputRoll = random.nextDouble();
+        if (outputRoll < 0.05) {
+            finalOutput = Math.max(1, minOutput - random.nextInt(2) - 1);
+        } else if (outputRoll < 0.8) {
+            finalOutput = Math.min(31, avgOutput + random.nextInt(2) + 1);
+        } else {
+            finalOutput = avgOutput;
+        }
+
+        return new SeedPacketComponent(seed, finalSpeed, finalOutput);
     }
 }
