@@ -1,6 +1,6 @@
 package me.theabab2333.harvestheritage.item;
 
-import me.theabab2333.harvestheritage.api.render.IItemDisplayInHand;
+import me.theabab2333.harvestheritage.api.item.ISeedItem;
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
@@ -10,13 +10,12 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-@SuppressWarnings("checkstyle:AbbreviationAsWordInName")
-public class SeedPacketItem extends KnownSeedItem implements IItemDisplayInHand {
+public class SeedPacketItem extends KnownSeedItem implements ISeedItem {
     public SeedPacketItem(Properties properties) {
         super(properties);
     }
@@ -51,50 +50,42 @@ public class SeedPacketItem extends KnownSeedItem implements IItemDisplayInHand 
     }
 
     @Override
-    public ItemStack getDisplayedItem(ItemStack stack) {
-        if (stack.get(ModDataComponents.SEED_PACKET_COMPONENT) instanceof SeedPacketComponent component) {
-            return component.seedComponent().seed().value().getDefaultInstance();
-        }
-
-        if (stack.get(ModDataComponents.SEED_COMPONENT) instanceof SeedComponent component) {
-            return component.seed().value().getDefaultInstance();
-        }
-
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public int offsetX(ItemStack stack) {
-        return 5;
-    }
-
-    @Override
-    public int offsetY(ItemStack stack) {
-        return 2;
-    }
-
-    @Override
-    public int scale(ItemStack stack) {
-        return 16;
-    }
-
-    @Override
     public Holder<Item> seed(ItemStack itemStack) {
-        return super.seed(itemStack);
+        if (itemStack.get(ModDataComponents.SEED_PACKET_COMPONENT) instanceof SeedPacketComponent seedPacketComponent) {
+            return seedPacketComponent.seedComponent().seed();
+        } else if (itemStack.get(ModDataComponents.SEED_COMPONENT) instanceof SeedComponent seedComponent) {
+            return seedComponent.seed();
+        } else {
+            return Items.AIR.builtInRegistryHolder();
+        }
     }
 
     @Override
     public List<Holder<Item>> result(ItemStack itemStack) {
-        return super.result(itemStack);
+        if (itemStack.get(ModDataComponents.SEED_PACKET_COMPONENT) instanceof SeedPacketComponent seedPacketComponent) {
+            return seedPacketComponent.seedComponent().result();
+        } else if (itemStack.get(ModDataComponents.SEED_COMPONENT) instanceof SeedComponent seedComponent) {
+            return seedComponent.result();
+        } else {
+            return List.of(Items.AIR.builtInRegistryHolder());
+        }
     }
 
     @Override
     public int speed(ItemStack itemStack) {
-        return Objects.requireNonNull(this.getSeedPacketComponent(itemStack)).speed();
+        if (itemStack.get(ModDataComponents.SEED_PACKET_COMPONENT) instanceof SeedPacketComponent seedPacketComponent) {
+            return seedPacketComponent.speed();
+        } else {
+            return 0;
+        }
     }
 
     @Override
     public int output(ItemStack itemStack) {
-        return Objects.requireNonNull(this.getSeedPacketComponent(itemStack)).output();
+        if (itemStack.get(ModDataComponents.SEED_PACKET_COMPONENT) instanceof SeedPacketComponent seedPacketComponent) {
+            return seedPacketComponent.output();
+        } else {
+            return 0;
+        }
     }
 }
