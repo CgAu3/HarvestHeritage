@@ -1,9 +1,5 @@
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
-@NotNullByDefault
+@NullMarked
 package me.theabab2333.harvestheritage.init;
 
-import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;
-import org.jetbrains.annotations.NotNullByDefault;
+import org.jspecify.annotations.NullMarked;
 
-import javax.annotation.ParametersAreNonnullByDefault;

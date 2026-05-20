@@ -19,13 +19,13 @@ public class ModItems {
 
     public static final DeferredItem<Item> MAGNIFYING_GLASS = ITEMS.registerItem("magnifying_glass", MagnifyingGlassItem::new);
 
+    public static final DeferredItem<Item> GRAPE = ITEMS.registerSimpleItem("grape");
+
     public static final DeferredItem<Item> UNKNOWN_SEED = ITEMS.registerItem("unknown_seed", UnknownSeedItem::new);
 
     public static final DeferredItem<Item> KNOWN_SEED = ITEMS.registerItem("known_seed", KnownSeedItem::new);
 
     public static final DeferredItem<Item> SEED_PACKET = ITEMS.registerItem("seed_packet", SeedPacketItem::new);
-
-    public static final DeferredItem<Item> GRAPE = ITEMS.registerSimpleItem("grape");
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

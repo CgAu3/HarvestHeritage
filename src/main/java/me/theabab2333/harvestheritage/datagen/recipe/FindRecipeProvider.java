@@ -4,6 +4,7 @@ import me.theabab2333.harvestheritage.HarvestHeritage;
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModItems;
+import me.theabab2333.harvestheritage.init.ModSeeds;
 import me.theabab2333.harvestheritage.recipe.FindRecipe;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -26,17 +27,17 @@ public class FindRecipeProvider extends ModRecipeProvider {
     private static void buildCommonSeed(RecipeOutput output) {
         List<ItemStackTemplate> list = new ArrayList<>();
         for (var entry : SEEDS.entrySet()) {
-            var seedItem = entry.getKey();
-            var seedInfo = entry.getValue();
-            var resultItems = seedInfo.results();
-            var stage = seedInfo.stage();
+            Item seedItem = entry.getKey();
+            ModSeeds.SeedInfo seedInfo = entry.getValue();
+            List<Item> resultItems = seedInfo.results();
+            int stage = seedInfo.stage();
 
             Holder<Item> seedHolder = seedItem.builtInRegistryHolder();
             List<Holder<Item>> resultHolders = resultItems.stream().map(item -> (Holder<Item>) item.builtInRegistryHolder()).toList();
 
-            var component = SeedComponent.createSeed(seedHolder, resultHolders, stage);
-            var patch = DataComponentPatch.builder().set(ModDataComponents.SEED_COMPONENT.get(), component).build();
-            var stack = new ItemStackTemplate(ModItems.KNOWN_SEED.get(), 1, patch);
+            SeedComponent component = SeedComponent.createSeed(seedHolder, resultHolders, stage);
+            DataComponentPatch patch = DataComponentPatch.builder().set(ModDataComponents.SEED_COMPONENT.get(), component).build();
+            ItemStackTemplate stack = new ItemStackTemplate(ModItems.KNOWN_SEED.get(), 1, patch);
             list.add(stack);
         }
         FindRecipe.Builder.builder(ModItems.UNKNOWN_SEED, list).save(output, HarvestHeritage.of("find/known_seed"));

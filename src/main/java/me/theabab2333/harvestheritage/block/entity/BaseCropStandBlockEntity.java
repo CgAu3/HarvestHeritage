@@ -30,7 +30,9 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.jspecify.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class BaseCropStandBlockEntity extends BlockEntity {
     public BaseCropStandBlockEntity(BlockEntityType<?> type, BlockPos worldPosition, BlockState blockState) {
@@ -150,10 +152,14 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
         RecipeManager recipeManager = level.recipeAccess();
         var holders = recipeManager.recipeMap().byType(ModRecipes.HYBRID_TYPE.get());
 
-        if (holders.isEmpty()) return;
-
         SeedComponent seed1 = component1.seedComponent();
         SeedComponent seed2 = component2.seedComponent();
+
+        if (holders.isEmpty()) {
+            return;
+        }
+
+        AtomicBoolean hasRecipe = new AtomicBoolean(false);
 
         holders.forEach(holder -> {
             HybridRecipe recipe = holder.value();
@@ -169,34 +175,32 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
                     if (!input1.equals(input2)) {
                         List<SeedComponent> outputs = recipe.getOutputSeeds();
 
-                        RandomSource random = level.getRandom();
+                        List<SeedComponent> seeds = new ArrayList<>(outputs);
+                        seeds.add(seed1);
+                        seeds.add(seed2);
 
-                        SeedComponent finalSeedComponent;
-                        double seedRoll = random.nextDouble();
-                        if (seedRoll < 0.5) {
-                            finalSeedComponent = random.nextBoolean() ? seed1 : seed2;
-                        } else {
-                            if (!outputs.isEmpty()) {
-                                finalSeedComponent = outputs.get(random.nextInt(outputs.size()));
-                            } else {
-                                finalSeedComponent = seed1;
-                            }
-                        }
-
-                        SeedPacketComponent component = this.updateSeed(level, component1, component2, finalSeedComponent);
+                        SeedPacketComponent component = this.updateSeed(level, component1, component2, seeds);
                         cropStandBlock.setSeedPacketComponent(component);
+                        hasRecipe.set(true);
                     }
+                } else {
+                    hasRecipe.set(false);
                 }
             }
         });
 
-        if (seed1.seed().value() == seed2.seed().value()) {
-            SeedPacketComponent component = this.updateSeed(level, component1, component2, seed1);
+        if (!hasRecipe.get()) {
+            SeedPacketComponent component = this.updateSeed(level, component1, component2, List.of());
             cropStandBlock.setSeedPacketComponent(component);
         }
     }
 
-    public SeedPacketComponent updateSeed(Level level, SeedPacketComponent component1, SeedPacketComponent component2, SeedComponent seed) {
+    public SeedPacketComponent updateSeed(
+        Level level,
+        SeedPacketComponent component1,
+        SeedPacketComponent component2,
+        List<SeedComponent> seeds
+    ) {
         int speed1 = component1.speed();
         int output1 = component1.output();
 
@@ -233,6 +237,20 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
             finalOutput = avgOutput;
         }
 
-        return new SeedPacketComponent(seed, finalSpeed, finalOutput);
+        // seed
+        SeedComponent finalSeedComponent;
+        double seedRoll = random.nextDouble();
+        if (seedRoll < 0.5) {
+            finalSeedComponent = random.nextBoolean() ? component1.seedComponent() : component2.seedComponent();
+        } else {
+            if (!seeds.isEmpty()) {
+                finalSeedComponent = seeds.get(random.nextInt(seeds.size()));
+            } else {
+                finalSeedComponent = random.nextBoolean() ? component1.seedComponent() : component2.seedComponent();
+            }
+        }
+
+
+        return new SeedPacketComponent(finalSeedComponent, finalSpeed, finalOutput);
     }
 }

@@ -1,6 +1,7 @@
 {
   "block.harvestheritage.crop_stand.tooltip.stage": "Current Growth Stage：%s",
   "block.harvestheritage.crop_stand_block": "Crop Stand",
+  "block.harvestheritage.scaffolding_crop_stand_block": "Hanging crop racks",
   "block.harvestheritage.test_block": "Test Block",
   "creativetab.harvestheritage.harvestheritage.seed_packet": "Harvest Heritage：Seed Packet",
   "item.harvestheritage.grape": "Grape",

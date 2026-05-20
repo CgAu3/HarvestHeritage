@@ -1,5 +1,6 @@
 package me.theabab2333.harvestheritage.datagen.recipe;
 
+import me.theabab2333.harvestheritage.init.ModBlocks;
 import me.theabab2333.harvestheritage.init.ModItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -32,7 +33,12 @@ public class ModItemRecipe extends ModRecipeProvider {
             .define('C', Items.STICK)
             .unlockedBy("has_amethyst_shard", has(Items.AMETHYST_SHARD))
             .save(output);
-
-
+        ShapedRecipeBuilder.shaped(registries.lookupOrThrow(Registries.ITEM), RecipeCategory.MISC, ModBlocks.CROP_STAND_BLOCK.asItem())
+            .pattern("   ")
+            .pattern("A A")
+            .pattern("A A")
+            .define('A', Items.STICK)
+            .unlockedBy("has_stick", has(Items.STICK))
+            .save(output);
     }
 }
