@@ -2,7 +2,9 @@
   "required": true,
   "package": "me.theabab2333.harvestheritage.mixin",
   "compatibilityLevel": "JAVA_25",
-  "mixins": [],
+  "mixins": [
+    "ScaffoldingBlockMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

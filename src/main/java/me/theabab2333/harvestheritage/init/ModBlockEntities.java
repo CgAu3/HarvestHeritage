@@ -21,7 +21,7 @@ public class ModBlockEntities {
         () -> new BlockEntityType<>(CropStandStandBlockEntity::new, ModBlocks.CROP_STAND_BLOCK.get())
     );
 
-    public static final Supplier<BlockEntityType<?>> SCAFFOLDING_CROP_STAND_BLOCK_ENTITY = BLOCK_ENTITY_TYPES.register(
+    public static final Supplier<BlockEntityType<ScaffoldingCropStandBlockEntity>> SCAFFOLDING_CROP_STAND_BLOCK_ENTITY = BLOCK_ENTITY_TYPES.register(
         "scaffolding_crop_stand_block_entity",
         () -> new BlockEntityType<>(ScaffoldingCropStandBlockEntity::new, ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK.get())
     );

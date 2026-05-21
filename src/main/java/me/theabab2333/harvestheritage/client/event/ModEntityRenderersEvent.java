@@ -2,6 +2,7 @@ package me.theabab2333.harvestheritage.client.event;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
 import me.theabab2333.harvestheritage.client.render.blockentity.CropStandBlockEntityRenderer;
+import me.theabab2333.harvestheritage.client.render.blockentity.ScaffoldingCropStandBlockEntityRenderer;
 import me.theabab2333.harvestheritage.init.ModBlockEntities;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -15,6 +16,11 @@ public class ModEntityRenderersEvent {
         event.registerBlockEntityRenderer(
             ModBlockEntities.CROP_STAND_BLOCK_ENTITY.get(),
             CropStandBlockEntityRenderer::new
+        );
+
+        event.registerBlockEntityRenderer(
+            ModBlockEntities.SCAFFOLDING_CROP_STAND_BLOCK_ENTITY.get(),
+            ScaffoldingCropStandBlockEntityRenderer::new
         );
     }
 }

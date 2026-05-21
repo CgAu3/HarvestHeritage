@@ -1,8 +1,7 @@
 package me.theabab2333.harvestheritage.client.render.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import me.theabab2333.harvestheritage.block.entity.BaseCropStandBlockEntity;
-import me.theabab2333.harvestheritage.block.entity.CropStandStandBlockEntity;
+import me.theabab2333.harvestheritage.block.entity.ScaffoldingCropStandBlockEntity;
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.BlockModelResolver;
@@ -18,27 +17,29 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
-public class CropStandBlockEntityRenderer implements BlockEntityRenderer<CropStandStandBlockEntity, CropStandBlockEntityRenderState> {
+import static me.theabab2333.harvestheritage.client.render.blockentity.CropStandBlockEntityRenderer.getRenderStage;
+
+public class ScaffoldingCropStandBlockEntityRenderer
+    implements BlockEntityRenderer<ScaffoldingCropStandBlockEntity, ScaffoldingCropStandBlockEntityRenderState> {
 
     private static final BlockDisplayContext BLOCK_DISPLAY_CONTEXT = BlockDisplayContext.create();
 
     private final BlockModelResolver blockModelResolver;
 
-    public CropStandBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
+    public ScaffoldingCropStandBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         this.blockModelResolver = context.blockModelResolver();
     }
 
     @Override
-    public CropStandBlockEntityRenderState createRenderState() {
-        return new CropStandBlockEntityRenderState();
+    public ScaffoldingCropStandBlockEntityRenderState createRenderState() {
+        return new ScaffoldingCropStandBlockEntityRenderState();
     }
 
-    // make idea happy~
     @Override
     @SuppressWarnings("ConstantValue")
     public void extractRenderState(
-        CropStandStandBlockEntity blockEntity,
-        CropStandBlockEntityRenderState state,
+        ScaffoldingCropStandBlockEntity blockEntity,
+        ScaffoldingCropStandBlockEntityRenderState state,
         float partialTicks,
         Vec3 cameraPosition,
         ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress
@@ -58,29 +59,9 @@ public class CropStandBlockEntityRenderer implements BlockEntityRenderer<CropSta
         this.blockModelResolver.update(state.block, blockState, BLOCK_DISPLAY_CONTEXT);
     }
 
-    public static int getRenderStage(BaseCropStandBlockEntity blockEntity, SeedComponent seedComponent) {
-        int maxStage = 7;
-        int stateStage = blockEntity.getStage();
-        int seedStage = seedComponent.stage();
-
-        int renderStage;
-        if (seedStage == 0) {
-            renderStage = 0;
-        } else if (seedStage >= stateStage) {
-            if (seedStage == stateStage) {
-                renderStage = maxStage;
-            } else {
-                renderStage = stateStage + (maxStage - stateStage) * stateStage / seedStage;
-            }
-        } else {
-            renderStage = seedStage + (maxStage - seedStage) * seedStage / stateStage;
-        }
-        return renderStage;
-    }
-
     @Override
     public void submit(
-        CropStandBlockEntityRenderState state,
+        ScaffoldingCropStandBlockEntityRenderState state,
         PoseStack poseStack,
         SubmitNodeCollector submitNodeCollector,
         CameraRenderState cameraRenderState
