@@ -21,6 +21,7 @@ public class ENUSProvider extends LanguageProvider {
         addItem(ModItems.KNOWN_SEED, "Known Seed");
         addItem(ModItems.SEED_PACKET, "Seed Packet");
         addItem(ModItems.GRAPE, "Grape");
+        addItem(ModItems.SCAFFOLDING_CROP_STAND_BLOCK_ITEM, "Hanging crop racks");
         addBlock(ModBlocks.TEST_BLOCK, "Test Block");
         addBlock(ModBlocks.CROP_STAND_BLOCK, "Crop Stand");
         addBlock(ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK, "Hanging crop racks");

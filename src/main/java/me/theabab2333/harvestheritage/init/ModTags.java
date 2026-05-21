@@ -22,5 +22,6 @@ public class ModTags {
 
     public static class BlockTags {
         public static TagKey<Block> CAN_SHEAR = createBlockTag("can_shear");
+        public static TagKey<Block> SCAFFOLDING_BLOCKS = createBlockTag("scaffolding_blocks");
     }
 }

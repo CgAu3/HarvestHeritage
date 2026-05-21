@@ -3,6 +3,7 @@ package me.theabab2333.harvestheritage.init;
 import me.theabab2333.harvestheritage.item.GrassShearItem;
 import me.theabab2333.harvestheritage.item.KnownSeedItem;
 import me.theabab2333.harvestheritage.item.MagnifyingGlassItem;
+import me.theabab2333.harvestheritage.item.ScaffoldingCropStandBlockItem;
 import me.theabab2333.harvestheritage.item.SeedPacketItem;
 import me.theabab2333.harvestheritage.item.UnknownSeedItem;
 import net.minecraft.world.item.Item;
@@ -26,6 +27,11 @@ public class ModItems {
     public static final DeferredItem<Item> KNOWN_SEED = ITEMS.registerItem("known_seed", KnownSeedItem::new);
 
     public static final DeferredItem<Item> SEED_PACKET = ITEMS.registerItem("seed_packet", SeedPacketItem::new);
+
+    public static final DeferredItem<Item> SCAFFOLDING_CROP_STAND_BLOCK_ITEM = ITEMS.registerItem(
+        "scaffolding_crop_stand_block",
+        properties -> new ScaffoldingCropStandBlockItem(ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK.get(), properties)
+    );
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

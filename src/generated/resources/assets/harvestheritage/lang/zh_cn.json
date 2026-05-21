@@ -10,6 +10,7 @@
   "item.harvestheritage.known_seed": "已知种子",
   "item.harvestheritage.magnifying_glass": "放大镜",
   "item.harvestheritage.magnifying_glass.tooltip": "能看作物属性和种子欸...?",
+  "item.harvestheritage.scaffolding_crop_stand_block": "悬挂式作物架",
   "item.harvestheritage.seed.tooltip.fail": "抱歉，这个物品没有种子组件",
   "item.harvestheritage.seed.tooltip.seed": "种子：%s",
   "item.harvestheritage.seed.tooltip.stage": "种子生长阶段：%s",

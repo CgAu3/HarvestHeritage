@@ -10,6 +10,7 @@
   "item.harvestheritage.known_seed": "Known Seed",
   "item.harvestheritage.magnifying_glass": "Magnifying Glass",
   "item.harvestheritage.magnifying_glass.tooltip": "Can you see crop attributes and seeds...?",
+  "item.harvestheritage.scaffolding_crop_stand_block": "Hanging crop racks",
   "item.harvestheritage.seed.tooltip.fail": "Sorry, this item does not have a seed component",
   "item.harvestheritage.seed.tooltip.seed": "Seed: %s",
   "item.harvestheritage.seed.tooltip.stage": "Seed Growth Stage：%s",

@@ -26,7 +26,7 @@ public class ModBlocks {
         CropStandBlock::new
     );
 
-    public static final DeferredBlock<Block> SCAFFOLDING_CROP_STAND_BLOCK = registerBlockWithItem(
+    public static final DeferredBlock<Block> SCAFFOLDING_CROP_STAND_BLOCK = BLOCKS.registerBlock(
         "scaffolding_crop_stand_block",
         ScaffoldingCropStandBlock::new
     );

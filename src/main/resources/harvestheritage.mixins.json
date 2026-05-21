@@ -3,6 +3,7 @@
   "package": "me.theabab2333.harvestheritage.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "ScaffoldingBlockItemMixin",
     "ScaffoldingBlockMixin"
   ],
   "injectors": {

@@ -20,6 +20,7 @@ public class ZHCNProvider extends LanguageProvider {
         addItem(ModItems.KNOWN_SEED, "已知种子");
         addItem(ModItems.SEED_PACKET, "种子袋");
         addItem(ModItems.GRAPE, "葡萄");
+        addItem(ModItems.SCAFFOLDING_CROP_STAND_BLOCK_ITEM, "悬挂式作物架");
         addBlock(ModBlocks.TEST_BLOCK, "测试方块");
         addBlock(ModBlocks.CROP_STAND_BLOCK, "作物架");
         addBlock(ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK, "悬挂式作物架");
