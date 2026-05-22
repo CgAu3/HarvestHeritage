@@ -1,6 +1,7 @@
 package me.theabab2333.harvestheritage.mixin;
 
 import me.theabab2333.harvestheritage.init.ModBlocks;
+import me.theabab2333.harvestheritage.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -28,7 +29,7 @@ public abstract class ScaffoldingBlockMixin extends Block {
 
     /**
      * @author theabab2333
-     * @reason 统一脚手架与悬挂式脚手架
+     * @reason 统一脚手架与悬挂式作物架
      */
     @Overwrite
     public static int getDistance(BlockGetter level, BlockPos pos) {
@@ -54,13 +55,15 @@ public abstract class ScaffoldingBlockMixin extends Block {
 
     /**
      * @author theabab2333
-     * @reason 统一脚手架与悬挂式脚手架
+     * @reason 统一脚手架与悬挂式作物架
      */
     @Overwrite
     protected @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, CollisionContext context) {
         if (context.isHoldingItem(state.getBlock().asItem())) {
             return Shapes.block();
-        } else if ((ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK.isBound() && context.isHoldingItem(ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK.asItem()))) {
+        } else if (ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK.isBound() && context.isHoldingItem(ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK.asItem())) {
+            return Shapes.block();
+        } else if ((ModItems.SEED_PACKET.isBound() && context.isHoldingItem(ModItems.SEED_PACKET.asItem()))) {
             return Shapes.block();
         } else {
             return state.getValue(BOTTOM) ? SHAPE_UNSTABLE : SHAPE_STABLE;

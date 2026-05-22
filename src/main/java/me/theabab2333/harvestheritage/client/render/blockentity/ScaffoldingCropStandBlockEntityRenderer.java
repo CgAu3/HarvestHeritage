@@ -12,12 +12,9 @@ import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
-
-import static me.theabab2333.harvestheritage.client.render.blockentity.CropStandBlockEntityRenderer.getRenderStage;
 
 public class ScaffoldingCropStandBlockEntityRenderer
     implements BlockEntityRenderer<ScaffoldingCropStandBlockEntity, ScaffoldingCropStandBlockEntityRenderState> {
@@ -45,6 +42,7 @@ public class ScaffoldingCropStandBlockEntityRenderer
         ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress
     ) {
         state.block.clear();
+        state.block1.clear();
         BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
 
         state.seedPacketComponent = blockEntity.getSeedPacketComponent();
@@ -53,10 +51,13 @@ public class ScaffoldingCropStandBlockEntityRenderer
         if (seedComponent == null) return;
 
         state.stage = blockEntity.getStage();
-        int renderStage = getRenderStage(blockEntity, seedComponent);
 
-        BlockState blockState = Blocks.WHEAT.defaultBlockState().setValue(CropBlock.AGE, renderStage);
-        this.blockModelResolver.update(state.block, blockState, BLOCK_DISPLAY_CONTEXT);
+        BlockState azaleaState = Blocks.AZALEA.defaultBlockState();
+        this.blockModelResolver.update(state.block, azaleaState, BLOCK_DISPLAY_CONTEXT);
+        if (state.stage == seedComponent.stage()) {
+            BlockState sporeState = Blocks.SPORE_BLOSSOM.defaultBlockState();
+            this.blockModelResolver.update(state.block1, sporeState, BLOCK_DISPLAY_CONTEXT);
+        }
     }
 
     @Override
@@ -66,9 +67,20 @@ public class ScaffoldingCropStandBlockEntityRenderer
         SubmitNodeCollector submitNodeCollector,
         CameraRenderState cameraRenderState
     ) {
-        if (state.block.isEmpty()) return;
-        poseStack.pushPose();
-        state.block.submit(poseStack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
-        poseStack.popPose();
+        if (!state.block.isEmpty()) {
+            poseStack.pushPose();
+            poseStack.scale(0.8F, 0.8F, 0.8F);
+            poseStack.translate(0.125F, 0, 0.125F);
+            state.block.submit(poseStack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+            poseStack.popPose();
+        }
+
+        if (!state.block1.isEmpty()) {
+            poseStack.pushPose();
+            poseStack.scale(0.625F, 0.625F, 0.625F);
+            poseStack.translate(0.3F, -1, 0.3F);
+            state.block1.submit(poseStack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, -0);
+            poseStack.popPose();
+        }
     }
 }
