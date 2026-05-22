@@ -23,7 +23,7 @@ public abstract class ScaffoldingBlockItemMixin extends BlockItem {
 
     /**
      * @author theabab
-     * @reason 统一脚手架与悬挂式脚手架
+     * @reason 统一脚手架与悬挂式作物架
      */
     @Overwrite
     public BlockPlaceContext updatePlacementContext(BlockPlaceContext context) {
