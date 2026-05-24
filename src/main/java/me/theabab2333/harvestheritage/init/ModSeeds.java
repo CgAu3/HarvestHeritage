@@ -23,6 +23,12 @@ public class ModSeeds {
         SEEDS.put(Items.BEETROOT_SEEDS, new SeedInfo(List.of(Items.BEETROOT), 3));
         SEEDS.put(Items.MELON_SEEDS, new SeedInfo(List.of(Items.MELON), 3));
         SEEDS.put(Items.PUMPKIN_SEEDS, new SeedInfo(List.of(Items.PUMPKIN), 3));
+        SEEDS.put(Items.SWEET_BERRIES, new SeedInfo(List.of(Items.SWEET_BERRIES), 3));
+        SEEDS.put(Items.GLOW_BERRIES, new SeedInfo(List.of(Items.GLOW_BERRIES), 3));
+        SEEDS.put(Items.CHORUS_FRUIT, new SeedInfo(List.of(Items.CHORUS_FRUIT), 3));
+        SEEDS.put(Items.CARROT, new SeedInfo(List.of(Items.CARROT), 3));
+        SEEDS.put(Items.POTATO, new SeedInfo(List.of(Items.POTATO), 3));
+        SEEDS.put(Items.CHICKEN, new SeedInfo(List.of(Items.CHICKEN, Items.FEATHER), 3));
     }
 
     public static List<ItemStack> getSeeds() {

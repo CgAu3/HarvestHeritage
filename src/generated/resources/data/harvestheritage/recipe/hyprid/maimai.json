@@ -1,0 +1,17 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:wheat",
+    "minecraft:wheat"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:chicken",
+        "minecraft:feather"
+      ],
+      "seed": "minecraft:chicken",
+      "stage": 3
+    }
+  ]
+}

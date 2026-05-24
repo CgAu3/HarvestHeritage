@@ -21,6 +21,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -28,11 +29,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class BaseCropStandBlockEntity extends BlockEntity {
     public BaseCropStandBlockEntity(BlockEntityType<?> type, BlockPos worldPosition, BlockState blockState) {
@@ -71,7 +70,7 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
     }
 
     @Override
-    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
@@ -159,40 +158,31 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
             return;
         }
 
-        AtomicBoolean hasRecipe = new AtomicBoolean(false);
-
-        holders.forEach(holder -> {
+        for (RecipeHolder<HybridRecipe> holder : holders) {
             HybridRecipe recipe = holder.value();
             List<Holder<Item>> inputList = recipe.getInputSeeds();
             if (inputList.size() == 2) {
                 Holder<Item> input1 = seed1.seed();
                 Holder<Item> input2 = seed2.seed();
 
-                boolean match1 = inputList.contains(input1);
-                boolean match2 = inputList.contains(input2);
+                boolean match1 = inputList.stream().map(Holder::value).anyMatch(item -> item == input1.value());
+                boolean match2 = inputList.stream().map(Holder::value).anyMatch(item -> item == input2.value());
 
-                if (match1 && match2) {
-                    if (!input1.equals(input2)) {
-                        List<SeedComponent> outputs = recipe.getOutputSeeds();
+                if (match1 && match2 && input1.value() != input2.value()) {
+                    List<SeedComponent> outputs = recipe.getOutputSeeds();
+                    List<SeedComponent> seeds = new ArrayList<>(outputs);
+                    seeds.add(seed1);
+                    seeds.add(seed2);
 
-                        List<SeedComponent> seeds = new ArrayList<>(outputs);
-                        seeds.add(seed1);
-                        seeds.add(seed2);
-
-                        SeedPacketComponent component = this.updateSeed(level, component1, component2, seeds);
-                        cropStandBlock.setSeedPacketComponent(component);
-                        hasRecipe.set(true);
-                    }
-                } else {
-                    hasRecipe.set(false);
+                    SeedPacketComponent component = this.updateSeed(level, component1, component2, seeds);
+                    cropStandBlock.setSeedPacketComponent(component);
+                    return;
                 }
             }
-        });
-
-        if (!hasRecipe.get()) {
-            SeedPacketComponent component = this.updateSeed(level, component1, component2, List.of());
-            cropStandBlock.setSeedPacketComponent(component);
         }
+
+        SeedPacketComponent component = this.updateSeed(level, component1, component2, List.of());
+        cropStandBlock.setSeedPacketComponent(component);
     }
 
     public SeedPacketComponent updateSeed(

@@ -6,9 +6,9 @@
       "components": {
         "harvestheritage:seed_component": {
           "result": [
-            "minecraft:beetroot"
+            "minecraft:potato"
           ],
-          "seed": "minecraft:beetroot_seeds",
+          "seed": "minecraft:potato",
           "stage": 3
         }
       },
@@ -30,9 +30,34 @@
       "components": {
         "harvestheritage:seed_component": {
           "result": [
-            "minecraft:pumpkin"
+            "minecraft:chicken",
+            "minecraft:feather"
           ],
-          "seed": "minecraft:pumpkin_seeds",
+          "seed": "minecraft:chicken",
+          "stage": 3
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    },
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:glow_berries"
+          ],
+          "seed": "minecraft:glow_berries",
+          "stage": 3
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    },
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:chorus_fruit"
+          ],
+          "seed": "minecraft:chorus_fruit",
           "stage": 3
         }
       },
@@ -45,6 +70,54 @@
             "minecraft:melon"
           ],
           "seed": "minecraft:melon_seeds",
+          "stage": 3
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    },
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:beetroot"
+          ],
+          "seed": "minecraft:beetroot_seeds",
+          "stage": 3
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    },
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:pumpkin"
+          ],
+          "seed": "minecraft:pumpkin_seeds",
+          "stage": 3
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    },
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:sweet_berries"
+          ],
+          "seed": "minecraft:sweet_berries",
+          "stage": 3
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    },
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:carrot"
+          ],
+          "seed": "minecraft:carrot",
           "stage": 3
         }
       },

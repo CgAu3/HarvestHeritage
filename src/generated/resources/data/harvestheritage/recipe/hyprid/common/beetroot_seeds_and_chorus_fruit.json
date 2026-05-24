@@ -1,0 +1,58 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:beetroot_seeds",
+    "minecraft:chorus_fruit"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:wheat"
+      ],
+      "seed": "minecraft:wheat_seeds",
+      "stage": 3
+    },
+    {
+      "result": [
+        "minecraft:melon"
+      ],
+      "seed": "minecraft:melon_seeds",
+      "stage": 3
+    },
+    {
+      "result": [
+        "minecraft:pumpkin"
+      ],
+      "seed": "minecraft:pumpkin_seeds",
+      "stage": 3
+    },
+    {
+      "result": [
+        "minecraft:sweet_berries"
+      ],
+      "seed": "minecraft:sweet_berries",
+      "stage": 3
+    },
+    {
+      "result": [
+        "minecraft:glow_berries"
+      ],
+      "seed": "minecraft:glow_berries",
+      "stage": 3
+    },
+    {
+      "result": [
+        "minecraft:carrot"
+      ],
+      "seed": "minecraft:carrot",
+      "stage": 3
+    },
+    {
+      "result": [
+        "minecraft:potato"
+      ],
+      "seed": "minecraft:potato",
+      "stage": 3
+    }
+  ]
+}
