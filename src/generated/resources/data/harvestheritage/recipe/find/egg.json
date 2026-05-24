@@ -6,10 +6,11 @@
       "components": {
         "harvestheritage:seed_component": {
           "result": [
-            "minecraft:beef",
-            "minecraft:leather"
+            "minecraft:egg",
+            "minecraft:brown_egg",
+            "minecraft:blue_egg"
           ],
-          "seed": "minecraft:beef",
+          "seed": "minecraft:egg",
           "stage": 4
         }
       },

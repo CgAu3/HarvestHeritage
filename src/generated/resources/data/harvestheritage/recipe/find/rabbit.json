@@ -6,7 +6,8 @@
       "components": {
         "harvestheritage:seed_component": {
           "result": [
-            "minecraft:rabbit"
+            "minecraft:rabbit",
+            "minecraft:rabbit_foot"
           ],
           "seed": "minecraft:rabbit",
           "stage": 4

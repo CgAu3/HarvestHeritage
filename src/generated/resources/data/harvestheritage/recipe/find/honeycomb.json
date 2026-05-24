@@ -6,10 +6,10 @@
       "components": {
         "harvestheritage:seed_component": {
           "result": [
-            "minecraft:beef",
-            "minecraft:leather"
+            "minecraft:honeycomb",
+            "minecraft:honey_bottle"
           ],
-          "seed": "minecraft:beef",
+          "seed": "minecraft:honeycomb",
           "stage": 4
         }
       },

@@ -6,10 +6,10 @@
       "components": {
         "harvestheritage:seed_component": {
           "result": [
-            "minecraft:beef",
-            "minecraft:leather"
+            "minecraft:ink_sac",
+            "minecraft:glow_ink_sac"
           ],
-          "seed": "minecraft:beef",
+          "seed": "minecraft:ink_sac",
           "stage": 4
         }
       },

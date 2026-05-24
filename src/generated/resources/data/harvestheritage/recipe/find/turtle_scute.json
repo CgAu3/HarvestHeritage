@@ -6,10 +6,9 @@
       "components": {
         "harvestheritage:seed_component": {
           "result": [
-            "minecraft:beef",
-            "minecraft:leather"
+            "minecraft:turtle_scute"
           ],
-          "seed": "minecraft:beef",
+          "seed": "minecraft:turtle_scute",
           "stage": 4
         }
       },

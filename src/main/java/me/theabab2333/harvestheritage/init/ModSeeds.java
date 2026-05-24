@@ -17,10 +17,9 @@ public class ModSeeds {
     }
 
     public static Map<Item, SeedInfo> ALL_SEED = new LinkedHashMap<>();
-
     public static Map<Item, SeedInfo> CROP_SEED = new LinkedHashMap<>();
-
     public static Map<Item, SeedInfo> ANIMAL_SEED = new LinkedHashMap<>();
+    public static Map<Item, SeedInfo> MOB_SEED = new LinkedHashMap<>();
 
     static {
         // common
@@ -36,18 +35,32 @@ public class ModSeeds {
 
         // animal
         ANIMAL_SEED.put(Items.CHICKEN, new SeedInfo(List.of(Items.CHICKEN, Items.FEATHER), 4));
-        ANIMAL_SEED.put(Items.BEEF, new SeedInfo(List.of(Items.BEEF), 4));
+        ANIMAL_SEED.put(Items.BEEF, new SeedInfo(List.of(Items.BEEF, Items.LEATHER), 4));
         ANIMAL_SEED.put(Items.PORKCHOP, new SeedInfo(List.of(Items.PORKCHOP), 4));
         ANIMAL_SEED.put(Items.MUTTON, new SeedInfo(List.of(Items.MUTTON), 4));
-        ANIMAL_SEED.put(Items.RABBIT, new SeedInfo(List.of(Items.RABBIT), 4));
+        ANIMAL_SEED.put(Items.RABBIT, new SeedInfo(List.of(Items.RABBIT, Items.RABBIT_FOOT), 4));
         ANIMAL_SEED.put(Items.SALMON, new SeedInfo(List.of(Items.SALMON), 4));
         ANIMAL_SEED.put(Items.COD, new SeedInfo(List.of(Items.COD), 4));
         ANIMAL_SEED.put(Items.TROPICAL_FISH, new SeedInfo(List.of(Items.TROPICAL_FISH), 4));
         ANIMAL_SEED.put(Items.PUFFERFISH, new SeedInfo(List.of(Items.PUFFERFISH), 4));
+        ANIMAL_SEED.put(Items.INK_SAC, new SeedInfo(List.of(Items.INK_SAC, Items.GLOW_INK_SAC), 4));
+        ANIMAL_SEED.put(Items.ARMADILLO_SCUTE, new SeedInfo(List.of(Items.ARMADILLO_SCUTE), 4));
+        ANIMAL_SEED.put(Items.EGG, new SeedInfo(List.of(Items.EGG, Items.BROWN_EGG, Items.BLUE_EGG), 4));
+        ANIMAL_SEED.put(Items.TURTLE_SCUTE, new SeedInfo(List.of(Items.TURTLE_SCUTE), 4));
+        ANIMAL_SEED.put(Items.HONEYCOMB, new SeedInfo(List.of(Items.HONEYCOMB, Items.HONEY_BOTTLE), 4));
+
+        // mob
+        MOB_SEED.put(Items.BLAZE_ROD, new SeedInfo(List.of(Items.BLAZE_ROD), 4));
+        MOB_SEED.put(Items.BREEZE_ROD, new SeedInfo(List.of(Items.BREEZE_ROD), 4));
+        MOB_SEED.put(Items.ENDER_PEARL, new SeedInfo(List.of(Items.ENDER_PEARL), 4));
+        MOB_SEED.put(Items.ECHO_SHARD, new SeedInfo(List.of(Items.ECHO_SHARD), 4));
+        MOB_SEED.put(Items.SLIME_BALL, new SeedInfo(List.of(Items.SLIME_BALL), 4));
+
 
         // all
         ALL_SEED.putAll(CROP_SEED);
         ALL_SEED.putAll(ANIMAL_SEED);
+        ALL_SEED.putAll(MOB_SEED);
     }
 
     public static List<ItemStack> getSeeds() {
