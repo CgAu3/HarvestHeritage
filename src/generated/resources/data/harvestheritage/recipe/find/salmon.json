@@ -1,0 +1,18 @@
+{
+  "type": "harvestheritage:find",
+  "ingredient": "harvestheritage:unknown_seed",
+  "result": [
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:salmon"
+          ],
+          "seed": "minecraft:salmon",
+          "stage": 4
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    }
+  ]
+}

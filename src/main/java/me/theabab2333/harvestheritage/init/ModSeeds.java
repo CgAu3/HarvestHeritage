@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,24 +16,43 @@ public class ModSeeds {
     public record SeedInfo(List<Item> results, int stage) {
     }
 
-    public static Map<Item, SeedInfo> SEEDS = new HashMap<>();
+    public static Map<Item, SeedInfo> ALL_SEED = new LinkedHashMap<>();
+
+    public static Map<Item, SeedInfo> CROP_SEED = new LinkedHashMap<>();
+
+    public static Map<Item, SeedInfo> ANIMAL_SEED = new LinkedHashMap<>();
 
     static {
-        SEEDS.put(Items.WHEAT_SEEDS, new SeedInfo(List.of(Items.WHEAT), 3));
-        SEEDS.put(Items.BEETROOT_SEEDS, new SeedInfo(List.of(Items.BEETROOT), 3));
-        SEEDS.put(Items.MELON_SEEDS, new SeedInfo(List.of(Items.MELON), 3));
-        SEEDS.put(Items.PUMPKIN_SEEDS, new SeedInfo(List.of(Items.PUMPKIN), 3));
-        SEEDS.put(Items.SWEET_BERRIES, new SeedInfo(List.of(Items.SWEET_BERRIES), 3));
-        SEEDS.put(Items.GLOW_BERRIES, new SeedInfo(List.of(Items.GLOW_BERRIES), 3));
-        SEEDS.put(Items.CHORUS_FRUIT, new SeedInfo(List.of(Items.CHORUS_FRUIT), 3));
-        SEEDS.put(Items.CARROT, new SeedInfo(List.of(Items.CARROT), 3));
-        SEEDS.put(Items.POTATO, new SeedInfo(List.of(Items.POTATO), 3));
-        SEEDS.put(Items.CHICKEN, new SeedInfo(List.of(Items.CHICKEN, Items.FEATHER), 3));
+        // common
+        CROP_SEED.put(Items.WHEAT_SEEDS, new SeedInfo(List.of(Items.WHEAT), 3));
+        CROP_SEED.put(Items.BEETROOT_SEEDS, new SeedInfo(List.of(Items.BEETROOT), 3));
+        CROP_SEED.put(Items.MELON_SEEDS, new SeedInfo(List.of(Items.MELON), 3));
+        CROP_SEED.put(Items.PUMPKIN_SEEDS, new SeedInfo(List.of(Items.PUMPKIN), 3));
+        CROP_SEED.put(Items.SWEET_BERRIES, new SeedInfo(List.of(Items.SWEET_BERRIES), 3));
+        CROP_SEED.put(Items.GLOW_BERRIES, new SeedInfo(List.of(Items.GLOW_BERRIES), 3));
+        CROP_SEED.put(Items.CHORUS_FRUIT, new SeedInfo(List.of(Items.CHORUS_FRUIT), 3));
+        CROP_SEED.put(Items.CARROT, new SeedInfo(List.of(Items.CARROT), 3));
+        CROP_SEED.put(Items.POTATO, new SeedInfo(List.of(Items.POTATO), 3));
+
+        // animal
+        ANIMAL_SEED.put(Items.CHICKEN, new SeedInfo(List.of(Items.CHICKEN, Items.FEATHER), 4));
+        ANIMAL_SEED.put(Items.BEEF, new SeedInfo(List.of(Items.BEEF), 4));
+        ANIMAL_SEED.put(Items.PORKCHOP, new SeedInfo(List.of(Items.PORKCHOP), 4));
+        ANIMAL_SEED.put(Items.MUTTON, new SeedInfo(List.of(Items.MUTTON), 4));
+        ANIMAL_SEED.put(Items.RABBIT, new SeedInfo(List.of(Items.RABBIT), 4));
+        ANIMAL_SEED.put(Items.SALMON, new SeedInfo(List.of(Items.SALMON), 4));
+        ANIMAL_SEED.put(Items.COD, new SeedInfo(List.of(Items.COD), 4));
+        ANIMAL_SEED.put(Items.TROPICAL_FISH, new SeedInfo(List.of(Items.TROPICAL_FISH), 4));
+        ANIMAL_SEED.put(Items.PUFFERFISH, new SeedInfo(List.of(Items.PUFFERFISH), 4));
+
+        // all
+        ALL_SEED.putAll(CROP_SEED);
+        ALL_SEED.putAll(ANIMAL_SEED);
     }
 
     public static List<ItemStack> getSeeds() {
         List<ItemStack> list = new ArrayList<>();
-        for (var entry : SEEDS.entrySet()) {
+        for (var entry : ALL_SEED.entrySet()) {
             Item seedItem = entry.getKey();
             SeedInfo seedInfo = entry.getValue();
             var resultItems = seedInfo.results();

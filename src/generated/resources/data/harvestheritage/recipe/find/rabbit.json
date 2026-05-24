@@ -1,0 +1,18 @@
+{
+  "type": "harvestheritage:find",
+  "ingredient": "harvestheritage:unknown_seed",
+  "result": [
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:rabbit"
+          ],
+          "seed": "minecraft:rabbit",
+          "stage": 4
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    }
+  ]
+}

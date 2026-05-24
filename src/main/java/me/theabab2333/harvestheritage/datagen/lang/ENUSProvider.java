@@ -27,7 +27,7 @@ public class ENUSProvider extends LanguageProvider {
         addBlock(ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK, "Hanging crop racks");
         add("item.harvestheritage.magnifying_glass.tooltip", "Can you see crop attributes and seeds...?");
         add("modmenu.nameTranslation.harvestheritage", "Harvest Heritage");
-        add("creativetab.harvestheritage.harvestheritage.seed_packet", "Harvest Heritage：Seed Packet");
+        add("creativetab.harvestheritage.seed_packet", "Harvest Heritage：Seed Packet");
         add(
             "item.harvestheritage.unknown_seed.tooltip",
             "Maybe you need to throw it on the ground and look at it with a magnifying glass..."

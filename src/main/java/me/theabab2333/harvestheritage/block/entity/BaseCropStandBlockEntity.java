@@ -22,7 +22,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -148,15 +147,12 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
         SeedPacketComponent component2,
         ServerLevel level
     ) {
-        RecipeManager recipeManager = level.recipeAccess();
-        var holders = recipeManager.recipeMap().byType(ModRecipes.HYBRID_TYPE.get());
+        var holders = level.recipeAccess().recipeMap().byType(ModRecipes.HYBRID_TYPE.get());
+
+        if (holders.isEmpty()) return;
 
         SeedComponent seed1 = component1.seedComponent();
         SeedComponent seed2 = component2.seedComponent();
-
-        if (holders.isEmpty()) {
-            return;
-        }
 
         for (RecipeHolder<HybridRecipe> holder : holders) {
             HybridRecipe recipe = holder.value();

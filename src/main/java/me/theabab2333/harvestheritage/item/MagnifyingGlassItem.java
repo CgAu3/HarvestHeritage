@@ -20,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MagnifyingGlassItem extends Item implements ITooltipItem {
@@ -46,30 +47,26 @@ public class MagnifyingGlassItem extends Item implements ITooltipItem {
                     if (level instanceof ServerLevel serverLevel) {
                         RecipeManager manager = serverLevel.recipeAccess();
                         var holders = manager.recipeMap().byType(ModRecipes.FIND_TYPE.get());
-                        holders.forEach(
-                            holder -> {
-                                FindRecipe recipe = holder.value();
-                                ItemStack itemStack = itemEntity.getItem().copy();
-                                Item item = itemStack.getItem();
-                                if (recipe.getIngredient().test(item.getDefaultInstance())) {
-                                    List<ItemStackTemplate> list = recipe.getResult();
-                                    if (!list.isEmpty()) {
-                                        var random = serverLevel.getRandom();
-                                        var nextInt = random.nextInt(list.size());
-                                        itemStack.shrink(1);
-                                        itemEntity.setItem(itemStack);
-                                        var result = list.get(nextInt).create();
-                                        Containers.dropItemStack(
-                                            level,
-                                            itemEntity.getX(),
-                                            itemEntity.getY(),
-                                            itemEntity.getZ(),
-                                            result
-                                        );
-                                    }
-                                }
+                        List<FindRecipe> matched = new ArrayList<>();
+                        for (var holder : holders) {
+                            FindRecipe recipe = holder.value();
+                            Item item = itemEntity.getItem().getItem();
+                            if (recipe.getIngredient().test(item.getDefaultInstance())) {
+                                matched.add(recipe);
                             }
-                        );
+                        }
+                        if (!matched.isEmpty()) {
+                            var random = level.getRandom();
+                            FindRecipe recipe = matched.get(random.nextInt(matched.size()));
+                            List<ItemStackTemplate> list = recipe.getResult();
+                            if (!list.isEmpty()) {
+                                ItemStack itemStack = itemEntity.getItem().copy();
+                                itemStack.shrink(1);
+                                itemEntity.setItem(itemStack);
+                                var result = list.get(random.nextInt(list.size())).create();
+                                Containers.dropItemStack(level, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), result);
+                            }
+                        }
                     }
                 }
             }

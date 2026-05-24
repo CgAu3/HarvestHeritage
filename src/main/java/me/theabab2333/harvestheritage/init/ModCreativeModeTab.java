@@ -24,13 +24,14 @@ public class ModCreativeModeTab {
             .title(Component.translatable("modmenu.nameTranslation.harvestheritage"))
             .build()
     );
+
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> SEED_TAB = CREATIVE_MODE_TABS.register(
         "seed_tab",
         () -> CreativeModeTab.builder()
             .displayItems((parameters, output) -> ModSeeds.getSeeds().forEach(output::accept))
             .icon(() -> new ItemStack(ModItems.SEED_PACKET.get()))
-            .withTabsBefore(COMMON_TAB.getKey())
-            .title(Component.translatable("creativetab.harvestheritage.harvestheritage.seed_packet"))
+            .withTabsBefore(COMMON_TAB.getKey().identifier())
+            .title(Component.translatable("creativetab.harvestheritage.seed_packet"))
             .build()
     );
 

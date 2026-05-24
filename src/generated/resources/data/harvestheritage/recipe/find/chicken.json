@@ -1,0 +1,19 @@
+{
+  "type": "harvestheritage:find",
+  "ingredient": "harvestheritage:unknown_seed",
+  "result": [
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:chicken",
+            "minecraft:feather"
+          ],
+          "seed": "minecraft:chicken",
+          "stage": 4
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    }
+  ]
+}

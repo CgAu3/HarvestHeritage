@@ -142,7 +142,7 @@ public class ModRegisterGuiLayersEvent {
             width,
             height
         );
-        int vector2icX = vector2ic.x();
+        int vector2icX = vector2ic.x() + 16;
         int vector2icY = vector2ic.y();
         graphicsExtractor.pose().pushMatrix();
         graphicsExtractor.fillGradient(vector2icX - 6, vector2icY - 6, vector2icX + width + 6, vector2icY + 74, 0x55383838, 0x552C2C2C);

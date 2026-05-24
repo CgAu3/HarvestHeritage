@@ -25,7 +25,7 @@ public class ZHCNProvider extends LanguageProvider {
         addBlock(ModBlocks.CROP_STAND_BLOCK, "作物架");
         addBlock(ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK, "悬挂式作物架");
         add("modmenu.nameTranslation.harvestheritage", "收获：遗产");
-        add("creativetab.harvestheritage.harvestheritage.seed_packet", "收获：遗产 种子袋");
+        add("creativetab.harvestheritage.seed_packet", "收获：遗产 种子袋");
         add("item.harvestheritage.unknown_seed.tooltip", "或许需要丢在地上用放大镜看看...");
         add("item.harvestheritage.magnifying_glass.tooltip", "能看作物属性和种子欸...?");
         add("item.harvestheritage.grass_shear.tooltip", "用这个破坏点草试试?");
