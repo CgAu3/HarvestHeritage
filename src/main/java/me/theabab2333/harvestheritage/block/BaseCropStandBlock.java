@@ -6,15 +6,11 @@ import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.item.GrassShearItem;
-import me.theabab2333.harvestheritage.item.MagnifyingGlassItem;
-import me.theabab2333.harvestheritage.util.SeedUtil;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentPatch;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -88,26 +84,6 @@ public abstract class BaseCropStandBlock extends Block implements EntityBlock {
         if (itemStack.getItem() instanceof ISeedItem) {
             blockEntity.seedUseOn(itemStack);
             return InteractionResult.SUCCESS;
-        } else if (itemStack.getItem() instanceof MagnifyingGlassItem) {
-            if (!level.isClientSide()) return InteractionResult.FAIL;
-            if (component == null) return InteractionResult.FAIL;
-            player.sendSystemMessage(Component.literal("========"));
-            player.sendSystemMessage(Component.translatable(
-                    "item.harvestheritage.seed.tooltip.seed",
-                    SeedUtil.getSeedName(component.seedComponent().seed().value())
-                )
-                .withStyle(ChatFormatting.GREEN));
-            player.sendSystemMessage(Component.translatable("item.harvestheritage.seed.tooltip.stage", component.seedComponent().stage())
-                .withStyle(ChatFormatting.LIGHT_PURPLE));
-            player.sendSystemMessage(Component.translatable("block.harvestheritage.crop_stand.tooltip.stage", blockEntity.getStage())
-                .withStyle(ChatFormatting.DARK_PURPLE));
-            player.sendSystemMessage(Component.translatable("item.harvestheritage.seed_packet.tooltip.speed", component.speed())
-                .withStyle(ChatFormatting.BLUE));
-            player.sendSystemMessage(Component.translatable("item.harvestheritage.seed_packet.tooltip.output", component.output())
-                .withStyle(ChatFormatting.GOLD));
-            player.sendSystemMessage(Component.literal("========"));
-
-            return InteractionResult.PASS;
         } else if (itemStack.getItem() instanceof GrassShearItem) {
 
             if (component == null) return InteractionResult.FAIL;
@@ -133,10 +109,7 @@ public abstract class BaseCropStandBlock extends Block implements EntityBlock {
         }
     }
 
-    public NonNullList<ItemStack> getSeedOutput(
-        SeedPacketComponent component,
-        Level level
-    ) {
+    public NonNullList<ItemStack> getSeedOutput(SeedPacketComponent component, Level level) {
         if (level.isClientSide()) return NonNullList.create();
         NonNullList<ItemStack> itemStacks = NonNullList.create();
         int output = component.output();

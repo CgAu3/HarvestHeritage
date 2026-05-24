@@ -1,6 +1,7 @@
 package me.theabab2333.harvestheritage.block;
 
 import me.theabab2333.harvestheritage.block.entity.ScaffoldingCropStandBlockEntity;
+import me.theabab2333.harvestheritage.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -128,7 +129,12 @@ public class ScaffoldingCropStandBlock extends BaseCropStandBlock {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (context.isHoldingItem(state.getBlock().asItem()) || context.isHoldingItem(Blocks.SCAFFOLDING.asItem())) {
+        if (
+            context.isHoldingItem(state.getBlock().asItem())
+            || context.isHoldingItem(Blocks.SCAFFOLDING.asItem())
+            || context.isHoldingItem(ModItems.SEED_PACKET.asItem())
+            || context.isHoldingItem(ModItems.GRASS_SHEAR.asItem())
+        ) {
             return Shapes.block();
         } else {
             return state.getValue(BOTTOM) ? SHAPE_UNSTABLE : SHAPE_STABLE;

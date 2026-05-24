@@ -63,7 +63,7 @@ public abstract class ScaffoldingBlockMixin extends Block {
             return Shapes.block();
         } else if (ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK.isBound() && context.isHoldingItem(ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK.asItem())) {
             return Shapes.block();
-        } else if ((ModItems.SEED_PACKET.isBound() && context.isHoldingItem(ModItems.SEED_PACKET.asItem()))) {
+        } else if (ModItems.SEED_PACKET.isBound() && context.isHoldingItem(ModItems.SEED_PACKET.asItem())) {
             return Shapes.block();
         } else {
             return state.getValue(BOTTOM) ? SHAPE_UNSTABLE : SHAPE_STABLE;

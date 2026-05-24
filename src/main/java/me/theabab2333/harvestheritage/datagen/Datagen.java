@@ -3,7 +3,6 @@ package me.theabab2333.harvestheritage.datagen;
 import me.theabab2333.harvestheritage.HarvestHeritage;
 import me.theabab2333.harvestheritage.datagen.lang.ENUSProvider;
 import me.theabab2333.harvestheritage.datagen.lang.ZHCNProvider;
-import me.theabab2333.harvestheritage.datagen.loot.ModGlobalLootModifierProvider;
 import me.theabab2333.harvestheritage.datagen.loot.ModLootTables;
 import me.theabab2333.harvestheritage.datagen.model.ModModelProvider;
 import me.theabab2333.harvestheritage.datagen.recipe.ModRecipeProvider;
@@ -29,7 +28,6 @@ public class Datagen {
         event.createProvider(ModRecipeProvider.Runner::new);
 
         // LootTab
-        event.createProvider(ModGlobalLootModifierProvider::new);
         event.createProvider(ModLootTables::new);
 
         // Lang

@@ -1,7 +1,6 @@
 package me.theabab2333.harvestheritage;
 
 import com.mojang.logging.LogUtils;
-import me.theabab2333.harvestheritage.datagen.loot.ModLootModifiers;
 import me.theabab2333.harvestheritage.init.ModBlockEntities;
 import me.theabab2333.harvestheritage.init.ModBlocks;
 import me.theabab2333.harvestheritage.init.ModConfig;
@@ -33,7 +32,6 @@ public class HarvestHeritage {
         ModCreativeModeTab.register(eventBus);
         ModDataComponents.register(eventBus);
         ModRecipes.register(eventBus);
-        ModLootModifiers.register(eventBus);
 
         NeoForge.EVENT_BUS.register(this);
 
