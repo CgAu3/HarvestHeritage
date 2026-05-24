@@ -26,7 +26,6 @@ public class ModCreativeModeTab {
                 .displayItems((parameters, output) -> getItem().forEach(output::accept))
                 .icon(() -> new ItemStack(ModItems.GRASS_SHEAR.get()))
                 .title(Component.translatable("modmenu.nameTranslation.harvestheritage"))
-                .withTabsBefore(SEED_TAB.getKey())
                 .build()
         );
 
@@ -35,8 +34,8 @@ public class ModCreativeModeTab {
             () -> CreativeModeTab.builder()
                 .displayItems((parameters, output) -> ModSeeds.getSeeds().forEach(output::accept))
                 .icon(() -> new ItemStack(ModItems.SEED_PACKET.get()))
-                .withTabsAfter(COMMON_TAB.getKey())
                 .title(Component.translatable("creativetab.harvestheritage.seed_packet"))
+                .withTabsBefore(COMMON_TAB.getKey())
                 .build()
         );
     }

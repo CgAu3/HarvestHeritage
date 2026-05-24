@@ -84,33 +84,4 @@ public class SeedPacketItem extends KnownSeedItem implements ISeedItem {
             return Items.AIR.builtInRegistryHolder();
         }
     }
-
-    @Override
-    public List<Holder<Item>> result(ItemStack itemStack) {
-        if (itemStack.get(ModDataComponents.SEED_PACKET_COMPONENT) instanceof SeedPacketComponent seedPacketComponent) {
-            return seedPacketComponent.seedComponent().result();
-        } else if (itemStack.get(ModDataComponents.SEED_COMPONENT) instanceof SeedComponent seedComponent) {
-            return seedComponent.result();
-        } else {
-            return List.of(Items.AIR.builtInRegistryHolder());
-        }
-    }
-
-    @Override
-    public int speed(ItemStack itemStack) {
-        if (itemStack.get(ModDataComponents.SEED_PACKET_COMPONENT) instanceof SeedPacketComponent seedPacketComponent) {
-            return seedPacketComponent.speed();
-        } else {
-            return 0;
-        }
-    }
-
-    @Override
-    public int output(ItemStack itemStack) {
-        if (itemStack.get(ModDataComponents.SEED_PACKET_COMPONENT) instanceof SeedPacketComponent seedPacketComponent) {
-            return seedPacketComponent.output();
-        } else {
-            return 0;
-        }
-    }
 }
