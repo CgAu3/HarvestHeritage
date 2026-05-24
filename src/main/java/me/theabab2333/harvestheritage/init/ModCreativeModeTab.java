@@ -16,24 +16,30 @@ import static me.theabab2333.harvestheritage.HarvestHeritage.MODID;
 
 public class ModCreativeModeTab {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> COMMON_TAB = CREATIVE_MODE_TABS.register(
-        "common_tab",
-        () -> CreativeModeTab.builder()
-            .displayItems((parameters, output) -> getItem().forEach(output::accept))
-            .icon(() -> new ItemStack(ModItems.GRASS_SHEAR.get()))
-            .title(Component.translatable("modmenu.nameTranslation.harvestheritage"))
-            .build()
-    );
+    public static DeferredHolder<CreativeModeTab, CreativeModeTab> COMMON_TAB;
+    public static DeferredHolder<CreativeModeTab, CreativeModeTab> SEED_TAB;
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> SEED_TAB = CREATIVE_MODE_TABS.register(
-        "seed_tab",
-        () -> CreativeModeTab.builder()
-            .displayItems((parameters, output) -> ModSeeds.getSeeds().forEach(output::accept))
-            .icon(() -> new ItemStack(ModItems.SEED_PACKET.get()))
-            .withTabsBefore(COMMON_TAB.getKey().identifier())
-            .title(Component.translatable("creativetab.harvestheritage.seed_packet"))
-            .build()
-    );
+    static {
+        COMMON_TAB = CREATIVE_MODE_TABS.register(
+            "common_tab",
+            () -> CreativeModeTab.builder()
+                .displayItems((parameters, output) -> getItem().forEach(output::accept))
+                .icon(() -> new ItemStack(ModItems.GRASS_SHEAR.get()))
+                .title(Component.translatable("modmenu.nameTranslation.harvestheritage"))
+                .withTabsBefore(SEED_TAB.getKey())
+                .build()
+        );
+
+        SEED_TAB = CREATIVE_MODE_TABS.register(
+            "seed_tab",
+            () -> CreativeModeTab.builder()
+                .displayItems((parameters, output) -> ModSeeds.getSeeds().forEach(output::accept))
+                .icon(() -> new ItemStack(ModItems.SEED_PACKET.get()))
+                .withTabsAfter(COMMON_TAB.getKey())
+                .title(Component.translatable("creativetab.harvestheritage.seed_packet"))
+                .build()
+        );
+    }
 
     public static List<ItemLike> getItem() {
         List<ItemLike> items = new ArrayList<>();
