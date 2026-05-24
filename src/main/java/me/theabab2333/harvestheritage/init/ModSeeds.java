@@ -55,7 +55,15 @@ public class ModSeeds {
         MOB_SEED.put(Items.ENDER_PEARL, new SeedInfo(List.of(Items.ENDER_PEARL), 4));
         MOB_SEED.put(Items.ECHO_SHARD, new SeedInfo(List.of(Items.ECHO_SHARD), 4));
         MOB_SEED.put(Items.SLIME_BALL, new SeedInfo(List.of(Items.SLIME_BALL), 4));
-
+        MOB_SEED.put(Items.GUNPOWDER, new SeedInfo(List.of(Items.GUNPOWDER), 4));
+        MOB_SEED.put(Items.PRISMARINE_CRYSTALS, new SeedInfo(List.of(Items.PRISMARINE_CRYSTALS, Items.PRISMARINE_SHARD), 4));
+        MOB_SEED.put(Items.SPIDER_EYE, new SeedInfo(List.of(Items.SPIDER_EYE), 4));
+        MOB_SEED.put(Items.MAGMA_CREAM, new SeedInfo(List.of(Items.MAGMA_CREAM), 4));
+        MOB_SEED.put(Items.GHAST_TEAR, new SeedInfo(List.of(Items.GHAST_TEAR), 4));
+        MOB_SEED.put(Items.PHANTOM_MEMBRANE, new SeedInfo(List.of(Items.PHANTOM_MEMBRANE), 4));
+        MOB_SEED.put(Items.ROTTEN_FLESH, new SeedInfo(List.of(Items.ROTTEN_FLESH), 4));
+        MOB_SEED.put(Items.BONE, new SeedInfo(List.of(Items.BONE), 4));
+        MOB_SEED.put(Items.STRING, new SeedInfo(List.of(Items.STRING), 4));
 
         // all
         ALL_SEED.putAll(CROP_SEED);
