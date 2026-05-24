@@ -29,7 +29,7 @@ public class ModCreativeModeTab {
         () -> CreativeModeTab.builder()
             .displayItems((parameters, output) -> ModSeeds.getSeeds().forEach(output::accept))
             .icon(() -> new ItemStack(ModItems.SEED_PACKET.get()))
-            .withTabsBefore(COMMON_TAB.getId())
+            .withTabsBefore(COMMON_TAB.getKey())
             .title(Component.translatable("creativetab.harvestheritage.harvestheritage.seed_packet"))
             .build()
     );
