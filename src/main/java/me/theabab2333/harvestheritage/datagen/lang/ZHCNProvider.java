@@ -22,6 +22,7 @@ public class ZHCNProvider extends LanguageProvider {
         addItem(ModItems.GRAPE, "葡萄");
         addItem(ModItems.ZZZZ, "zzzz");
         addItem(ModItems.SCAFFOLDING_CROP_STAND_BLOCK_ITEM, "悬挂式作物架");
+        addItem(ModItems.FRIED_SEEDSACK, "瓜子袋");
         addBlock(ModBlocks.ACTIVAOR_BLOCK, "奇异催生器");
         addBlock(ModBlocks.TEST_BLOCK, "测试方块");
         addBlock(ModBlocks.CROP_STAND_BLOCK, "作物架");

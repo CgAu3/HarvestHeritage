@@ -48,7 +48,7 @@ public class ActivatorBlockRenderer implements BlockEntityRenderer<ActivatorBloc
         Level level = blockEntity.getLevel();
         if (level == null) return;
 
-        state.animTime = (level.getGameTime() % (3600)) + partialTicks;
+        state.animTime = (level.getGameTime() % 360000L) + partialTicks;
 
         ItemStack stack = new ItemStack(ModItems.ZZZZ.get());
 
@@ -75,11 +75,11 @@ public class ActivatorBlockRenderer implements BlockEntityRenderer<ActivatorBloc
         poseStack.pushPose();
         poseStack.translate(0.5, 1.75, 0.5);
 
-        poseStack.mulPose(Axis.XP.rotationDegrees(t * 1.3F));
-        poseStack.mulPose(Axis.YP.rotationDegrees(t * 2.1F));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(t * 0.7F));
+        poseStack.mulPose(Axis.XP.rotationDegrees(t * 2F));
+        poseStack.mulPose(Axis.YP.rotationDegrees(t * 2F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(t));
 
-        float s = (float) Math.sin(t * 0.05F);
+        float s = (float) Math.sin(t * 0.02F);
         poseStack.scale(-s, -s, -s);
 
         state.itemModel.submit(poseStack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);

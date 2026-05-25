@@ -7,7 +7,9 @@ import me.theabab2333.harvestheritage.item.ScaffoldingCropStandBlockItem;
 import me.theabab2333.harvestheritage.item.SeedPacketItem;
 import me.theabab2333.harvestheritage.item.UnknownSeedItem;
 import me.theabab2333.harvestheritage.item.ZZZZItem;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.Consumable;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -30,6 +32,13 @@ public class ModItems {
     public static final DeferredItem<Item> KNOWN_SEED = ITEMS.registerItem("known_seed", KnownSeedItem::new);
 
     public static final DeferredItem<Item> SEED_PACKET = ITEMS.registerItem("seed_packet", SeedPacketItem::new);
+
+    public static final DeferredItem<Item> FRIED_SEEDSACK = ITEMS.registerSimpleItem(
+        "fried_seedsack", properties -> properties.food(
+            new FoodProperties.Builder().nutrition(2).saturationModifier(0.5f).alwaysEdible().build(),
+            Consumable.builder().consumeSeconds(0.1f).build()
+        )
+    );
 
     public static final DeferredItem<Item> SCAFFOLDING_CROP_STAND_BLOCK_ITEM = ITEMS.registerItem(
         "scaffolding_crop_stand_block",

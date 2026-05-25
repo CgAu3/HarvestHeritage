@@ -18,6 +18,7 @@ public class ModItemModelProvider {
         itemModels.generateFlatItem(ModItems.KNOWN_SEED.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.GRAPE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ZZZZ.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.FRIED_SEEDSACK.get(), ModelTemplates.FLAT_ITEM);
         seedPacket(itemModels);
     }
 

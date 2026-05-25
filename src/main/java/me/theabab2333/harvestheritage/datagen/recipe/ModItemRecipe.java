@@ -7,7 +7,10 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CookingBookCategory;
+import net.minecraft.world.item.crafting.Ingredient;
 
 public class ModItemRecipe extends ModRecipeProvider {
     protected ModItemRecipe(HolderLookup.Provider registries, RecipeOutput output) {
@@ -40,5 +43,13 @@ public class ModItemRecipe extends ModRecipeProvider {
             .define('A', Items.STICK)
             .unlockedBy("has_stick", has(Items.STICK))
             .save(output);
+        SimpleCookingRecipeBuilder.smelting(
+            Ingredient.of(ModItems.SEED_PACKET.asItem()),
+            RecipeCategory.FOOD,
+            CookingBookCategory.FOOD,
+            ModItems.FRIED_SEEDSACK.asItem(),
+            0.1f,
+            100
+        ).unlockedBy("has_seed_packet", has(ModItems.FRIED_SEEDSACK.asItem())).save(output);
     }
 }

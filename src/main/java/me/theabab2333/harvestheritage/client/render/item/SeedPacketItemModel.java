@@ -83,7 +83,7 @@ public record SeedPacketItemModel(
             seedInts.add(-1);
             seedLayer.setExtents(extents);
             properties.applyToLayer(seedLayer, context);
-            seedLayer.setLocalTransform(new Matrix4f().translate(0.0f, 0.0f, -0.05f));
+            seedLayer.setLocalTransform(new Matrix4f().translate(0.0f, 0.0f, 0.05f));
             try {
                 var baseQuads = quads.getAll();
                 if (!baseQuads.isEmpty()) {
@@ -116,7 +116,7 @@ public record SeedPacketItemModel(
         }
 
         float margin = (1.0f - 12.0f / 16.0f) / 2.0f;
-        Vector3f p0 = new Vector3f(margin, margin, 0.6f);
+        Vector3f p0 = new Vector3f(margin, margin, 0.55f);
         Vector3f p1 = new Vector3f(1.0f - margin, margin, 0.6f);
         Vector3f p2 = new Vector3f(1.0f - margin, 1.0f - margin, 0.6f);
         Vector3f p3 = new Vector3f(margin, 1.0f - margin, 0.6f);
