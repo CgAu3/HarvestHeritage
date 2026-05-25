@@ -1,4 +1,4 @@
-package me.theabab2333.harvestheritage.client.render.blockentity;
+package me.theabab2333.harvestheritage.client.render.blockentity.state;
 
 import net.minecraft.client.renderer.block.BlockModelRenderState;
 

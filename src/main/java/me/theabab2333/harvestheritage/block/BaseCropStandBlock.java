@@ -101,7 +101,7 @@ public abstract class BaseCropStandBlock extends Block implements EntityBlock {
             return InteractionResult.PASS;
         } else if (component != null && component.seedComponent().stage() == blockEntity.getStage()) {
             NonNullList<ItemStack> itemStacks = getSeedOutput(component, level);
-            Containers.dropContents(level, pos, itemStacks);
+            this.dropContents(level, pos, itemStacks);
             blockEntity.setStage(0);
             return InteractionResult.PASS;
         } else {
@@ -109,7 +109,7 @@ public abstract class BaseCropStandBlock extends Block implements EntityBlock {
         }
     }
 
-    public NonNullList<ItemStack> getSeedOutput(SeedPacketComponent component, Level level) {
+    public static NonNullList<ItemStack> getSeedOutput(SeedPacketComponent component, Level level) {
         if (level.isClientSide()) return NonNullList.create();
         NonNullList<ItemStack> itemStacks = NonNullList.create();
         int output = component.output();
@@ -119,5 +119,9 @@ public abstract class BaseCropStandBlock extends Block implements EntityBlock {
             itemStacks.add(new ItemStack(itemHolder, count));
         }
         return itemStacks;
+    }
+
+    public void dropContents(Level level, BlockPos pos, NonNullList<ItemStack> itemStacks) {
+        Containers.dropContents(level, pos, itemStacks);
     }
 }

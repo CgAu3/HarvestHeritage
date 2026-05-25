@@ -1,4 +1,5 @@
 {
+  "block.harvestheritage.activaor_block": "奇异催生器",
   "block.harvestheritage.crop_stand.tooltip.stage": "当前生长阶段：%s",
   "block.harvestheritage.crop_stand_block": "作物架",
   "block.harvestheritage.scaffolding_crop_stand_block": "悬挂式作物架",
@@ -20,5 +21,7 @@
   "item.harvestheritage.seed_packet.tooltip.speed": "生长速度：%s",
   "item.harvestheritage.unknown_seed": "未知种子",
   "item.harvestheritage.unknown_seed.tooltip": "或许需要丢在地上用放大镜看看...",
+  "item.harvestheritage.zzzz": "zzzz",
+  "item.harvestheritage.zzzz.tooltip": "这是什么？太怪了",
   "modmenu.nameTranslation.harvestheritage": "收获：遗产"
 }

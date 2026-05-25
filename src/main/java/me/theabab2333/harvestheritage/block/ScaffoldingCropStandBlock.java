@@ -4,9 +4,12 @@ import me.theabab2333.harvestheritage.block.entity.ScaffoldingCropStandBlockEnti
 import me.theabab2333.harvestheritage.init.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -58,6 +61,11 @@ public class ScaffoldingCropStandBlock extends BaseCropStandBlock {
         Level level = context.getLevel();
         int distance = getDistance(level, pos);
         return this.defaultBlockState().setValue(DISTANCE, distance).setValue(BOTTOM, this.isBottom(level, pos, distance));
+    }
+
+    @Override
+    public void dropContents(Level level, BlockPos pos, NonNullList<ItemStack> itemStacks) {
+        Containers.dropContents(level, pos.below(), itemStacks);
     }
 
     @Override

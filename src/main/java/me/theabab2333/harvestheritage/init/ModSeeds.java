@@ -71,7 +71,7 @@ public class ModSeeds {
         ALL_SEED.putAll(MOB_SEED);
     }
 
-    public static List<ItemStack> getSeeds() {
+    public static List<ItemStack> getSeedPackets() {
         List<ItemStack> list = new ArrayList<>();
         for (var entry : ALL_SEED.entrySet()) {
             Item seedItem = entry.getKey();

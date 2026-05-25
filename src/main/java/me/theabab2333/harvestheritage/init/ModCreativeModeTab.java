@@ -1,7 +1,9 @@
 package me.theabab2333.harvestheritage.init;
 
+import me.theabab2333.harvestheritage.HarvestHeritage;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
@@ -26,13 +28,14 @@ public class ModCreativeModeTab {
                 .displayItems((parameters, output) -> getItem().forEach(output::accept))
                 .icon(() -> new ItemStack(ModItems.GRASS_SHEAR.get()))
                 .title(Component.translatable("modmenu.nameTranslation.harvestheritage"))
+                .withTabsAfter(ResourceKey.create(Registries.CREATIVE_MODE_TAB, HarvestHeritage.of("seed_tab")))
                 .build()
         );
 
         SEED_TAB = CREATIVE_MODE_TABS.register(
             "seed_tab",
             () -> CreativeModeTab.builder()
-                .displayItems((parameters, output) -> ModSeeds.getSeeds().forEach(output::accept))
+                .displayItems((parameters, output) -> ModSeeds.getSeedPackets().forEach(output::accept))
                 .icon(() -> new ItemStack(ModItems.SEED_PACKET.get()))
                 .title(Component.translatable("creativetab.harvestheritage.seed_packet"))
                 .withTabsBefore(COMMON_TAB.getKey())

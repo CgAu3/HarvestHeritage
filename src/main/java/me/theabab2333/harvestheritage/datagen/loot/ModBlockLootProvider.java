@@ -22,6 +22,7 @@ public class ModBlockLootProvider extends BlockLootSubProvider {
 
         this.dropSelf(ModBlocks.CROP_STAND_BLOCK.get());
         this.dropSelf(ModBlocks.TEST_BLOCK.get());
+        this.dropSelf(ModBlocks.ACTIVAOR_BLOCK.get());
 
         this.dropOther(ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK.get(), Items.SCAFFOLDING);
     }

@@ -6,6 +6,7 @@ import me.theabab2333.harvestheritage.item.MagnifyingGlassItem;
 import me.theabab2333.harvestheritage.item.ScaffoldingCropStandBlockItem;
 import me.theabab2333.harvestheritage.item.SeedPacketItem;
 import me.theabab2333.harvestheritage.item.UnknownSeedItem;
+import me.theabab2333.harvestheritage.item.ZZZZItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -21,6 +22,8 @@ public class ModItems {
     public static final DeferredItem<Item> MAGNIFYING_GLASS = ITEMS.registerItem("magnifying_glass", MagnifyingGlassItem::new);
 
     public static final DeferredItem<Item> GRAPE = ITEMS.registerSimpleItem("grape");
+
+    public static final DeferredItem<Item> ZZZZ = ITEMS.registerItem("zzzz", ZZZZItem::new);
 
     public static final DeferredItem<Item> UNKNOWN_SEED = ITEMS.registerItem("unknown_seed", UnknownSeedItem::new);
 

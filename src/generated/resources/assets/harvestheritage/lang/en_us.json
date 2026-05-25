@@ -1,4 +1,5 @@
 {
+  "block.harvestheritage.activaor_block": "Strange Activator",
   "block.harvestheritage.crop_stand.tooltip.stage": "Current Growth Stage：%s",
   "block.harvestheritage.crop_stand_block": "Crop Stand",
   "block.harvestheritage.scaffolding_crop_stand_block": "Hanging crop racks",
@@ -20,5 +21,7 @@
   "item.harvestheritage.seed_packet.tooltip.speed": "Growth Speed: %s",
   "item.harvestheritage.unknown_seed": "Unknown Seed",
   "item.harvestheritage.unknown_seed.tooltip": "Maybe you need to throw it on the ground and look at it with a magnifying glass...",
+  "item.harvestheritage.zzzz": "zzzz",
+  "item.harvestheritage.zzzz.tooltip": "What is this? It's too strange",
   "modmenu.nameTranslation.harvestheritage": "Harvest Heritage"
 }
