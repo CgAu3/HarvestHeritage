@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "harvestheritage:block/test_block"
+      "model": "harvestheritage:block/activaor_block"
     }
   }
 }

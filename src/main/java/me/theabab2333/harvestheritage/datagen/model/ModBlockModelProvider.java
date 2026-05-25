@@ -22,7 +22,7 @@ public class ModBlockModelProvider {
         Consumer<BlockModelDefinitionGenerator> blockStateOutput = blockModels.blockStateOutput;
 
         blockModels.createTrivialCube(ModBlocks.TEST_BLOCK.get());
-        blockModels.copyModel(ModBlocks.TEST_BLOCK.get(), ModBlocks.ACTIVAOR_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.ACTIVAOR_BLOCK.get());
 
         blockStateOutput.accept(MultiPartGenerator.multiPart(ModBlocks.CROP_STAND_BLOCK.get())
             .with(plainVariant(HarvestHeritage.of("block/crop_stand_block"))));
