@@ -6,6 +6,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.ints.IntList;
 import me.theabab2333.harvestheritage.api.item.ISeedItem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.color.item.ItemTintSources;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -14,18 +15,28 @@ import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.item.ModelRenderProperties;
+import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelBaker;
 import net.minecraft.client.resources.model.ResolvedModel;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.resources.model.geometry.QuadCollection;
+import net.minecraft.client.resources.model.sprite.AtlasManager;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.client.resources.model.sprite.TextureSlots;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import org.joml.Matrix4f;
 import org.joml.Matrix4fc;
+import org.joml.Vector3f;
 import org.joml.Vector3fc;
 import org.jspecify.annotations.Nullable;
 
@@ -64,7 +75,79 @@ public record SeedPacketItemModel(
         renderState.appendModelIdentityElement(intList.getInt(0));
 
         Holder<Item> holder = seedItem.seed(stack);
-        resolver.appendItemLayers(renderState, new ItemStack(holder), context, level, owner, i);
+        if (holder.value() == Items.AIR) return;
+
+        if (context == ItemDisplayContext.THIRD_PERSON_LEFT_HAND || context == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND) {
+            ItemStackRenderState.LayerRenderState seedLayer = renderState.newLayer();
+            IntList seedInts = seedLayer.tintLayers();
+            seedInts.add(-1);
+            seedLayer.setExtents(extents);
+            properties.applyToLayer(seedLayer, context);
+            seedLayer.setLocalTransform(new Matrix4f().translate(0.0f, 0.0f, -0.05f));
+            try {
+                var baseQuads = quads.getAll();
+                if (!baseQuads.isEmpty()) {
+                    var baseQuad = baseQuads.get(0);
+                    addSeedQuad(seedLayer, holder.value(), baseQuad.direction(), baseQuad.materialInfo());
+                }
+            } catch (Exception ignored) {
+            }
+            renderState.appendModelIdentityElement(seedInts.getInt(0));
+        } else {
+            resolver.appendItemLayers(renderState, new ItemStack(holder), context, level, owner, i);
+        }
+    }
+
+    private static void addSeedQuad(
+        ItemStackRenderState.LayerRenderState layer, Item seedItem,
+        Direction direction, BakedQuad.MaterialInfo baseMat
+    ) {
+        Identifier itemId = BuiltInRegistries.ITEM.getKey(seedItem);
+        Identifier textureId = itemId.withPath("item/" + itemId.getPath());
+
+        AtlasManager atlasManager = Minecraft.getInstance().getAtlasManager();
+        TextureAtlasSprite sprite = atlasManager.get(new SpriteId(TextureAtlas.LOCATION_BLOCKS, textureId));
+
+        if (sprite.contents().name().equals(MissingTextureAtlasSprite.getLocation())) {
+            sprite = atlasManager.get(new SpriteId(TextureAtlas.LOCATION_ITEMS, textureId));
+            if (sprite.contents().name().equals(MissingTextureAtlasSprite.getLocation())) {
+                return;
+            }
+        }
+
+        float margin = (1.0f - 12.0f / 16.0f) / 2.0f;
+        Vector3f p0 = new Vector3f(margin, margin, 0.6f);
+        Vector3f p1 = new Vector3f(1.0f - margin, margin, 0.6f);
+        Vector3f p2 = new Vector3f(1.0f - margin, 1.0f - margin, 0.6f);
+        Vector3f p3 = new Vector3f(margin, 1.0f - margin, 0.6f);
+
+        long uv0 = packUV(sprite.getU(0.0f), sprite.getV(0.0f));
+        long uv1 = packUV(sprite.getU(1.0f), sprite.getV(0.0f));
+        long uv2 = packUV(sprite.getU(1.0f), sprite.getV(1.0f));
+        long uv3 = packUV(sprite.getU(0.0f), sprite.getV(1.0f));
+
+        BakedQuad.MaterialInfo materialInfo = new BakedQuad.MaterialInfo(
+            sprite,
+            baseMat.layer(),
+            baseMat.itemRenderType(),
+            -1,
+            baseMat.shade(),
+            baseMat.lightEmission(),
+            baseMat.ambientOcclusion()
+        );
+
+        BakedQuad seedQuad = new BakedQuad(
+            p0, p1, p2, p3,
+            uv3, uv2, uv1, uv0,
+            direction,
+            materialInfo
+        );
+
+        layer.prepareQuadList().add(seedQuad);
+    }
+
+    private static long packUV(float u, float v) {
+        return (long) Float.floatToRawIntBits(u) << 32 | (Float.floatToRawIntBits(v) & 0xFFFFFFFFL);
     }
 
     public record Unbaked(Identifier model, List<ItemTintSource> tints, Optional<Transformation> transformation)
@@ -87,7 +170,6 @@ public record SeedPacketItemModel(
             TextureSlots slots = resolvedModel.getTopTextureSlots();
             List<BakedQuad> baseModelQuads = resolvedModel.bakeTopGeometry(slots, baker, BlockModelRotation.IDENTITY).getAll();
             Supplier<Vector3fc[]> extents = Suppliers.memoize(() -> computeExtents(baseModelQuads));
-
 
             return new SeedPacketItemModel(
                 resolvedModel.bakeTopGeometry(slots, baker, BlockModelRotation.IDENTITY),
