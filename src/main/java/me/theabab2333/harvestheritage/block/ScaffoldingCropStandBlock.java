@@ -2,9 +2,11 @@ package me.theabab2333.harvestheritage.block;
 
 import me.theabab2333.harvestheritage.block.entity.ScaffoldingCropStandBlockEntity;
 import me.theabab2333.harvestheritage.init.ModItems;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
@@ -27,6 +29,9 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static net.minecraft.world.level.block.ScaffoldingBlock.getDistance;
 
@@ -53,6 +58,19 @@ public class ScaffoldingCropStandBlock extends BaseCropStandBlock {
         properties.noCollision().noOcclusion().sound(SoundType.SCAFFOLDING);
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(BOTTOM, Boolean.FALSE).setValue(DISTANCE, STABILITY_MAX_DISTANCE));
+    }
+
+    @Override
+    public List<Component> getTooltip(ItemStack itemStack) {
+        List<Component> components = new ArrayList<>();
+        components.add(Component.translatable("block.harvestheritage.scaffolding_crop_stand.tooltip.1").withStyle(ChatFormatting.GRAY));
+        components.add(Component.translatable("block.harvestheritage.scaffolding_crop_stand.tooltip.2").withStyle(ChatFormatting.GRAY));
+        return components;
+    }
+
+    @Override
+    public boolean hasShiftKeyDown() {
+        return true;
     }
 
     @Override

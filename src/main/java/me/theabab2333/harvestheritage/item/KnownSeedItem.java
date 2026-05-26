@@ -1,6 +1,6 @@
 package me.theabab2333.harvestheritage.item;
 
-import me.theabab2333.harvestheritage.api.item.ITooltipItem;
+import me.theabab2333.harvestheritage.api.item.IHasTooltips;
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.util.SeedUtil;
@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KnownSeedItem extends Item implements ITooltipItem {
+public class KnownSeedItem extends Item implements IHasTooltips {
     public KnownSeedItem(Properties properties) {
         super(properties);
     }

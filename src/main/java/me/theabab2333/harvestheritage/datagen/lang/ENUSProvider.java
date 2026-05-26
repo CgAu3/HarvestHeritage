@@ -24,6 +24,7 @@ public class ENUSProvider extends LanguageProvider {
         addItem(ModItems.ZZZZ, "zzzz");
         addItem(ModItems.SCAFFOLDING_CROP_STAND_BLOCK_ITEM, "Hanging crop racks");
         addItem(ModItems.FRIED_SEEDSACK, "Fried Seed Sack");
+        addItem(ModItems.KFC, "Crazy Thursday");
         addBlock(ModBlocks.ACTIVAOR_BLOCK, "Strange Activator");
         addBlock(ModBlocks.TEST_BLOCK, "Test Block");
         addBlock(ModBlocks.CROP_STAND_BLOCK, "Crop Stand");
@@ -32,6 +33,7 @@ public class ENUSProvider extends LanguageProvider {
         add("item.harvestheritage.magnifying_glass.tooltip", "Can you see crop attributes and seeds...?");
         add("modmenu.nameTranslation.harvestheritage", "Harvest Heritage");
         add("creativetab.harvestheritage.seed_packet", "Harvest Heritage：Seed Packet");
+        add("gui.harvestheritage.tooltip.shift", "Hold down [Shift] to view information");
         add(
             "item.harvestheritage.unknown_seed.tooltip",
             "Maybe you need to throw it on the ground and look at it with a magnifying glass..."
@@ -44,5 +46,26 @@ public class ENUSProvider extends LanguageProvider {
         add("item.harvestheritage.seed_packet.tooltip.speed", "Growth Speed: %s");
         add("item.harvestheritage.seed_packet.tooltip.output", "Output Amount: %s");
         add("block.harvestheritage.crop_stand.tooltip.stage", "Current Growth Stage：%s");
+        add("block.harvestheritage.crop_stand.tooltip.1", "Crop stand, can generally be planted on farmland");
+        add("block.harvestheritage.crop_stand.tooltip.2", "Right-click the crop stand with a seed packet to plant crops");
+        add(
+            "block.harvestheritage.crop_stand.tooltip.3",
+            "When crops mature, use grass shears to get seeds, or right-click directly to harvest the produce"
+        );
+        add(
+            "block.harvestheritage.crop_stand.tooltip.4",
+            "When crops are mature, if there are other mature crop stands two blocks away in the north, south, east, or west directions, crossbreeding may occur at the empty crop stand in the middle..."
+        );
+        add("block.harvestheritage.crop_stand.tooltip.5", "Of course, you can also breed within the same type");
+        add(
+            "block.harvestheritage.crop_stand.tooltip.6",
+            "Crop attributes depend on both crop stands; there is a chance of increase and a chance of decrease"
+        );
+        add("block.harvestheritage.scaffolding_crop_stand.tooltip.1", "Right-click scaffolding with a seed packet to convert");
+        add(
+            "block.harvestheritage.scaffolding_crop_stand.tooltip.2",
+            "Cannot crossbreed, but can be harvested. Suitable for large-scale planting; recommended a few blocks above the ground"
+        );
+        add("block.harvestheritage.activator.tooltip", "Random ticks are about to accelerate");
     }
 }

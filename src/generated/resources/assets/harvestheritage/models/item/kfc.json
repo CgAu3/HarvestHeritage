@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "harvestheritage:item/seed_packet",
+    "layer1": "minecraft:item/cooked_chicken"
+  }
+}

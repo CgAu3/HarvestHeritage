@@ -1,10 +1,14 @@
 package me.theabab2333.harvestheritage.block;
 
+import me.theabab2333.harvestheritage.api.item.IHasTooltips;
 import me.theabab2333.harvestheritage.block.entity.ActivatorBlockEntity;
 import me.theabab2333.harvestheritage.init.ModBlockEntities;
+import me.theabab2333.harvestheritage.util.StyelUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -19,7 +23,9 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.redstone.Orientation;
 import org.jspecify.annotations.Nullable;
 
-public class ActivatorBlock extends Block implements EntityBlock {
+import java.util.List;
+
+public class ActivatorBlock extends Block implements EntityBlock, IHasTooltips {
     public ActivatorBlock(Properties properties) {
         properties.noOcclusion();
         super(properties);
@@ -82,5 +88,10 @@ public class ActivatorBlock extends Block implements EntityBlock {
     @Override
     public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> type) {
         return createTickerHelper(type, ModBlockEntities.ACTIVATOR_BLOCK_ENTITY.get(), ActivatorBlockEntity::tick);
+    }
+
+    @Override
+    public List<Component> getTooltip(ItemStack itemStack) {
+        return List.of(Component.translatable("block.harvestheritage.activator.tooltip").setStyle(StyelUtil.colorFromRatio()));
     }
 }

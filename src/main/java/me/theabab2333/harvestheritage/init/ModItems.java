@@ -7,6 +7,8 @@ import me.theabab2333.harvestheritage.item.ScaffoldingCropStandBlockItem;
 import me.theabab2333.harvestheritage.item.SeedPacketItem;
 import me.theabab2333.harvestheritage.item.UnknownSeedItem;
 import me.theabab2333.harvestheritage.item.ZZZZItem;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.Consumable;
@@ -36,7 +38,17 @@ public class ModItems {
     public static final DeferredItem<Item> FRIED_SEEDSACK = ITEMS.registerSimpleItem(
         "fried_seedsack", properties -> properties.food(
             new FoodProperties.Builder().nutrition(2).saturationModifier(0.5f).alwaysEdible().build(),
-            Consumable.builder().consumeSeconds(0.1f).build()
+            Consumable.builder()
+                .consumeSeconds(0.1f)
+                .sound(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.EMPTY))
+                .build()
+        )
+    );
+
+    public static final DeferredItem<Item> KFC = ITEMS.registerSimpleItem(
+        "kfc", properties -> properties.food(
+            new FoodProperties.Builder().nutrition(20).saturationModifier(2f).alwaysEdible().build(),
+            Consumable.builder().consumeSeconds(1f).build()
         )
     );
 

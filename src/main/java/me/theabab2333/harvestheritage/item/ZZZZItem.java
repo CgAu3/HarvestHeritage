@@ -1,6 +1,6 @@
 package me.theabab2333.harvestheritage.item;
 
-import me.theabab2333.harvestheritage.api.item.ITooltipItem;
+import me.theabab2333.harvestheritage.api.item.IHasTooltips;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -9,7 +9,7 @@ import java.util.List;
 
 import static me.theabab2333.harvestheritage.util.StyelUtil.colorFromRatio;
 
-public class ZZZZItem extends Item implements ITooltipItem {
+public class ZZZZItem extends Item implements IHasTooltips {
 
     public ZZZZItem(Properties properties) {
 //        properties.component(

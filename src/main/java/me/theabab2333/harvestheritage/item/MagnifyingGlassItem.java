@@ -1,6 +1,6 @@
 package me.theabab2333.harvestheritage.item;
 
-import me.theabab2333.harvestheritage.api.item.ITooltipItem;
+import me.theabab2333.harvestheritage.api.item.IHasTooltips;
 import me.theabab2333.harvestheritage.init.ModRecipes;
 import me.theabab2333.harvestheritage.recipe.FindRecipe;
 import net.minecraft.ChatFormatting;
@@ -23,7 +23,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MagnifyingGlassItem extends Item implements ITooltipItem {
+public class MagnifyingGlassItem extends Item implements IHasTooltips {
     public MagnifyingGlassItem(Properties properties) {
         properties.stacksTo(1);
         super(properties);

@@ -1,5 +1,6 @@
 package me.theabab2333.harvestheritage.block;
 
+import me.theabab2333.harvestheritage.api.item.IHasTooltips;
 import me.theabab2333.harvestheritage.api.item.ISeedItem;
 import me.theabab2333.harvestheritage.block.entity.BaseCropStandBlockEntity;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
@@ -29,7 +30,7 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-public abstract class BaseCropStandBlock extends Block implements EntityBlock {
+public abstract class BaseCropStandBlock extends Block implements EntityBlock, IHasTooltips {
     public BaseCropStandBlock(Properties properties) {
         properties.randomTicks();
         super(properties);

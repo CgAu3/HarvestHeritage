@@ -1,6 +1,6 @@
 package me.theabab2333.harvestheritage.item;
 
-import me.theabab2333.harvestheritage.api.item.ITooltipItem;
+import me.theabab2333.harvestheritage.api.item.IHasTooltips;
 import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.init.ModTags;
 import net.minecraft.ChatFormatting;
@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-public class GrassShearItem extends Item implements ITooltipItem {
+public class GrassShearItem extends Item implements IHasTooltips {
     public GrassShearItem(Properties properties) {
         properties.stacksTo(1);
         super(properties);

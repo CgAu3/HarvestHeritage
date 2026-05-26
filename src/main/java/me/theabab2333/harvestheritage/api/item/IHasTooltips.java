@@ -5,6 +5,10 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public interface ITooltipItem {
+public interface IHasTooltips {
     List<Component> getTooltip(ItemStack itemStack);
+
+    default boolean hasShiftKeyDown() {
+        return false;
+    }
 }

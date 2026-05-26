@@ -7,6 +7,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CookingBookCategory;
@@ -51,5 +52,10 @@ public class ModItemRecipe extends ModRecipeProvider {
             0.1f,
             100
         ).unlockedBy("has_seed_packet", has(ModItems.FRIED_SEEDSACK.asItem())).save(output);
+        ShapelessRecipeBuilder.shapeless(registries.lookupOrThrow(Registries.ITEM), RecipeCategory.FOOD, ModItems.KFC)
+            .requires(Items.PAPER)
+            .requires(Items.COOKED_CHICKEN)
+            .unlockedBy("has_cooked_chicken", has(Items.COOKED_CHICKEN))
+            .save(output);
     }
 }
