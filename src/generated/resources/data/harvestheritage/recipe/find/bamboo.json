@@ -1,0 +1,18 @@
+{
+  "type": "harvestheritage:find",
+  "ingredient": "harvestheritage:unknown_seed",
+  "result": [
+    {
+      "components": {
+        "harvestheritage:seed_component": {
+          "result": [
+            "minecraft:bamboo"
+          ],
+          "seed": "minecraft:bamboo",
+          "stage": 3
+        }
+      },
+      "id": "harvestheritage:known_seed"
+    }
+  ]
+}

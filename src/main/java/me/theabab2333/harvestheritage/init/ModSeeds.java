@@ -32,6 +32,10 @@ public class ModSeeds {
         CROP_SEED.put(Items.CHORUS_FRUIT, new SeedInfo(List.of(Items.CHORUS_FRUIT), 3));
         CROP_SEED.put(Items.CARROT, new SeedInfo(List.of(Items.CARROT), 3));
         CROP_SEED.put(Items.POTATO, new SeedInfo(List.of(Items.POTATO), 3));
+        CROP_SEED.put(Items.SUGAR_CANE, new SeedInfo(List.of(Items.SUGAR_CANE), 3));
+        CROP_SEED.put(Items.BAMBOO, new SeedInfo(List.of(Items.BAMBOO), 3));
+        CROP_SEED.put(Items.SEA_PICKLE, new SeedInfo(List.of(Items.SEA_PICKLE), 3));
+        CROP_SEED.put(Items.KELP, new SeedInfo(List.of(Items.KELP), 3));
 
         // animal
         ANIMAL_SEED.put(Items.CHICKEN, new SeedInfo(List.of(Items.CHICKEN, Items.FEATHER), 4));
