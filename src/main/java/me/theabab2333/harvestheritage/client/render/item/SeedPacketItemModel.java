@@ -4,11 +4,11 @@ import com.google.common.base.Suppliers;
 import com.mojang.math.Transformation;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import it.unimi.dsi.fastutil.ints.IntList;
 import me.theabab2333.harvestheritage.api.item.ISeedItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.color.item.ItemTintSources;
+import net.minecraft.client.model.geom.builders.UVPair;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.dispatch.BlockModelRotation;
 import net.minecraft.client.renderer.item.ItemModel;
@@ -25,7 +25,6 @@ import net.minecraft.client.resources.model.geometry.QuadCollection;
 import net.minecraft.client.resources.model.sprite.AtlasManager;
 import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.client.resources.model.sprite.TextureSlots;
-import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -66,42 +65,23 @@ public record SeedPacketItemModel(
 
         renderState.appendModelIdentityElement(this);
 
-        ItemStackRenderState.LayerRenderState layer = renderState.newLayer();
-        IntList intList = layer.tintLayers();
-        intList.add(-1);
-        layer.setExtents(extents);
-        properties.applyToLayer(layer, context);
-        layer.prepareQuadList().addAll(quads.getAll());
-        renderState.appendModelIdentityElement(intList.getInt(0));
+        ItemStackRenderState.LayerRenderState baseLayer = renderState.newLayer();
+        baseLayer.setExtents(extents);
+        baseLayer.setLocalTransform(matrix4fc);
+        properties.applyToLayer(baseLayer, context);
+        baseLayer.prepareQuadList().addAll(quads.getAll());
 
         Holder<Item> holder = seedItem.seed(stack);
         if (holder.value() == Items.AIR) return;
 
-        if (context == ItemDisplayContext.THIRD_PERSON_LEFT_HAND || context == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND) {
-            ItemStackRenderState.LayerRenderState seedLayer = renderState.newLayer();
-            IntList seedInts = seedLayer.tintLayers();
-            seedInts.add(-1);
-            seedLayer.setExtents(extents);
-            properties.applyToLayer(seedLayer, context);
-            seedLayer.setLocalTransform(new Matrix4f().translate(0.0f, 0.0f, 0.05f));
-            try {
-                var baseQuads = quads.getAll();
-                if (!baseQuads.isEmpty()) {
-                    var baseQuad = baseQuads.get(0);
-                    addSeedQuad(seedLayer, holder.value(), baseQuad.direction(), baseQuad.materialInfo());
-                }
-            } catch (Exception ignored) {
-            }
-            renderState.appendModelIdentityElement(seedInts.getInt(0));
-        } else {
+        if (context == ItemDisplayContext.GUI) {
             resolver.appendItemLayers(renderState, new ItemStack(holder), context, level, owner, i);
+        } else {
+            addSeedLayer(renderState, holder.value(), context);
         }
     }
 
-    private static void addSeedQuad(
-        ItemStackRenderState.LayerRenderState layer, Item seedItem,
-        Direction direction, BakedQuad.MaterialInfo baseMat
-    ) {
+    private void addSeedLayer(ItemStackRenderState renderState, Item seedItem, ItemDisplayContext context) {
         Identifier itemId = BuiltInRegistries.ITEM.getKey(seedItem);
         Identifier textureId = itemId.withPath("item/" + itemId.getPath());
 
@@ -115,39 +95,29 @@ public record SeedPacketItemModel(
             }
         }
 
+        var baseQuads = quads.getAll();
+        if (baseQuads.isEmpty()) return;
+        BakedQuad baseQuad = baseQuads.get(0);
+        BakedQuad.MaterialInfo material = baseQuad.materialInfo();
+
+        ItemStackRenderState.LayerRenderState seedLayer = renderState.newLayer();
+        seedLayer.setExtents(extents);
+        seedLayer.setLocalTransform(new Matrix4f(matrix4fc).translate(0.0f, 0.0f, 0.05f));
+        properties.applyToLayer(seedLayer, context);
+
         float margin = (1.0f - 12.0f / 16.0f) / 2.0f;
-        Vector3f p0 = new Vector3f(margin, margin, 0.55f);
-        Vector3f p1 = new Vector3f(1.0f - margin, margin, 0.6f);
-        Vector3f p2 = new Vector3f(1.0f - margin, 1.0f - margin, 0.6f);
-        Vector3f p3 = new Vector3f(margin, 1.0f - margin, 0.6f);
-
-        long uv0 = packUV(sprite.getU(0.0f), sprite.getV(0.0f));
-        long uv1 = packUV(sprite.getU(1.0f), sprite.getV(0.0f));
-        long uv2 = packUV(sprite.getU(1.0f), sprite.getV(1.0f));
-        long uv3 = packUV(sprite.getU(0.0f), sprite.getV(1.0f));
-
-        BakedQuad.MaterialInfo materialInfo = new BakedQuad.MaterialInfo(
-            sprite,
-            baseMat.layer(),
-            baseMat.itemRenderType(),
-            -1,
-            baseMat.shade(),
-            baseMat.lightEmission(),
-            baseMat.ambientOcclusion()
-        );
-
-        BakedQuad seedQuad = new BakedQuad(
-            p0, p1, p2, p3,
-            uv3, uv2, uv1, uv0,
-            direction,
-            materialInfo
-        );
-
-        layer.prepareQuadList().add(seedQuad);
-    }
-
-    private static long packUV(float u, float v) {
-        return (long) Float.floatToRawIntBits(u) << 32 | (Float.floatToRawIntBits(v) & 0xFFFFFFFFL);
+        seedLayer.prepareQuadList().add(new BakedQuad(
+            new Vector3f(margin, margin, 0.5f),
+            new Vector3f(1.0f - margin, margin, 0.5f),
+            new Vector3f(1.0f - margin, 1.0f - margin, 0.5f),
+            new Vector3f(margin, 1.0f - margin, 0.5f),
+            UVPair.pack(sprite.getU(0.0f), sprite.getV(1.0f)),
+            UVPair.pack(sprite.getU(1.0f), sprite.getV(1.0f)),
+            UVPair.pack(sprite.getU(1.0f), sprite.getV(0.0f)),
+            UVPair.pack(sprite.getU(0.0f), sprite.getV(0.0f)),
+            baseQuad.direction(),
+            material
+        ));
     }
 
     public record Unbaked(Identifier model, List<ItemTintSource> tints, Optional<Transformation> transformation)
