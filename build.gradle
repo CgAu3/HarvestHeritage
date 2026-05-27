@@ -10,6 +10,10 @@ tasks.named('wrapper', Wrapper).configure {
     distributionType = Wrapper.DistributionType.BIN
 }
 
+tasks.named('jar', Jar) {
+    exclude '/.cache'
+}
+
 version = mod_version
 group = mod_group_id
 
@@ -51,8 +55,14 @@ neoForge {
 
         data {
             clientData()
-            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+            programArguments = [
+                    '--mod', project.mod_id,
+                    '--all',
+                    '--output', file('src/generated/resources/').absolutePath,
+                    '--existing', file('src/main/resources').absolutePath
+            ]
         }
+
         configureEach {
             systemProperty 'terminal.jline', 'true'
             systemProperty 'forge.logging.markers', 'REGISTRIES'
@@ -97,15 +107,13 @@ dependencies {
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
-    var replaceProperties = [
-            minecraft_version      : minecraft_version,
-            minecraft_version_range: minecraft_version_range,
-            neo_version            : neo_version,
-            mod_id                 : mod_id,
-            mod_name               : mod_name,
-            mod_license            : mod_license,
-            mod_version            : mod_version,
-    ]
+    var replaceProperties = [minecraft_version      : minecraft_version,
+                             minecraft_version_range: minecraft_version_range,
+                             neo_version            : neo_version,
+                             mod_id                 : mod_id,
+                             mod_name               : mod_name,
+                             mod_license            : mod_license,
+                             mod_version            : mod_version,]
     inputs.properties replaceProperties
     expand replaceProperties
     from "src/main/templates"
