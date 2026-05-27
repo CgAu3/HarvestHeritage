@@ -1,7 +1,6 @@
 package me.theabab2333.harvestheritage.init;
 
-import me.theabab2333.harvestheritage.component.SeedComponent;
-import net.minecraft.core.Holder;
+import me.theabab2333.harvestheritage.util.SeedUtil;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -78,18 +77,8 @@ public class ModSeeds {
     public static List<ItemStack> getSeedPackets() {
         List<ItemStack> list = new ArrayList<>();
         for (var entry : ALL_SEED.entrySet()) {
-            Item seedItem = entry.getKey();
-            SeedInfo seedInfo = entry.getValue();
-            var resultItems = seedInfo.results();
-            int stage = seedInfo.stage();
-
-            Holder<Item> seedHolder = seedItem.builtInRegistryHolder();
-            List<Holder<Item>> resultHolders = resultItems.stream().map(item -> (Holder<Item>) item.builtInRegistryHolder()).toList();
-
-            SeedComponent component = SeedComponent.createSeed(seedHolder, resultHolders, stage);
-            DataComponentPatch patch = DataComponentPatch.builder().set(ModDataComponents.SEED_COMPONENT.get(), component).build();
-            ItemStack stack = new ItemStack(ModItems.SEED_PACKET, 1, patch);
-            list.add(stack);
+            DataComponentPatch patch = SeedUtil.createSeedComponentPatch(entry.getKey(), entry.getValue());
+            list.add(new ItemStack(ModItems.SEED_PACKET, 1, patch));
         }
         return list;
     }

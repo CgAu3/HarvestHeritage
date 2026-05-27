@@ -5,6 +5,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import lombok.Getter;
 import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.init.ModRecipes;
+import me.theabab2333.harvestheritage.init.ModSeeds;
+import me.theabab2333.harvestheritage.util.SeedUtil;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
@@ -22,8 +25,8 @@ import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Getter
 public class SeedPacketRecipe extends NormalCraftingRecipe {
@@ -117,9 +120,26 @@ public class SeedPacketRecipe extends NormalCraftingRecipe {
 
     @Override
     public List<RecipeDisplay> display() {
+        List<SlotDisplay> inputVariants = new ArrayList<>();
+        List<SlotDisplay> outputVariants = new ArrayList<>();
+
+        for (var entry : ModSeeds.ALL_SEED.entrySet()) {
+            DataComponentPatch patch = SeedUtil.createSeedComponentPatch(entry.getKey(), entry.getValue());
+
+            inputVariants.add(new SlotDisplay.ItemStackSlotDisplay(
+                new ItemStackTemplate(ModItems.KNOWN_SEED, 1, patch)
+            ));
+            outputVariants.add(new SlotDisplay.ItemStackSlotDisplay(
+                new ItemStackTemplate(ModItems.SEED_PACKET, 1, patch)
+            ));
+        }
+
         return List.of(new ShapelessCraftingRecipeDisplay(
-            Stream.of(this.knownSeed, this.acceptPaper).map(Ingredient::display).toList(),
-            new SlotDisplay.ItemStackSlotDisplay(this.result),
+            List.of(
+                new SlotDisplay.Composite(inputVariants),
+                this.acceptPaper.display()
+            ),
+            new SlotDisplay.Composite(outputVariants),
             new SlotDisplay.ItemSlotDisplay(ModItems.KNOWN_SEED.asItem())
         ));
     }

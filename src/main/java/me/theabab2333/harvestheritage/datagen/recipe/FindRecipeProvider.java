@@ -1,13 +1,9 @@
 package me.theabab2333.harvestheritage.datagen.recipe;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
-import me.theabab2333.harvestheritage.component.SeedComponent;
-import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModItems;
-import me.theabab2333.harvestheritage.init.ModSeeds;
 import me.theabab2333.harvestheritage.recipe.FindRecipe;
 import me.theabab2333.harvestheritage.util.SeedUtil;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -38,14 +34,7 @@ public class FindRecipeProvider extends ModRecipeProvider {
 
     private void buildFindSeeds(RecipeOutput output) {
         FIND_SEEDS.forEach(item -> {
-            ModSeeds.SeedInfo seedInfo = SeedUtil.getSeedInfo(item);
-            List<Item> resultItems = seedInfo.results();
-            int stage = seedInfo.stage();
-
-            Holder<Item> seedHolder = SeedUtil.getHolder(item);
-            List<Holder<Item>> resultHolders = resultItems.stream().map(holder -> (Holder<Item>) holder.builtInRegistryHolder()).toList();
-            SeedComponent component = SeedComponent.createSeed(seedHolder, resultHolders, stage);
-            DataComponentPatch patch = DataComponentPatch.builder().set(ModDataComponents.SEED_COMPONENT.get(), component).build();
+            DataComponentPatch patch = SeedUtil.createSeedComponentPatch(item, SeedUtil.getSeedInfo(item));
             ItemStackTemplate stack = new ItemStackTemplate(ModItems.KNOWN_SEED.get(), 1, patch);
             FindRecipe.Builder.builder(ModItems.UNKNOWN_SEED, List.of(stack)).save(output, FIND.withSuffix(SeedUtil.getPath(item)));
         });
