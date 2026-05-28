@@ -3,7 +3,7 @@ package me.theabab2333.harvestheritage.block;
 import me.theabab2333.harvestheritage.api.item.IHasTooltips;
 import me.theabab2333.harvestheritage.block.entity.ActivatorBlockEntity;
 import me.theabab2333.harvestheritage.init.ModBlockEntities;
-import me.theabab2333.harvestheritage.util.StyelUtil;
+import me.theabab2333.harvestheritage.util.StyleUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -92,6 +92,6 @@ public class ActivatorBlock extends Block implements EntityBlock, IHasTooltips {
 
     @Override
     public List<Component> getTooltip(ItemStack itemStack) {
-        return List.of(Component.translatable("block.harvestheritage.activator.tooltip").setStyle(StyelUtil.colorFromRatio()));
+        return List.of(Component.translatable("block.harvestheritage.activator.tooltip").setStyle(StyleUtil.colorFromRatio()));
     }
 }

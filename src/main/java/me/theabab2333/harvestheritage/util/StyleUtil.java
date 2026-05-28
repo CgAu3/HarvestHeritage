@@ -5,7 +5,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 
-public class StyelUtil {
+public class StyleUtil {
 
     public static Style colorFromRatio() {
         return colorFromRatio(getRatio(50), true);

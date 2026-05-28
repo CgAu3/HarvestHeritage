@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-import static me.theabab2333.harvestheritage.util.StyelUtil.colorFromRatio;
+import static me.theabab2333.harvestheritage.util.StyleUtil.colorFromRatio;
 
 public class ZZZZItem extends Item implements IHasTooltips {
 
