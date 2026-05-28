@@ -67,7 +67,7 @@ public class ModJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addCraftingStation(FIND_TYPE.get(), ModItems.UNKNOWN_SEED);
+        registration.addCraftingStation(FIND_TYPE.get(), ModItems.MAGNIFYING_GLASS);
         registration.addCraftingStation(HYBRID_TYPE.get(), ModBlocks.CROP_STAND_BLOCK);
     }
 }

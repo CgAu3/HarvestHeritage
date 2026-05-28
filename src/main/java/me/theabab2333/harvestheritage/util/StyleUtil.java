@@ -50,9 +50,10 @@ public class StyleUtil {
         double phase = getRatio(speed);
         MutableComponent result = Component.empty();
         for (int i = 0; i < text.length(); i++) {
-            float t = text.length() <= 1 ? 0 : (float) ((double) i / (text.length() - 1) + phase) % 1.0f;
+            float t = text.length() == 1 ? 0 : (float) ((double) i / (text.length() - 1) + phase) % 1.0f;
+            float ct = t < 0.5f ? t * 2 : (1 - t) * 2;
             result.append(Component.literal(String.valueOf(text.charAt(i)))
-                .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(lerpColor(startRgb, endRgb, t)))));
+                .withStyle(Style.EMPTY.withColor(TextColor.fromRgb(lerpColor(startRgb, endRgb, ct)))));
         }
         return result;
     }

@@ -32,7 +32,7 @@ public class ZHCNProvider extends LanguageProvider {
         add("creativetab.harvestheritage.seed_packet", "收获：遗产 种子袋");
         add("gui.harvestheritage.tooltip.shift", "按住[Shift]以查看信息");
         add("item.harvestheritage.unknown_seed.tooltip", "或许需要丢在地上用放大镜看看...");
-        add("item.harvestheritage.zzzz.tooltip", "这是什么？太怪了");
+        add("item.harvestheritage.zzzz.tooltip", "太怪了,明明已经有很多模组都有类似的了,还要玩吗?");
         add("item.harvestheritage.magnifying_glass.tooltip", "能看作物属性和种子欸...?");
         add("item.harvestheritage.grass_shear.tooltip", "用这个破坏点草试试?");
         add("item.harvestheritage.seed.tooltip.fail", "抱歉，这个物品没有种子组件");

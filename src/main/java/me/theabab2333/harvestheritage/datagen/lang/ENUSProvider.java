@@ -29,7 +29,10 @@ public class ENUSProvider extends LanguageProvider {
         addBlock(ModBlocks.TEST_BLOCK, "Test Block");
         addBlock(ModBlocks.CROP_STAND_BLOCK, "Crop Stand");
         addBlock(ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK, "Hanging crop racks");
-        add("item.harvestheritage.zzzz.tooltip", "What is this? It's too strange");
+        add(
+            "item.harvestheritage.zzzz.tooltip",
+            "It's so weird. There are already plenty of mods with similar content, so should I still play it?"
+        );
         add("item.harvestheritage.magnifying_glass.tooltip", "Can you see crop attributes and seeds...?");
         add("modmenu.nameTranslation.harvestheritage", "Harvest Heritage");
         add("creativetab.harvestheritage.seed_packet", "Harvest Heritage：Seed Packet");
