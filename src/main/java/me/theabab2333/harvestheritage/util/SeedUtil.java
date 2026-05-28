@@ -68,7 +68,7 @@ public class SeedUtil {
     }
 
     public static SeedComponent rollSeed(RandomSource random, SeedComponent seed1, SeedComponent seed2, List<SeedComponent> hybrids) {
-        if (random.nextDouble() < 0.5) {
+        if (random.nextDouble() < 0.2) {
             return random.nextBoolean() ? seed1 : seed2;
         }
         if (!hybrids.isEmpty()) {
