@@ -3,15 +3,16 @@ package me.theabab2333.harvestheritage.recipe;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import lombok.Getter;
+import me.theabab2333.harvestheritage.component.SeedComponent;
+import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.init.ModRecipes;
-import me.theabab2333.harvestheritage.init.ModSeeds;
-import me.theabab2333.harvestheritage.util.SeedUtil;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -25,7 +26,6 @@ import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -81,6 +81,8 @@ public class SeedPacketRecipe extends NormalCraftingRecipe {
             boolean hasPaper = false;
             boolean hasSeed = false;
 
+            DataComponentPatch resultPatch = this.result.components();
+
             for (int slot = 0; slot < input.size(); slot++) {
                 ItemStack itemStack = input.getItem(slot);
                 if (!itemStack.isEmpty()) {
@@ -90,13 +92,20 @@ public class SeedPacketRecipe extends NormalCraftingRecipe {
                     }
 
                     if (this.knownSeed.test(itemStack)) {
+                        if (!resultPatch.isEmpty()) {
+                            java.util.Optional<SeedComponent> recipeSeedOpt = resultPatch.getPatch(ModDataComponents.SEED_COMPONENT.get());
+                            if (recipeSeedOpt != null && recipeSeedOpt.isPresent()) {
+                                SeedComponent inputSeed = itemStack.get(ModDataComponents.SEED_COMPONENT.get());
+                                if (!recipeSeedOpt.get().equals(inputSeed)) {
+                                    return false;
+                                }
+                            }
+                        }
                         hasSeed = true;
                         continue;
                     }
 
-                    if (!this.knownSeed.test(itemStack) && !this.knownSeed.test(itemStack)) {
-                        return false;
-                    }
+                    return false;
                 }
             }
 
@@ -120,27 +129,12 @@ public class SeedPacketRecipe extends NormalCraftingRecipe {
 
     @Override
     public List<RecipeDisplay> display() {
-        List<SlotDisplay> inputVariants = new ArrayList<>();
-        List<SlotDisplay> outputVariants = new ArrayList<>();
-
-        for (var entry : ModSeeds.ALL_SEED.entrySet()) {
-            DataComponentPatch patch = SeedUtil.createSeedComponentPatch(entry.getKey(), entry.getValue());
-
-            inputVariants.add(new SlotDisplay.ItemStackSlotDisplay(
-                new ItemStackTemplate(ModItems.KNOWN_SEED, 1, patch)
-            ));
-            outputVariants.add(new SlotDisplay.ItemStackSlotDisplay(
-                new ItemStackTemplate(ModItems.SEED_PACKET, 1, patch)
-            ));
-        }
+        DataComponentPatch patch = this.result.components();
 
         return List.of(new ShapelessCraftingRecipeDisplay(
-            List.of(
-                new SlotDisplay.Composite(inputVariants),
-                this.acceptPaper.display()
-            ),
-            new SlotDisplay.Composite(outputVariants),
-            new SlotDisplay.ItemSlotDisplay(ModItems.KNOWN_SEED.asItem())
+            List.of(new SlotDisplay.ItemStackSlotDisplay(new ItemStackTemplate(ModItems.KNOWN_SEED, 1, patch)), this.acceptPaper.display()),
+            new SlotDisplay.ItemStackSlotDisplay(this.result),
+            new SlotDisplay.ItemSlotDisplay(Items.CRAFTING_TABLE)
         ));
     }
 

@@ -3,6 +3,7 @@ package me.theabab2333.harvestheritage.integration.jei;
 import me.theabab2333.harvestheritage.HarvestHeritage;
 import me.theabab2333.harvestheritage.event.ModRecipeSyncEvent;
 import me.theabab2333.harvestheritage.init.ModBlocks;
+import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.init.ModRecipes;
 import me.theabab2333.harvestheritage.init.ModSeeds;
@@ -14,9 +15,11 @@ import me.theabab2333.harvestheritage.util.SeedUtil;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.types.IRecipeHolderType;
+import mezz.jei.api.registration.IExtraIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.ISubtypeRegistration;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -69,5 +72,18 @@ public class ModJeiPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addCraftingStation(FIND_TYPE.get(), ModItems.MAGNIFYING_GLASS);
         registration.addCraftingStation(HYBRID_TYPE.get(), ModBlocks.CROP_STAND_BLOCK);
+    }
+
+    @Override
+    public void registerItemSubtypes(ISubtypeRegistration registration) {
+        registration.registerFromDataComponentTypes(
+            ModItems.SEED_PACKET.get(),
+            ModDataComponents.SEED_COMPONENT.get()
+        );
+    }
+
+    @Override
+    public void registerExtraIngredients(IExtraIngredientRegistration registration) {
+        registration.addExtraItemStacks(ModSeeds.getSeedPackets());
     }
 }

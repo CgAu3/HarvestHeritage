@@ -39,6 +39,7 @@ public class HybridRecipeProvider extends ModRecipeProvider {
         // other
         buildSeed(List.of(Items.EGG, Items.SUGAR_CANE), Items.SLIME_BALL);
         buildSeed(List.of(Items.SLIME_BALL, Items.CHORUS_FRUIT), Items.ENDER_PEARL);
+        buildSeed(List.of(Items.MUTTON, Items.SWEET_BERRIES), Items.STRING);
     }
 
     private void buildSeed(List<Item> inputs, Item output) {
