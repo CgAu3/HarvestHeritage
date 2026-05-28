@@ -67,5 +67,7 @@ public class ENUSProvider extends LanguageProvider {
             "Cannot crossbreed, but can be harvested. Suitable for large-scale planting; recommended a few blocks above the ground"
         );
         add("block.harvestheritage.activator.tooltip", "Random ticks are about to accelerate");
+        add("jei.harvestheritage.find", "Let me see see");
+        add("jei.harvestheritage.hybrid", "Hybrid");
     }
 }

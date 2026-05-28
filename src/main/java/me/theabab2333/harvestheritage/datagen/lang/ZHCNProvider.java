@@ -54,5 +54,7 @@ public class ZHCNProvider extends LanguageProvider {
         add("block.harvestheritage.scaffolding_crop_stand.tooltip.2", "不能杂交，但是能收获，适合大范围种植，推荐离地几格");
         add("block.harvestheritage.crop_stand.tooltip.stage", "当前生长阶段：%s");
         add("block.harvestheritage.activator.tooltip", "随机刻要加速了");
+        add("jei.harvestheritage.find", "让我看看");
+        add("jei.harvestheritage.hybrid", "杂交");
     }
 }

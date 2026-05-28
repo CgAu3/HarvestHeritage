@@ -35,5 +35,7 @@
   "item.harvestheritage.unknown_seed.tooltip": "Maybe you need to throw it on the ground and look at it with a magnifying glass...",
   "item.harvestheritage.zzzz": "zzzz",
   "item.harvestheritage.zzzz.tooltip": "What is this? It's too strange",
+  "jei.harvestheritage.find": "Let me see see",
+  "jei.harvestheritage.hybrid": "Hybrid",
   "modmenu.nameTranslation.harvestheritage": "Harvest Heritage"
 }

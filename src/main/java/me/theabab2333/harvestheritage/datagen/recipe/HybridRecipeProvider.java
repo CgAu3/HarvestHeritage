@@ -4,10 +4,12 @@ import me.theabab2333.harvestheritage.HarvestHeritage;
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.recipe.HybridRecipe;
 import me.theabab2333.harvestheritage.util.SeedUtil;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,20 @@ public class HybridRecipeProvider extends ModRecipeProvider {
     protected void buildRecipes() {
         // common seeds
         buildCommonSeeds();
+
+        // other
+        buildSeed(List.of(Items.EGG, Items.SUGAR_CANE), Items.SLIME_BALL);
+        buildSeed(List.of(Items.SLIME_BALL, Items.CHORUS_FRUIT), Items.ENDER_PEARL);
+    }
+
+    private void buildSeed(List<Item> inputs, Item output) {
+        if (inputs.size() != 2) {
+            HarvestHeritage.LOGGER.warn("Datagen hyprid Recipe is exception!");
+            return;
+        }
+        List<Holder<Item>> holders = new ArrayList<>();
+        inputs.forEach(item -> holders.add(getHolder(item)));
+        HybridRecipe.Builder.builder(holders, List.of(fromItem(output))).save(this.output, HYPRID.withSuffix(getPath(output)));
     }
 
     private void buildCommonSeeds() {

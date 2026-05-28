@@ -1,0 +1,16 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:egg",
+    "minecraft:sugar_cane"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:slime_ball"
+      ],
+      "seed": "minecraft:slime_ball",
+      "stage": 4
+    }
+  ]
+}
