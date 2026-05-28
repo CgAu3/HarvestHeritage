@@ -12,10 +12,6 @@ import static me.theabab2333.harvestheritage.util.StyelUtil.colorFromRatio;
 public class ZZZZItem extends Item implements IHasTooltips {
 
     public ZZZZItem(Properties properties) {
-//        properties.component(
-//            DataComponents.EQUIPPABLE,
-//            Equippable.builder(ArmorType.HELMET.getSlot()).build()
-//        );
         super(properties);
     }
 
