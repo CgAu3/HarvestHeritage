@@ -3,6 +3,7 @@ package me.theabab2333.harvestheritage.integration.jei.category;
 import me.theabab2333.harvestheritage.init.ModBlocks;
 import me.theabab2333.harvestheritage.integration.jei.ModJeiPlugin;
 import me.theabab2333.harvestheritage.recipe.HybridRecipe;
+import me.theabab2333.harvestheritage.util.SeedUtil;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -35,6 +36,12 @@ public class HybridRecipeCategory extends AbstractRecipeCategory<RecipeHolder<Hy
         List<ItemStack> outputStacks = recipe.getOutputSeeds().stream()
             .map(comp -> new ItemStack(comp.seed()))
             .toList();
+
+        List<ItemStack> inputSeedPackets = SeedUtil.getSeedPackets(inputStacks);
+        List<ItemStack> outputSeedPackets = SeedUtil.getSeedPackets(outputStacks);
+
+        builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStacks(inputSeedPackets);
+        builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStacks(outputSeedPackets);
 
         builder
             .addInputSlot(52, 7)

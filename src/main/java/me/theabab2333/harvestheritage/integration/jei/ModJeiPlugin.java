@@ -24,6 +24,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.RecipeHolder;
+
 import java.util.ArrayList;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -77,6 +78,10 @@ public class ModJeiPlugin implements IModPlugin {
     public void registerItemSubtypes(ISubtypeRegistration registration) {
         registration.registerFromDataComponentTypes(
             ModItems.SEED_PACKET.get(),
+            ModDataComponents.SEED_COMPONENT.get()
+        );
+        registration.registerFromDataComponentTypes(
+            ModItems.KNOWN_SEED.get(),
             ModDataComponents.SEED_COMPONENT.get()
         );
     }

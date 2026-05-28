@@ -4,6 +4,7 @@ import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModConfigs;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
+import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.init.ModSeeds;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentPatch;
@@ -13,7 +14,9 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SeedUtil {
@@ -52,6 +55,20 @@ public class SeedUtil {
 
     public static DataComponentPatch createSeedComponentPatch(Item seedItem, ModSeeds.SeedInfo seedInfo) {
         return createSeedComponentPatch(createSeedComponent(seedItem, seedInfo));
+    }
+
+    public static ItemStack getSeedPacket(Item item) {
+        ModSeeds.SeedInfo seedInfo = getSeedInfo(item);
+        DataComponentPatch dataComponentPatch = createSeedComponentPatch(item, seedInfo);
+        return new ItemStack(ModItems.SEED_PACKET, 1, dataComponentPatch);
+    }
+
+    public static List<ItemStack> getSeedPackets(List<ItemStack> items) {
+        List<ItemStack> inputSeedPackets = new ArrayList<>();
+        for (ItemStack item : items) {
+            inputSeedPackets.add(getSeedPacket(item.getItem()));
+        }
+        return inputSeedPackets;
     }
 
     public static int rollStat(RandomSource random, int val1, int val2, int min, int max) {
