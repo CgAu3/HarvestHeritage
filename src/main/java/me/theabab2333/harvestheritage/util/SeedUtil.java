@@ -1,6 +1,7 @@
 package me.theabab2333.harvestheritage.util;
 
 import me.theabab2333.harvestheritage.component.SeedComponent;
+import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModSeeds;
 import net.minecraft.core.Holder;
@@ -9,6 +10,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 
 import java.util.List;
@@ -38,29 +40,51 @@ public class SeedUtil {
         return item.builtInRegistryHolder();
     }
 
-    /**
-     * 从种子物品和种子信息创建 SeedComponent
-     */
     public static SeedComponent createSeedComponent(Item seedItem, ModSeeds.SeedInfo seedInfo) {
-        List<Holder<Item>> resultHolders = seedInfo.results().stream()
-            .map(item -> (Holder<Item>) item.builtInRegistryHolder())
-            .toList();
+        List<Holder<Item>> resultHolders = seedInfo.results().stream().map(item -> (Holder<Item>) item.builtInRegistryHolder()).toList();
         return SeedComponent.createSeed(getHolder(seedItem), resultHolders, seedInfo.stage());
     }
 
-    /**
-     * 从 SeedComponent 创建包含 SEED_COMPONENT 的 DataComponentPatch
-     */
     public static DataComponentPatch createSeedComponentPatch(SeedComponent component) {
-        return DataComponentPatch.builder()
-            .set(ModDataComponents.SEED_COMPONENT.get(), component)
-            .build();
+        return DataComponentPatch.builder().set(ModDataComponents.SEED_COMPONENT.get(), component).build();
     }
 
-    /**
-     * 从种子物品和种子信息直接创建包含 SEED_COMPONENT 的 DataComponentPatch
-     */
     public static DataComponentPatch createSeedComponentPatch(Item seedItem, ModSeeds.SeedInfo seedInfo) {
         return createSeedComponentPatch(createSeedComponent(seedItem, seedInfo));
+    }
+
+    public static int rollStat(RandomSource random, int val1, int val2, int min, int max) {
+        int minVal = Math.min(val1, val2);
+        int avgVal = (val1 + val2) / 2;
+        double roll = random.nextDouble();
+        if (roll < 0.05) {
+            return Math.max(min, minVal - random.nextInt(2) - 1);
+        } else if (roll < 0.8) {
+            return Math.min(max, avgVal + random.nextInt(2) + 1);
+        } else {
+            return avgVal;
+        }
+    }
+
+    public static SeedComponent rollSeed(RandomSource random, SeedComponent seed1, SeedComponent seed2, List<SeedComponent> hybrids) {
+        if (random.nextDouble() < 0.5) {
+            return random.nextBoolean() ? seed1 : seed2;
+        }
+        if (!hybrids.isEmpty()) {
+            return hybrids.get(random.nextInt(hybrids.size()));
+        }
+        return random.nextBoolean() ? seed1 : seed2;
+    }
+
+    public static SeedPacketComponent mergeSeedPackets(
+        RandomSource random,
+        SeedPacketComponent comp1,
+        SeedPacketComponent comp2,
+        List<SeedComponent> hybrids
+    ) {
+        int speed = rollStat(random, comp1.speed(), comp2.speed(), 1, 31);
+        int output = rollStat(random, comp1.output(), comp2.output(), 1, 31);
+        SeedComponent seed = rollSeed(random, comp1.seedComponent(), comp2.seedComponent(), hybrids);
+        return new SeedPacketComponent(seed, speed, output);
     }
 }
