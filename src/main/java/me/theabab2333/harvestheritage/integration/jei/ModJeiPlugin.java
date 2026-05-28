@@ -24,7 +24,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.RecipeHolder;
-
 import java.util.ArrayList;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;

@@ -1,10 +1,9 @@
 package me.theabab2333.harvestheritage.init;
 
-import me.theabab2333.harvestheritage.HarvestHeritage;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.IEventBus;
@@ -28,7 +27,7 @@ public class ModCreativeModeTab {
                 .displayItems((parameters, output) -> getItem().forEach(output::accept))
                 .icon(() -> new ItemStack(ModItems.GRASS_SHEAR.get()))
                 .title(Component.translatable("modmenu.nameTranslation.harvestheritage"))
-                .withTabsAfter(ResourceKey.create(Registries.CREATIVE_MODE_TAB, HarvestHeritage.of("seed_tab")))
+                .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
                 .build()
         );
 

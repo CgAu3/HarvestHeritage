@@ -16,7 +16,7 @@ public class ZZZZItem extends Item implements IHasTooltips {
 
     @Override
     public List<Component> getTooltip(ItemStack itemStack) {
-        return List.of(StyleUtil.charByCharComponent(Component.translatable("item.harvestheritage.zzzz.tooltip"), 0xf6d365, 0xfda085, 50));
+        return List.of(Component.translatable("item.harvestheritage.zzzz.tooltip").withStyle(StyleUtil.colorFromRatio(0xf6d365, 0xfda085)));
     }
 
     @Override

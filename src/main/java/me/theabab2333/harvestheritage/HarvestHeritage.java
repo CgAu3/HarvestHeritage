@@ -2,7 +2,7 @@ package me.theabab2333.harvestheritage;
 
 import me.theabab2333.harvestheritage.init.ModBlockEntities;
 import me.theabab2333.harvestheritage.init.ModBlocks;
-import me.theabab2333.harvestheritage.init.ModConfig;
+import me.theabab2333.harvestheritage.init.ModConfigs;
 import me.theabab2333.harvestheritage.init.ModCreativeModeTab;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModItems;
@@ -35,7 +35,7 @@ public class HarvestHeritage {
 
         NeoForge.EVENT_BUS.register(this);
 
-        ModConfig.register(modContainer);
+        ModConfigs.register(modContainer);
 
         LOGGER.info("Hey Player, your portal opening day is over. Give me the Crash.");
         LOGGER.info("If you want it, then you'll have to take it, as you have already known.");

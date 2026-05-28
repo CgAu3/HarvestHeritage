@@ -29,8 +29,13 @@ public class StyleUtil {
         return Style.EMPTY.withItalic(false).withColor(TextColor.fromRgb(rgb));
     }
 
-    public static Style charByCharStyle(int startRgb, int endRgb) {
+    public static Style colorFromRatio(int startRgb, int endRgb) {
         float t = (float) getRatio(50);
+        return Style.EMPTY.withColor(TextColor.fromRgb(lerpColor(startRgb, endRgb, t)));
+    }
+
+    public static Style colorFromRatio(int startRgb, int endRgb, double speed) {
+        float t = (float) getRatio(speed);
         return Style.EMPTY.withColor(TextColor.fromRgb(lerpColor(startRgb, endRgb, t)));
     }
 

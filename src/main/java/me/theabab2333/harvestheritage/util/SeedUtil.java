@@ -2,6 +2,7 @@ package me.theabab2333.harvestheritage.util;
 
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
+import me.theabab2333.harvestheritage.init.ModConfigs;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModSeeds;
 import net.minecraft.core.Holder;
@@ -82,8 +83,10 @@ public class SeedUtil {
         SeedPacketComponent comp2,
         List<SeedComponent> hybrids
     ) {
-        int speed = rollStat(random, comp1.speed(), comp2.speed(), 1, 31);
-        int output = rollStat(random, comp1.output(), comp2.output(), 1, 31);
+        int maxSpeed = ModConfigs.SEED_SPEED_MAX.getAsInt();
+        int outputMax = ModConfigs.OUTPUT_MAX.getAsInt();
+        int speed = rollStat(random, comp1.speed(), comp2.speed(), 1, maxSpeed);
+        int output = rollStat(random, comp1.output(), comp2.output(), 1, outputMax);
         SeedComponent seed = rollSeed(random, comp1.seedComponent(), comp2.seedComponent(), hybrids);
         return new SeedPacketComponent(seed, speed, output);
     }
