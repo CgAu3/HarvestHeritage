@@ -1,0 +1,16 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:magma_cream",
+    "minecraft:sugar_cane"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:gunpowder"
+      ],
+      "seed": "minecraft:gunpowder",
+      "stage": 4
+    }
+  ]
+}

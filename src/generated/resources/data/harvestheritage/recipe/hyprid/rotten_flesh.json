@@ -1,0 +1,16 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:beef",
+    "minecraft:spider_eye"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:rotten_flesh"
+      ],
+      "seed": "minecraft:rotten_flesh",
+      "stage": 4
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:slime_ball",
+    "minecraft:string"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:spider_eye"
+      ],
+      "seed": "minecraft:spider_eye",
+      "stage": 4
+    }
+  ]
+}

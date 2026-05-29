@@ -16,9 +16,12 @@ public class ModSeeds {
     }
 
     public static Map<Item, SeedInfo> ALL_SEED = new LinkedHashMap<>();
+
     public static Map<Item, SeedInfo> CROP_SEED = new LinkedHashMap<>();
     public static Map<Item, SeedInfo> ANIMAL_SEED = new LinkedHashMap<>();
     public static Map<Item, SeedInfo> MOB_SEED = new LinkedHashMap<>();
+    public static Map<Item, SeedInfo> MATERIAL_SEED = new LinkedHashMap<>();
+    public static Map<Item, SeedInfo> SPECIAL_SEED = new LinkedHashMap<>();
 
     static {
         // common
@@ -35,9 +38,10 @@ public class ModSeeds {
         CROP_SEED.put(Items.BAMBOO, new SeedInfo(List.of(Items.BAMBOO), 3));
         CROP_SEED.put(Items.SEA_PICKLE, new SeedInfo(List.of(Items.SEA_PICKLE), 3));
         CROP_SEED.put(Items.KELP, new SeedInfo(List.of(Items.KELP), 3));
+        CROP_SEED.put(Items.APPLE, new SeedInfo(List.of(Items.OAK_LOG, Items.APPLE), 4));
 
         // animal
-        ANIMAL_SEED.put(Items.CHICKEN, new SeedInfo(List.of(Items.CHICKEN, Items.FEATHER), 4));
+        ANIMAL_SEED.put(Items.CHICKEN, new SeedInfo(List.of(Items.CHICKEN, Items.FEATHER, Items.EGG), 4));
         ANIMAL_SEED.put(Items.BEEF, new SeedInfo(List.of(Items.BEEF, Items.LEATHER), 4));
         ANIMAL_SEED.put(Items.PORKCHOP, new SeedInfo(List.of(Items.PORKCHOP), 4));
         ANIMAL_SEED.put(Items.MUTTON, new SeedInfo(List.of(Items.MUTTON), 4));
@@ -48,7 +52,6 @@ public class ModSeeds {
         ANIMAL_SEED.put(Items.PUFFERFISH, new SeedInfo(List.of(Items.PUFFERFISH), 4));
         ANIMAL_SEED.put(Items.INK_SAC, new SeedInfo(List.of(Items.INK_SAC, Items.GLOW_INK_SAC), 4));
         ANIMAL_SEED.put(Items.ARMADILLO_SCUTE, new SeedInfo(List.of(Items.ARMADILLO_SCUTE), 4));
-        ANIMAL_SEED.put(Items.EGG, new SeedInfo(List.of(Items.EGG, Items.BROWN_EGG, Items.BLUE_EGG), 4));
         ANIMAL_SEED.put(Items.TURTLE_SCUTE, new SeedInfo(List.of(Items.TURTLE_SCUTE), 4));
         ANIMAL_SEED.put(Items.HONEYCOMB, new SeedInfo(List.of(Items.HONEYCOMB, Items.HONEY_BOTTLE), 4));
 
@@ -67,11 +70,31 @@ public class ModSeeds {
         MOB_SEED.put(Items.ROTTEN_FLESH, new SeedInfo(List.of(Items.ROTTEN_FLESH), 4));
         MOB_SEED.put(Items.BONE, new SeedInfo(List.of(Items.BONE), 4));
         MOB_SEED.put(Items.STRING, new SeedInfo(List.of(Items.STRING), 4));
+        MOB_SEED.put(Items.COOKED_PORKCHOP, new SeedInfo(List.of(Items.COOKED_PORKCHOP, Items.GOLD_NUGGET), 4)); // piglin
+        MOB_SEED.put(Items.SHULKER_SHELL, new SeedInfo(List.of(Items.SHULKER_SHELL), 5));
+
+        // material
+        MATERIAL_SEED.put(Items.FLINT, new SeedInfo(List.of(Items.FLINT), 3));
+        MATERIAL_SEED.put(Items.COAL, new SeedInfo(List.of(Items.COAL), 4));
+        MATERIAL_SEED.put(Items.IRON_INGOT, new SeedInfo(List.of(Items.IRON_INGOT), 5));
+        MATERIAL_SEED.put(Items.GOLD_INGOT, new SeedInfo(List.of(Items.GOLD_INGOT), 5));
+        MATERIAL_SEED.put(Items.AMETHYST_SHARD, new SeedInfo(List.of(Items.AMETHYST_SHARD), 5));
+        MATERIAL_SEED.put(Items.QUARTZ, new SeedInfo(List.of(Items.QUARTZ), 5));
+        MATERIAL_SEED.put(Items.LAPIS_LAZULI, new SeedInfo(List.of(Items.LAPIS_LAZULI), 5));
+        MATERIAL_SEED.put(Items.REDSTONE, new SeedInfo(List.of(Items.REDSTONE), 5));
+        MATERIAL_SEED.put(Items.GLOWSTONE_DUST, new SeedInfo(List.of(Items.GLOWSTONE_DUST), 5));
+        MATERIAL_SEED.put(Items.EMERALD, new SeedInfo(List.of(Items.EMERALD), 5));
+        MATERIAL_SEED.put(Items.DIAMOND, new SeedInfo(List.of(Items.DIAMOND), 5));
+        MATERIAL_SEED.put(Items.NETHERITE_SCRAP, new SeedInfo(List.of(Items.ANCIENT_DEBRIS), 6));
+
+        // special
+        SPECIAL_SEED.put(Items.ENDER_EYE, new SeedInfo(List.of(Items.ENDER_EYE), 5));
 
         // all
         ALL_SEED.putAll(CROP_SEED);
         ALL_SEED.putAll(ANIMAL_SEED);
         ALL_SEED.putAll(MOB_SEED);
+        ALL_SEED.putAll(MATERIAL_SEED);
     }
 
     public static List<ItemStack> getSeedPackets() {

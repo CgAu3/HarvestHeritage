@@ -1,0 +1,17 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:porkchop",
+    "minecraft:glow_berries"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:cooked_porkchop",
+        "minecraft:gold_nugget"
+      ],
+      "seed": "minecraft:cooked_porkchop",
+      "stage": 4
+    }
+  ]
+}

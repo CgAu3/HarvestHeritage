@@ -1,0 +1,16 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:turtle_scute",
+    "minecraft:amethyst_shard"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:emerald"
+      ],
+      "seed": "minecraft:emerald",
+      "stage": 5
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:kelp",
+    "minecraft:chicken"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:breeze_rod"
+      ],
+      "seed": "minecraft:breeze_rod",
+      "stage": 4
+    }
+  ]
+}

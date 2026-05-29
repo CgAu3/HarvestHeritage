@@ -1,7 +1,7 @@
 {
   "type": "harvestheritage:hyprid",
   "input_seeds": [
-    "minecraft:egg",
+    "minecraft:chicken",
     "minecraft:sugar_cane"
   ],
   "output_seeds": [

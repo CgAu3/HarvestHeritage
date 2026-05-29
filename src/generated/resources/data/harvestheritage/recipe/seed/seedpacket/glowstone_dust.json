@@ -1,0 +1,19 @@
+{
+  "type": "harvestheritage:seed_packet",
+  "accept_paper": "minecraft:paper",
+  "category": "misc",
+  "known_seed": "harvestheritage:known_seed",
+  "result": {
+    "components": {
+      "harvestheritage:seed_component": {
+        "result": [
+          "minecraft:glowstone_dust"
+        ],
+        "seed": "minecraft:glowstone_dust",
+        "stage": 5
+      }
+    },
+    "id": "harvestheritage:seed_packet"
+  },
+  "show_notification": false
+}

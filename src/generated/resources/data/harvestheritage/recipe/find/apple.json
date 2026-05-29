@@ -6,11 +6,10 @@
       "components": {
         "harvestheritage:seed_component": {
           "result": [
-            "minecraft:egg",
-            "minecraft:brown_egg",
-            "minecraft:blue_egg"
+            "minecraft:oak_log",
+            "minecraft:apple"
           ],
-          "seed": "minecraft:egg",
+          "seed": "minecraft:apple",
           "stage": 4
         }
       },

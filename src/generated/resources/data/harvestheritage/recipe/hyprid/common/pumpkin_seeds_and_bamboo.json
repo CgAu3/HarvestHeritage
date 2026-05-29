@@ -81,6 +81,14 @@
       ],
       "seed": "minecraft:kelp",
       "stage": 3
+    },
+    {
+      "result": [
+        "minecraft:oak_log",
+        "minecraft:apple"
+      ],
+      "seed": "minecraft:apple",
+      "stage": 4
     }
   ]
 }

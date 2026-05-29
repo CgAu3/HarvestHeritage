@@ -1,0 +1,17 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:ink_sac",
+    "minecraft:kelp"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:prismarine_crystals",
+        "minecraft:prismarine_shard"
+      ],
+      "seed": "minecraft:prismarine_crystals",
+      "stage": 4
+    }
+  ]
+}

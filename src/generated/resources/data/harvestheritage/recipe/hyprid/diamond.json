@@ -1,0 +1,30 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:emerald",
+    "minecraft:coal"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:diamond"
+      ],
+      "seed": "minecraft:diamond",
+      "stage": 5
+    },
+    {
+      "result": [
+        "minecraft:amethyst_shard"
+      ],
+      "seed": "minecraft:amethyst_shard",
+      "stage": 5
+    },
+    {
+      "result": [
+        "minecraft:quartz"
+      ],
+      "seed": "minecraft:quartz",
+      "stage": 5
+    }
+  ]
+}

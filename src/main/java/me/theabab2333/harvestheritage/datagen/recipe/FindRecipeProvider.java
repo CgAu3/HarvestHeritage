@@ -43,5 +43,8 @@ public class FindRecipeProvider extends ModRecipeProvider {
     @Override
     protected void buildRecipes() {
         buildFindSeeds(output);
+
+        FindRecipe.Builder.builder(ModItems.MAGNIFYING_GLASS, ModItems.ZZZZ)
+            .save(output, FIND.withSuffix(SeedUtil.getPath(ModItems.ZZZZ.asItem())));
     }
 }

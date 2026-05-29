@@ -56,5 +56,6 @@ public class ZHCNProvider extends LanguageProvider {
         add("block.harvestheritage.activator.tooltip", "随机刻要加速了");
         add("jei.harvestheritage.find", "让我看看");
         add("jei.harvestheritage.hybrid", "杂交");
+        add("jei.harvestheritage.hybrid.tooltip", "将以种子袋形式出战!");
     }
 }

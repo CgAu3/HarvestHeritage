@@ -1,0 +1,16 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:bone",
+    "minecraft:gunpowder"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:flint"
+      ],
+      "seed": "minecraft:flint",
+      "stage": 3
+    }
+  ]
+}

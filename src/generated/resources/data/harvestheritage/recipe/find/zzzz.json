@@ -1,0 +1,9 @@
+{
+  "type": "harvestheritage:find",
+  "ingredient": "harvestheritage:magnifying_glass",
+  "result": [
+    {
+      "id": "harvestheritage:zzzz"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:bone",
+    "minecraft:ghast_tear"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:iron_ingot"
+      ],
+      "seed": "minecraft:iron_ingot",
+      "stage": 5
+    }
+  ]
+}

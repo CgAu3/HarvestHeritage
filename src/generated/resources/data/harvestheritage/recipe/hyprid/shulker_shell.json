@@ -1,0 +1,16 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:chorus_fruit",
+    "minecraft:armadillo_scute"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:shulker_shell"
+      ],
+      "seed": "minecraft:shulker_shell",
+      "stage": 5
+    }
+  ]
+}

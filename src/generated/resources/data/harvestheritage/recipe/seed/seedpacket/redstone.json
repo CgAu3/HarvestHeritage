@@ -7,12 +7,10 @@
     "components": {
       "harvestheritage:seed_component": {
         "result": [
-          "minecraft:egg",
-          "minecraft:brown_egg",
-          "minecraft:blue_egg"
+          "minecraft:redstone"
         ],
-        "seed": "minecraft:egg",
-        "stage": 4
+        "seed": "minecraft:redstone",
+        "stage": 5
       }
     },
     "id": "harvestheritage:seed_packet"

@@ -1,0 +1,16 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:prismarine_crystals",
+    "minecraft:ghast_tear"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:quartz"
+      ],
+      "seed": "minecraft:quartz",
+      "stage": 5
+    }
+  ]
+}

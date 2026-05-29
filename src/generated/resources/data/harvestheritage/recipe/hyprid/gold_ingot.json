@@ -1,0 +1,16 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:porkchop",
+    "minecraft:iron_ingot"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:gold_ingot"
+      ],
+      "seed": "minecraft:gold_ingot",
+      "stage": 5
+    }
+  ]
+}

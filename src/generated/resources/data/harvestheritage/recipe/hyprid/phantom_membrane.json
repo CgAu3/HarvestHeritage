@@ -1,0 +1,16 @@
+{
+  "type": "harvestheritage:hyprid",
+  "input_seeds": [
+    "minecraft:ghast_tear",
+    "minecraft:string"
+  ],
+  "output_seeds": [
+    {
+      "result": [
+        "minecraft:phantom_membrane"
+      ],
+      "seed": "minecraft:phantom_membrane",
+      "stage": 4
+    }
+  ]
+}

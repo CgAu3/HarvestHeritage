@@ -4,6 +4,7 @@ import me.theabab2333.harvestheritage.init.ModBlocks;
 import me.theabab2333.harvestheritage.integration.jei.ModJeiPlugin;
 import me.theabab2333.harvestheritage.recipe.HybridRecipe;
 import me.theabab2333.harvestheritage.util.SeedUtil;
+import me.theabab2333.harvestheritage.util.StyleUtil;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -23,7 +24,7 @@ public class HybridRecipeCategory extends AbstractRecipeCategory<RecipeHolder<Hy
             Component.translatable("jei.harvestheritage.hybrid"),
             guiHelper.createDrawableItemLike(ModBlocks.CROP_STAND_BLOCK),
             162,
-            80
+            60
         );
     }
 
@@ -44,16 +45,16 @@ public class HybridRecipeCategory extends AbstractRecipeCategory<RecipeHolder<Hy
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStacks(outputSeedPackets);
 
         builder
-            .addInputSlot(52, 7)
+            .addInputSlot(52, 1)
             .setStandardSlotBackground()
             .addItemStacks(inputStacks);
 
         builder
-            .addSlot(RecipeIngredientRole.RENDER_ONLY, 74, 7)
+            .addSlot(RecipeIngredientRole.RENDER_ONLY, 74, 1)
             .add(ModBlocks.CROP_STAND_BLOCK);
 
         builder
-            .addInputSlot(96, 7)
+            .addInputSlot(96, 1)
             .setStandardSlotBackground()
             .addItemStacks(inputStacks.reversed());
 
@@ -63,9 +64,13 @@ public class HybridRecipeCategory extends AbstractRecipeCategory<RecipeHolder<Hy
         int startX = count < perRow ? (getWidth() - count * slotSize) / 2 + 2 : 2;
         for (int i = 0; i < count; i++) {
             builder
-                .addSlot(RecipeIngredientRole.OUTPUT, startX + (i % perRow) * slotSize, 31 + (i / perRow) * slotSize)
+                .addSlot(RecipeIngredientRole.OUTPUT, startX + (i % perRow) * slotSize, 25 + (i / perRow) * slotSize)
                 .setStandardSlotBackground()
-                .add(outputStacks.get(i));
+                .add(outputStacks.get(i))
+                .addRichTooltipCallback(
+                    (_, tooltip) ->
+                        tooltip.add(Component.translatable("jei.harvestheritage.hybrid.tooltip").withStyle(StyleUtil.colorFromRatio()))
+                );
         }
     }
 }

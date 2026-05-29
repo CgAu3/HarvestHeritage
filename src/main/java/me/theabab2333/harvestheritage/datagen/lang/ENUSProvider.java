@@ -72,5 +72,6 @@ public class ENUSProvider extends LanguageProvider {
         add("block.harvestheritage.activator.tooltip", "Random ticks are about to accelerate");
         add("jei.harvestheritage.find", "Let me see see");
         add("jei.harvestheritage.hybrid", "Hybrid");
+        add("jei.harvestheritage.hybrid.tooltip", "Will appear in seed packet form!");
     }
 }
