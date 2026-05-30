@@ -1,6 +1,7 @@
 {
   "block.harvestheritage.activaor_block": "奇异催生器",
-  "block.harvestheritage.activator.tooltip": "随机刻要加速了",
+  "block.harvestheritage.activator.tooltip.1": "随机刻要加速了",
+  "block.harvestheritage.activator.tooltip.2": "使用红石信号以激活",
   "block.harvestheritage.crop_stand.tooltip.1": "作物架，一般能种在耕地上",
   "block.harvestheritage.crop_stand.tooltip.2": "种子袋右键作物架能种植作物",
   "block.harvestheritage.crop_stand.tooltip.3": "作物成熟时使用除草剪能获取种子，直接右键能收获产物",

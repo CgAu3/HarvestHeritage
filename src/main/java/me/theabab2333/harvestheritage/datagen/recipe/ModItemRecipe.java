@@ -57,5 +57,17 @@ public class ModItemRecipe extends ModRecipeProvider {
             .requires(Items.COOKED_CHICKEN)
             .unlockedBy("has_cooked_chicken", has(Items.COOKED_CHICKEN))
             .save(output);
+        ShapedRecipeBuilder.shaped(registries.lookupOrThrow(Registries.ITEM), RecipeCategory.REDSTONE, ModBlocks.ACTIVAOR_BLOCK.asItem())
+            .pattern("ABA")
+            .pattern("CDE")
+            .pattern("AFA")
+            .define('A', Items.CRYING_OBSIDIAN)
+            .define('B', Items.NETHER_STAR)
+            .define('C', Items.END_CRYSTAL)
+            .define('D', ModItems.ZZZZ)
+            .define('E', Items.WAXED_OXIDIZED_COPPER_BULB)
+            .define('F', Items.ECHO_SHARD)
+            .unlockedBy("has_zzzz", has(ModItems.ZZZZ))
+            .save(output);
     }
 }

@@ -69,7 +69,8 @@ public class ENUSProvider extends LanguageProvider {
             "block.harvestheritage.scaffolding_crop_stand.tooltip.2",
             "Cannot crossbreed, but can be harvested. Suitable for large-scale planting; recommended a few blocks above the ground"
         );
-        add("block.harvestheritage.activator.tooltip", "Random ticks are about to accelerate");
+        add("block.harvestheritage.activator.tooltip.1", "Random ticks are about to accelerate");
+        add("block.harvestheritage.activator.tooltip.2", "使用红石信号以激活/Use a redstone signal to activate");
         add("jei.harvestheritage.find", "Let me see see");
         add("jei.harvestheritage.hybrid", "Hybrid");
         add("jei.harvestheritage.hybrid.tooltip", "Will appear in seed packet form!");

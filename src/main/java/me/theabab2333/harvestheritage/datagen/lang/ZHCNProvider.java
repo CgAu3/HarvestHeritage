@@ -53,7 +53,8 @@ public class ZHCNProvider extends LanguageProvider {
         add("block.harvestheritage.scaffolding_crop_stand.tooltip.1", "种子袋右键脚手架转换");
         add("block.harvestheritage.scaffolding_crop_stand.tooltip.2", "不能杂交，但是能收获，适合大范围种植，推荐离地几格");
         add("block.harvestheritage.crop_stand.tooltip.stage", "当前生长阶段：%s");
-        add("block.harvestheritage.activator.tooltip", "随机刻要加速了");
+        add("block.harvestheritage.activator.tooltip.1", "随机刻要加速了");
+        add("block.harvestheritage.activator.tooltip.2", "使用红石信号以激活");
         add("jei.harvestheritage.find", "让我看看");
         add("jei.harvestheritage.hybrid", "杂交");
         add("jei.harvestheritage.hybrid.tooltip", "将以种子袋形式出战!");
