@@ -1,6 +1,7 @@
 package me.theabab2333.harvestheritage.integration.jei;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
+import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.event.ModRecipeSyncEvent;
 import me.theabab2333.harvestheritage.init.ModBlocks;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
@@ -20,6 +21,7 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -76,10 +78,22 @@ public class ModJeiPlugin implements IModPlugin {
 
     @Override
     public void registerItemSubtypes(ISubtypeRegistration registration) {
-        registration.registerFromDataComponentTypes(
-            ModItems.SEED_PACKET.get(),
-            ModDataComponents.SEED_COMPONENT.get()
+        // seedpacket - seedpacketcomponent and seedcomponent
+        registration.registerSubtypeInterpreter(
+            ModItems.SEED_PACKET.get(), (stack, _) -> {
+                var packetComponent = stack.get(ModDataComponents.SEED_PACKET_COMPONENT.get());
+                if (packetComponent != null) {
+                    return BuiltInRegistries.ITEM.getKey(packetComponent.seedComponent().seed().value()).toString();
+                }
+                SeedComponent component = stack.get(ModDataComponents.SEED_COMPONENT.get());
+                if (component != null) {
+                    return BuiltInRegistries.ITEM.getKey(component.seed().value()).toString();
+                }
+                return null;
+            }
         );
+
+        // knownseed - seedcomponent
         registration.registerFromDataComponentTypes(
             ModItems.KNOWN_SEED.get(),
             ModDataComponents.SEED_COMPONENT.get()
