@@ -49,8 +49,10 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
         if (seedPacketComponent == null) {
             if (itemStack.get(ModDataComponents.SEED_COMPONENT) instanceof SeedComponent component) {
                 this.seedPacketComponent = SeedPacketComponent.createSeedPacket(component, 1, 1);
+                this.stage = 0;
             } else if (itemStack.get(ModDataComponents.SEED_PACKET_COMPONENT) instanceof SeedPacketComponent component) {
                 this.seedPacketComponent = component;
+                this.stage = 0;
             }
             itemStack.shrink(1);
         }
@@ -176,5 +178,4 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
             SeedUtil.mergeSeedPackets(level.getRandom(), component1, component2, List.of())
         );
     }
-
 }
