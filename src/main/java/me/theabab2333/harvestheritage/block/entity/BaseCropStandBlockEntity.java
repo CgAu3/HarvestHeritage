@@ -154,6 +154,8 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
         Item item1 = component1.seedComponent().seed().value();
         Item item2 = component2.seedComponent().seed().value();
 
+        List<SeedComponent> allOutputs = new ArrayList<>();
+
         for (RecipeHolder<HybridRecipe> holder : holders) {
             HybridRecipe recipe = holder.value();
             List<Holder<Item>> inputList = recipe.getInputSeeds();
@@ -161,21 +163,17 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
                 Item a = inputList.get(0).value();
                 Item b = inputList.get(1).value();
                 if ((item1 == a || item1 == b) && (item2 == a || item2 == b) && item1 != item2) {
-                    List<SeedComponent> outputs = recipe.getOutputSeeds();
-                    List<SeedComponent> seeds = new ArrayList<>(outputs);
-                    seeds.add(component1.seedComponent());
-                    seeds.add(component2.seedComponent());
-
-                    cropStandBlock.setSeedPacketComponent(
-                        SeedUtil.mergeSeedPackets(level.getRandom(), component1, component2, seeds)
-                    );
-                    return;
+                    allOutputs.addAll(recipe.getOutputSeeds());
                 }
             }
         }
 
+        List<SeedComponent> seeds = new ArrayList<>(allOutputs);
+        seeds.add(component1.seedComponent());
+        seeds.add(component2.seedComponent());
+
         cropStandBlock.setSeedPacketComponent(
-            SeedUtil.mergeSeedPackets(level.getRandom(), component1, component2, List.of())
+            SeedUtil.mergeSeedPackets(level.getRandom(), component1, component2, seeds)
         );
     }
 }
