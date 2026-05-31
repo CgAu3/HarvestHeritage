@@ -52,6 +52,13 @@ public class ModItemRecipe extends ModRecipeProvider {
             0.1f,
             100
         ).unlockedBy("has_seed_packet", has(ModItems.FRIED_SEEDSACK.asItem())).save(output);
+        SimpleCookingRecipeBuilder.campfireCooking(
+            Ingredient.of(ModItems.SEED_PACKET.asItem()),
+            RecipeCategory.FOOD,
+            ModItems.FRIED_SEEDSACK.asItem(),
+            0.1f,
+            600
+        ).unlockedBy("has_seed_packet", has(ModItems.FRIED_SEEDSACK.asItem())).save(output, "fried_seedsack_from_campfire_cooking");
         ShapelessRecipeBuilder.shapeless(registries.lookupOrThrow(Registries.ITEM), RecipeCategory.FOOD, ModItems.KFC)
             .requires(Items.PAPER)
             .requires(Items.COOKED_CHICKEN)

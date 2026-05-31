@@ -14,7 +14,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -45,7 +44,6 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
 
     public void seedUseOn(ItemStack itemStack) {
         if (level == null || level.isClientSide()) return;
-        level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
         if (seedPacketComponent == null) {
             if (itemStack.get(ModDataComponents.SEED_COMPONENT) instanceof SeedComponent component) {
                 this.seedPacketComponent = SeedPacketComponent.createSeedPacket(component, 1, 1);
@@ -55,6 +53,8 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
                 this.stage = 0;
             }
             itemStack.shrink(1);
+            setChanged();
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
         }
     }
 
@@ -64,34 +64,22 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void handleUpdateTag(ValueInput input) {
-        input.read("component", SeedPacketComponent.CODEC);
-        input.getIntOr("stage", 0);
-        super.handleUpdateTag(input);
-    }
-
-    @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
-    public void onDataPacket(Connection net, ValueInput valueInput) {
-        valueInput.read("component", SeedPacketComponent.CODEC);
-        valueInput.getIntOr("stage", 0);
-        super.onDataPacket(net, valueInput);
-    }
-
-    @Override
     protected void loadAdditional(ValueInput input) {
-        this.seedPacketComponent = input.read("component", SeedPacketComponent.CODEC).orElse(null);
+        super.loadAdditional(input);
+        this.seedPacketComponent = input.read("seed_component", SeedPacketComponent.CODEC).orElse(null);
         this.stage = input.getIntOr("stage", 0);
     }
 
     @Override
     protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
         if (seedPacketComponent != null) {
-            output.store("component", SeedPacketComponent.CODEC, this.seedPacketComponent);
+            output.store("seed_component", SeedPacketComponent.CODEC, this.seedPacketComponent);
         }
         output.putInt("stage", this.stage);
     }
@@ -110,6 +98,7 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
             if (random.nextInt(3) < speed) {
                 if (this.stage < needStage) {
                     this.stage++;
+                    setChanged();
                     level.sendBlockUpdated(pos, state, state, 3);
                 } else if (needStage == this.stage) {
                     find(level, pos);
@@ -175,5 +164,7 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
         cropStandBlock.setSeedPacketComponent(
             SeedUtil.mergeSeedPackets(level.getRandom(), component1, component2, seeds)
         );
+        setChanged(level, cropStandBlock.getBlockPos(), cropStandBlock.getBlockState());
+        level.sendBlockUpdated(cropStandBlock.getBlockPos(), cropStandBlock.getBlockState(), cropStandBlock.getBlockState(), 3);
     }
 }

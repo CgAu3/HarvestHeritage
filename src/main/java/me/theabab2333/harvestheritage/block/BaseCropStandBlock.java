@@ -98,12 +98,14 @@ public abstract class BaseCropStandBlock extends Block implements EntityBlock, I
 
                 blockEntity.setSeedPacketComponent(null);
                 blockEntity.setStage(0);
+                blockEntity.setChanged();
             }
             return InteractionResult.PASS;
         } else if (component != null && component.seedComponent().stage() == blockEntity.getStage()) {
             NonNullList<ItemStack> itemStacks = getSeedOutput(component, level);
             this.dropContents(level, pos, itemStacks);
             blockEntity.setStage(0);
+            blockEntity.setChanged();
             return InteractionResult.PASS;
         } else {
             return InteractionResult.FAIL;
