@@ -13,7 +13,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -64,7 +63,7 @@ public abstract class BaseCropStandBlock extends Block implements EntityBlock, I
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos belowPos = pos.below();
         BlockState belowState = level.getBlockState(belowPos);
-        return belowState.is(BlockTags.SUPPORTS_VEGETATION);
+        return belowState.is(Blocks.FARMLAND);
     }
 
     // SHIT?
