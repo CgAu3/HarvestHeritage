@@ -70,9 +70,13 @@ public class ENUSProvider extends LanguageProvider {
             "Cannot crossbreed, but can be harvested. Suitable for large-scale planting; recommended a few blocks above the ground"
         );
         add("block.harvestheritage.activator.tooltip.1", "Random ticks are about to accelerate");
-        add("block.harvestheritage.activator.tooltip.2", "使用红石信号以激活/Use a redstone signal to activate");
+        add("block.harvestheritage.activator.tooltip.2", "Use a redstone signal to activate");
         add("jei.harvestheritage.find", "Let me see see");
         add("jei.harvestheritage.hybrid", "Hybrid");
         add("jei.harvestheritage.hybrid.tooltip", "Will appear in seed packet form!");
+        add("advancement.harvestheritage.kfc.title", "Crazy Crazy Thursday");
+        add("advancement.harvestheritage.kfc.description", "Eat KFC");
+        add("advancement.harvestheritage.fride_seedsack.title", "Snacking Spectator");
+        add("advancement.harvestheritage.fride_seedsack.description", "Are melon seeds really melons...");
     }
 }

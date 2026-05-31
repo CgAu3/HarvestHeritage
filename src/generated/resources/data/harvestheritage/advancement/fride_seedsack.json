@@ -1,0 +1,29 @@
+{
+  "criteria": {
+    "consume_fride_seedsack": {
+      "conditions": {
+        "item": {
+          "items": "harvestheritage:fried_seedsack"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.harvestheritage.fride_seedsack.description"
+    },
+    "icon": {
+      "id": "harvestheritage:fried_seedsack"
+    },
+    "title": {
+      "translate": "advancement.harvestheritage.fride_seedsack.title"
+    }
+  },
+  "requirements": [
+    [
+      "consume_fride_seedsack"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

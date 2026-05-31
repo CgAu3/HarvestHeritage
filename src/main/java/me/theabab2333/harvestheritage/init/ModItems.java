@@ -47,7 +47,7 @@ public class ModItems {
 
     public static final DeferredItem<Item> KFC = ITEMS.registerSimpleItem(
         "kfc", properties -> properties.food(
-            new FoodProperties.Builder().nutrition(20).saturationModifier(2f).alwaysEdible().build(),
+            new FoodProperties.Builder().nutrition(15).saturationModifier(2f).alwaysEdible().build(),
             Consumable.builder().consumeSeconds(1f).build()
         )
     );

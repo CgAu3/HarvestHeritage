@@ -1,0 +1,31 @@
+{
+  "criteria": {
+    "consume_kfc": {
+      "conditions": {
+        "item": {
+          "items": "harvestheritage:kfc"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "#F8D4D2",
+      "translate": "advancement.harvestheritage.kfc.description"
+    },
+    "icon": {
+      "id": "harvestheritage:kfc"
+    },
+    "title": {
+      "color": "#F8D4D2",
+      "translate": "advancement.harvestheritage.kfc.title"
+    }
+  },
+  "requirements": [
+    [
+      "consume_kfc"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

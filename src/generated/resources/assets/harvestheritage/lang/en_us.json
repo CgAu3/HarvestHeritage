@@ -1,7 +1,11 @@
 {
+  "advancement.harvestheritage.fride_seedsack.description": "Are melon seeds really melons...",
+  "advancement.harvestheritage.fride_seedsack.title": "Snacking Spectator",
+  "advancement.harvestheritage.kfc.description": "Eat KFC",
+  "advancement.harvestheritage.kfc.title": "Crazy Crazy Thursday",
   "block.harvestheritage.activaor_block": "Strange Activator",
   "block.harvestheritage.activator.tooltip.1": "Random ticks are about to accelerate",
-  "block.harvestheritage.activator.tooltip.2": "使用红石信号以激活/Use a redstone signal to activate",
+  "block.harvestheritage.activator.tooltip.2": "Use a redstone signal to activate",
   "block.harvestheritage.crop_stand.tooltip.1": "Crop stand, can generally be planted on farmland",
   "block.harvestheritage.crop_stand.tooltip.2": "Right-click the crop stand with a seed packet to plant crops",
   "block.harvestheritage.crop_stand.tooltip.3": "When crops mature, use grass shears to get seeds, or right-click directly to harvest the produce",
