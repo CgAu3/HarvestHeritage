@@ -1,0 +1,37 @@
+{
+  "criteria": {
+    "obtain_max_seed_packet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "harvestheritage:seed_packet",
+            "predicates": {
+              "harvestheritage:seed_packet_max": {}
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "color": "#F5576C",
+      "translate": "advancement.harvestheritage.max_seed_packet.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "harvestheritage:seed_packet"
+    },
+    "title": {
+      "color": "#FA709A",
+      "translate": "advancement.harvestheritage.max_seed_packet.title"
+    }
+  },
+  "requirements": [
+    [
+      "obtain_max_seed_packet"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

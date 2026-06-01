@@ -1,11 +1,16 @@
 package me.theabab2333.harvestheritage.datagen.advancement;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
+import me.theabab2333.harvestheritage.advancement.SeedPacketMaxPredicate;
+import me.theabab2333.harvestheritage.init.ModDataComponentPredicates;
 import me.theabab2333.harvestheritage.init.ModItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.criterion.ConsumeItemTrigger;
+import net.minecraft.advancements.criterion.DataComponentMatchers;
+import net.minecraft.advancements.criterion.InventoryChangeTrigger;
+import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.AdvancementSubProvider;
@@ -55,5 +60,33 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                 )
             )
             .save(consumer, HarvestHeritage.of("fride_seedsack"));
+
+        Advancement.Builder.advancement()
+            .display(
+                ModItems.SEED_PACKET,
+                Component.translatable("advancement.harvestheritage.max_seed_packet.title").withColor(0xfa709a),
+                Component.translatable("advancement.harvestheritage.max_seed_packet.description").withColor(0xf5576c),
+                null,
+                AdvancementType.CHALLENGE,
+                true,
+                true,
+                false
+            )
+            .addCriterion(
+                "obtain_max_seed_packet",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    ItemPredicate.Builder.item()
+                        .of(provider.lookupOrThrow(Registries.ITEM), ModItems.SEED_PACKET)
+                        .withComponents(
+                            DataComponentMatchers.Builder.components()
+                                .partial(
+                                    ModDataComponentPredicates.getSeedPacketMaxType(),
+                                    new SeedPacketMaxPredicate()
+                                )
+                                .build()
+                        )
+                )
+            )
+            .save(consumer, HarvestHeritage.of("max_seed_packet"));
     }
 }

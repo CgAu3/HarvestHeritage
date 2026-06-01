@@ -4,6 +4,7 @@ import me.theabab2333.harvestheritage.init.ModBlockEntities;
 import me.theabab2333.harvestheritage.init.ModBlocks;
 import me.theabab2333.harvestheritage.init.ModConfigs;
 import me.theabab2333.harvestheritage.init.ModCreativeModeTab;
+import me.theabab2333.harvestheritage.init.ModDataComponentPredicates;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.init.ModRecipes;
@@ -31,6 +32,7 @@ public class HarvestHeritage {
         ModItems.register(eventBus);
         ModCreativeModeTab.register(eventBus);
         ModDataComponents.register(eventBus);
+        ModDataComponentPredicates.register(eventBus);
         ModRecipes.register(eventBus);
 
         NeoForge.EVENT_BUS.register(this);

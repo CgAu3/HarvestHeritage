@@ -62,5 +62,10 @@ public class ZHCNProvider extends LanguageProvider {
         add("advancement.harvestheritage.kfc.description", "食用疯狂星期四");
         add("advancement.harvestheritage.fride_seedsack.title", "吃瓜群众");
         add("advancement.harvestheritage.fride_seedsack.description", "瓜子也是瓜吗...");
+        add("advancement.harvestheritage.max_seed_packet.title", "登峰造极");
+        add(
+            "advancement.harvestheritage.max_seed_packet.description",
+            "你用运气与毅力获得了速度和产出均达到极限的种子袋\n或许你该放下游戏,去外面走走\n亦或者继续杂交..."
+        );
     }
 }

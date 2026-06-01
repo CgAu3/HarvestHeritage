@@ -78,5 +78,10 @@ public class ENUSProvider extends LanguageProvider {
         add("advancement.harvestheritage.kfc.description", "Eat KFC");
         add("advancement.harvestheritage.fride_seedsack.title", "Snacking Spectator");
         add("advancement.harvestheritage.fride_seedsack.description", "Are melon seeds really melons...");
+        add("advancement.harvestheritage.max_seed_packet.title", "Peak Performance");
+        add(
+            "advancement.harvestheritage.max_seed_packet.description",
+            "You have obtained a seed bag with speed and output reaching their limits through luck and perseverance.\nPerhaps you should put down the game and go for a walk outside.\nOr continue crossbreeding..."
+        );
     }
 }
