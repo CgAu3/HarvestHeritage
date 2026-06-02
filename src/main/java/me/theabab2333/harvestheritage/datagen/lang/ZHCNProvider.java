@@ -67,5 +67,7 @@ public class ZHCNProvider extends LanguageProvider {
             "advancement.harvestheritage.max_seed_packet.description",
             "你用运气与毅力获得了速度和产出均达到极限的种子袋\n或许你该放下游戏,去外面走走\n亦或者继续杂交..."
         );
+        add("advancement.harvestheritage.magnifying_glass.title", "大侦探");
+        add("advancement.harvestheritage.magnifying_glass.description", "你发现了一个华点...(戴头上?)");
     }
 }

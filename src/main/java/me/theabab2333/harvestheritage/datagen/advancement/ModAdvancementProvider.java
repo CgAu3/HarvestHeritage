@@ -88,5 +88,24 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                 )
             )
             .save(consumer, HarvestHeritage.of("max_seed_packet"));
+
+        Advancement.Builder.advancement()
+            .display(
+                ModItems.MAGNIFYING_GLASS,
+                Component.translatable("advancement.harvestheritage.magnifying_glass.title"),
+                Component.translatable("advancement.harvestheritage.magnifying_glass.description"),
+                null,
+                AdvancementType.TASK,
+                true,
+                true,
+                false
+            )
+            .addCriterion(
+                "find_it",
+                InventoryChangeTrigger.TriggerInstance.hasItems(
+                    ModItems.MAGNIFYING_GLASS
+                )
+            )
+            .save(consumer, HarvestHeritage.of("find_it"));
     }
 }

@@ -5,6 +5,7 @@ import me.theabab2333.harvestheritage.HarvestHeritage;
 import me.theabab2333.harvestheritage.block.entity.BaseCropStandBlockEntity;
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
+import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.util.SeedUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -16,14 +17,14 @@ import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPosition
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -45,6 +46,11 @@ public class ModRegisterGuiLayersEvent {
                 LocalPlayer player = minecraft.player;
                 Level level = minecraft.level;
                 if (player == null || minecraft.isPaused() || level == null) return;
+                Item glassItem = ModItems.MAGNIFYING_GLASS.asItem();
+                if (!player.getMainHandItem().is(glassItem) && !player.getOffhandItem()
+                    .is(glassItem) && !player.getItemBySlot(ArmorType.HELMET.getSlot()).is(glassItem)) {
+                    return;
+                }
 
                 Window window = Minecraft.getInstance().getWindow();
                 int guiScaledWidth = window.getGuiScaledWidth();
@@ -58,12 +64,6 @@ public class ModRegisterGuiLayersEvent {
                     BlockEntity blockEntity = level.getBlockEntity(blockPos);
                     if (blockState.is(Blocks.AIR) || blockEntity == null) return;
                     renderCropStandTooltip(graphicsExtractor, blockEntity, guiScaledWidth, guiScaledHeight);
-                    return;
-                }
-
-                if (hitResult.getType() == HitResult.Type.ENTITY) {
-                    Entity entity = ((EntityHitResult) hitResult).getEntity();
-
                 }
             }
         );

@@ -17,13 +17,20 @@ public class ModItemModelProvider {
     public static void registerModels(ItemModelGenerators itemModels) {
         itemModels.generateFlatItem(ModItems.GRASS_SHEAR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.UNKNOWN_SEED.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.MAGNIFYING_GLASS.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.KNOWN_SEED.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.GRAPE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ZZZZ.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.FRIED_SEEDSACK.get(), ModelTemplates.FLAT_ITEM);
+        magnifyingGlass(itemModels);
         kfc(itemModels);
         seedPacket(itemModels);
+    }
+
+    private static void magnifyingGlass(ItemModelGenerators itemModels) {
+        itemModels.itemModelOutput.accept(
+            ModItems.MAGNIFYING_GLASS.asItem(),
+            ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(ModItems.MAGNIFYING_GLASS.asItem()))
+        );
     }
 
     private static void kfc(ItemModelGenerators itemModels) {

@@ -83,5 +83,8 @@ public class ENUSProvider extends LanguageProvider {
             "advancement.harvestheritage.max_seed_packet.description",
             "You have obtained a seed bag with speed and output reaching their limits through luck and perseverance.\nPerhaps you should put down the game and go for a walk outside.\nOr continue crossbreeding..."
         );
+
+        add("advancement.harvestheritage.magnifying_glass.title", "Detective");
+        add("advancement.harvestheritage.magnifying_glass.description", "You found a brilliant point...(wear it on your head?)");
     }
 }

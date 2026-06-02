@@ -4,6 +4,7 @@ import me.theabab2333.harvestheritage.api.item.IHasTooltips;
 import me.theabab2333.harvestheritage.init.ModRecipes;
 import me.theabab2333.harvestheritage.recipe.FindRecipe;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
@@ -16,6 +17,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -26,6 +29,10 @@ import java.util.List;
 public class MagnifyingGlassItem extends Item implements IHasTooltips {
     public MagnifyingGlassItem(Properties properties) {
         properties.stacksTo(1);
+        properties.component(
+            DataComponents.EQUIPPABLE,
+            Equippable.builder(ArmorType.HELMET.getSlot()).build()
+        );
         super(properties);
     }
 

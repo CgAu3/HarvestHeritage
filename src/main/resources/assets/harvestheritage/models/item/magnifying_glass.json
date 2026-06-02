@@ -1,0 +1,107 @@
+{
+  "format_version": "1.21.11",
+  "credit": "Made with Blockbench",
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "harvestheritage:item/magnifying_glass"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        -90,
+        90,
+        45
+      ],
+      "translation": [
+        0,
+        2.25,
+        1.75
+      ],
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [
+        0,
+        -90,
+        45
+      ],
+      "translation": [
+        0,
+        2.25,
+        1.75
+      ],
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        -90,
+        -45
+      ],
+      "translation": [
+        0,
+        4,
+        1.25
+      ],
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        0,
+        90,
+        45
+      ],
+      "translation": [
+        0,
+        4,
+        1.25
+      ],
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ]
+    },
+    "ground": {
+      "rotation": [
+        0,
+        0,
+        74.25
+      ],
+      "translation": [
+        0,
+        1,
+        0.5
+      ],
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ]
+    },
+    "head": {
+      "translation": [
+        4.75,
+        -3.125,
+        -7
+      ],
+      "scale": [
+        0.65,
+        0.65,
+        0.65
+      ]
+    }
+  }
+}

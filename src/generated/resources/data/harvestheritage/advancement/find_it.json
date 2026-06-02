@@ -1,0 +1,31 @@
+{
+  "criteria": {
+    "find_it": {
+      "conditions": {
+        "items": [
+          {
+            "items": "harvestheritage:magnifying_glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.harvestheritage.magnifying_glass.description"
+    },
+    "icon": {
+      "id": "harvestheritage:magnifying_glass"
+    },
+    "title": {
+      "translate": "advancement.harvestheritage.magnifying_glass.title"
+    }
+  },
+  "requirements": [
+    [
+      "find_it"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
