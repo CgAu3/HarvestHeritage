@@ -69,5 +69,7 @@ public class ZHCNProvider extends LanguageProvider {
         );
         add("advancement.harvestheritage.magnifying_glass.title", "大侦探");
         add("advancement.harvestheritage.magnifying_glass.description", "你发现了一个华点...(戴头上?)");
+        add("advancement.harvestheritage.welcome.title", "收获：遗产");
+        add("advancement.harvestheritage.welcome.description", "欢迎来到收获：遗产！");
     }
 }

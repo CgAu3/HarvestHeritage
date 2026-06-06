@@ -86,5 +86,7 @@ public class ENUSProvider extends LanguageProvider {
 
         add("advancement.harvestheritage.magnifying_glass.title", "Detective");
         add("advancement.harvestheritage.magnifying_glass.description", "You found a brilliant point...(wear it on your head?)");
+        add("advancement.harvestheritage.welcome.title", "Harvest: Heritage");
+        add("advancement.harvestheritage.welcome.description", "Welcome to Harvest: Heritage!");
     }
 }

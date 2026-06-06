@@ -1,4 +1,5 @@
 {
+  "parent": "harvestheritage:welcome",
   "criteria": {
     "obtain_max_seed_packet": {
       "conditions": {
