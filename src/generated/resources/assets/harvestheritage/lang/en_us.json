@@ -7,6 +7,8 @@
   "advancement.harvestheritage.magnifying_glass.title": "Detective",
   "advancement.harvestheritage.max_seed_packet.description": "You have obtained a seed bag with speed and output reaching their limits through luck and perseverance.\nPerhaps you should put down the game and go for a walk outside.\nOr continue crossbreeding...",
   "advancement.harvestheritage.max_seed_packet.title": "Peak Performance",
+  "advancement.harvestheritage.welcome.description": "Welcome to Harvest: Heritage!",
+  "advancement.harvestheritage.welcome.title": "Harvest: Heritage",
   "block.harvestheritage.activaor_block": "Strange Activator",
   "block.harvestheritage.activator.tooltip.1": "Random ticks are about to accelerate",
   "block.harvestheritage.activator.tooltip.2": "Use a redstone signal to activate",

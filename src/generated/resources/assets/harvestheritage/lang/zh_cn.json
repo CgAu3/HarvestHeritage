@@ -7,6 +7,8 @@
   "advancement.harvestheritage.magnifying_glass.title": "大侦探",
   "advancement.harvestheritage.max_seed_packet.description": "你用运气与毅力获得了速度和产出均达到极限的种子袋\n或许你该放下游戏,去外面走走\n亦或者继续杂交...",
   "advancement.harvestheritage.max_seed_packet.title": "登峰造极",
+  "advancement.harvestheritage.welcome.description": "欢迎来到收获：遗产！",
+  "advancement.harvestheritage.welcome.title": "收获：遗产",
   "block.harvestheritage.activaor_block": "奇异催生器",
   "block.harvestheritage.activator.tooltip.1": "随机刻要加速了",
   "block.harvestheritage.activator.tooltip.2": "使用红石信号以激活",

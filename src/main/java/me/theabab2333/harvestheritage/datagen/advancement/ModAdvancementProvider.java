@@ -11,16 +11,32 @@ import net.minecraft.advancements.criterion.ConsumeItemTrigger;
 import net.minecraft.advancements.criterion.DataComponentMatchers;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.PlayerTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 
 import java.util.function.Consumer;
 
 public class ModAdvancementProvider implements AdvancementSubProvider {
     @Override
     public void generate(HolderLookup.Provider provider, Consumer<AdvancementHolder> consumer) {
+        AdvancementHolder WELCOME = Advancement.Builder.advancement()
+            .display(
+                ModItems.GRASS_SHEAR,
+                Component.translatable("advancement.harvestheritage.welcome.title"),
+                Component.translatable("advancement.harvestheritage.welcome.description"),
+                Identifier.withDefaultNamespace("gui/advancements/backgrounds/husbandry"),
+                AdvancementType.TASK,
+                false,
+                false,
+                false
+            )
+            .addCriterion("join", PlayerTrigger.TriggerInstance.tick())
+            .save(consumer, HarvestHeritage.of("welcome"));
+
         Advancement.Builder.advancement()
             .display(
                 ModItems.KFC,
@@ -39,6 +55,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                     ModItems.KFC.asItem()
                 )
             )
+            .parent(WELCOME)
             .save(consumer, HarvestHeritage.of("kfc"));
 
         Advancement.Builder.advancement()
@@ -59,6 +76,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                     ModItems.FRIED_SEEDSACK.asItem()
                 )
             )
+            .parent(WELCOME)
             .save(consumer, HarvestHeritage.of("fride_seedsack"));
 
         Advancement.Builder.advancement()
@@ -87,6 +105,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                         )
                 )
             )
+            .parent(WELCOME)
             .save(consumer, HarvestHeritage.of("max_seed_packet"));
 
         Advancement.Builder.advancement()
@@ -106,6 +125,7 @@ public class ModAdvancementProvider implements AdvancementSubProvider {
                     ModItems.MAGNIFYING_GLASS
                 )
             )
+            .parent(WELCOME)
             .save(consumer, HarvestHeritage.of("find_it"));
     }
 }
