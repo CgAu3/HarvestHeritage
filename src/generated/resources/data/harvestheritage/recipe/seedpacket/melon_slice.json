@@ -7,9 +7,9 @@
     "components": {
       "harvestheritage:seed_component": {
         "result": [
-          "minecraft:pumpkin"
+          "minecraft:melon"
         ],
-        "seed": "minecraft:pumpkin",
+        "seed": "minecraft:melon_slice",
         "stage": 3
       }
     },

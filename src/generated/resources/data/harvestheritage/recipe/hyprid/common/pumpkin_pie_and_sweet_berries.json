@@ -1,8 +1,8 @@
 {
   "type": "harvestheritage:hyprid",
   "input_seeds": [
-    "minecraft:pumpkin",
-    "minecraft:chorus_fruit"
+    "minecraft:pumpkin_pie",
+    "minecraft:sweet_berries"
   ],
   "output_seeds": [
     {
@@ -23,14 +23,7 @@
       "result": [
         "minecraft:melon"
       ],
-      "seed": "minecraft:melon",
-      "stage": 3
-    },
-    {
-      "result": [
-        "minecraft:sweet_berries"
-      ],
-      "seed": "minecraft:sweet_berries",
+      "seed": "minecraft:melon_slice",
       "stage": 3
     },
     {
@@ -38,6 +31,13 @@
         "minecraft:glow_berries"
       ],
       "seed": "minecraft:glow_berries",
+      "stage": 3
+    },
+    {
+      "result": [
+        "minecraft:chorus_fruit"
+      ],
+      "seed": "minecraft:chorus_fruit",
       "stage": 3
     },
     {

@@ -1,8 +1,8 @@
 {
   "type": "harvestheritage:hyprid",
   "input_seeds": [
-    "minecraft:melon",
-    "minecraft:potato"
+    "minecraft:melon_slice",
+    "minecraft:pumpkin_pie"
   ],
   "output_seeds": [
     {
@@ -17,13 +17,6 @@
         "minecraft:beetroot"
       ],
       "seed": "minecraft:beetroot",
-      "stage": 3
-    },
-    {
-      "result": [
-        "minecraft:pumpkin"
-      ],
-      "seed": "minecraft:pumpkin",
       "stage": 3
     },
     {
@@ -52,6 +45,13 @@
         "minecraft:carrot"
       ],
       "seed": "minecraft:carrot",
+      "stage": 3
+    },
+    {
+      "result": [
+        "minecraft:potato"
+      ],
+      "seed": "minecraft:potato",
       "stage": 3
     },
     {

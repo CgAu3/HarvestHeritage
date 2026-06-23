@@ -30,7 +30,7 @@ public abstract class ScaffoldingBlockItemMixin extends BlockItem {
         BlockPos pos = context.getClickedPos();
         Level level = context.getLevel();
         BlockState replacedState = level.getBlockState(pos);
-        if (!replacedState.is(ModTags.BlockTags.SCAFFOLDING_BLOCKS)) {
+        if (!replacedState.is(ModTags.ModBlockTags.SCAFFOLDING_BLOCKS)) {
             return ScaffoldingBlock.getDistance(level, pos) == 7 ? null : context;
         } else {
             Direction direction;
@@ -54,7 +54,7 @@ public abstract class ScaffoldingBlockItemMixin extends BlockItem {
                 }
 
                 replacedState = level.getBlockState(placementPos);
-                if (!replacedState.is(ModTags.BlockTags.SCAFFOLDING_BLOCKS)) {
+                if (!replacedState.is(ModTags.ModBlockTags.SCAFFOLDING_BLOCKS)) {
                     if (replacedState.canBeReplaced(context)) {
                         return BlockPlaceContext.at(context, placementPos, direction);
                     }

@@ -29,8 +29,8 @@ public class ModSeeds {
         // common
         CROP_SEED.put(Items.WHEAT, new SeedInfo(List.of(Items.WHEAT), 3));
         CROP_SEED.put(Items.BEETROOT, new SeedInfo(List.of(Items.BEETROOT), 3));
-        CROP_SEED.put(Items.MELON, new SeedInfo(List.of(Items.MELON), 3));
-        CROP_SEED.put(Items.PUMPKIN, new SeedInfo(List.of(Items.PUMPKIN), 3));
+        CROP_SEED.put(Items.MELON_SLICE, new SeedInfo(List.of(Items.MELON), 3));
+        CROP_SEED.put(Items.PUMPKIN_PIE, new SeedInfo(List.of(Items.PUMPKIN), 3));
         CROP_SEED.put(Items.SWEET_BERRIES, new SeedInfo(List.of(Items.SWEET_BERRIES), 3));
         CROP_SEED.put(Items.GLOW_BERRIES, new SeedInfo(List.of(Items.GLOW_BERRIES), 3));
         CROP_SEED.put(Items.CHORUS_FRUIT, new SeedInfo(List.of(Items.CHORUS_FRUIT), 3));

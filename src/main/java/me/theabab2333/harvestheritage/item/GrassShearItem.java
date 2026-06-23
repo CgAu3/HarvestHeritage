@@ -25,7 +25,7 @@ public class GrassShearItem extends Item implements IHasTooltips {
     @Override
     public boolean mineBlock(ItemStack itemStack, Level level, BlockState state, BlockPos pos, LivingEntity owner) {
         if (!level.isClientSide()) {
-            if (state.is(ModTags.BlockTags.CAN_SHEAR)) {
+            if (state.is(ModTags.ModBlockTags.CAN_SHEAR)) {
                 RandomSource random = level.getRandom();
                 if (random.nextFloat() < 0.07f) {
                     Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), ModItems.UNKNOWN_SEED.toStack());

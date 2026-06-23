@@ -20,14 +20,14 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(ModTags.BlockTags.CAN_SHEAR)
+        tag(ModTags.ModBlockTags.CAN_SHEAR)
             .add(Blocks.SHORT_GRASS)
             .add(Blocks.SHORT_DRY_GRASS)
             .add(Blocks.TALL_GRASS)
             .add(Blocks.TALL_DRY_GRASS)
             .add(Blocks.FERN)
             .add(Blocks.FERN);
-        tag(ModTags.BlockTags.SCAFFOLDING_BLOCKS)
+        tag(ModTags.ModBlockTags.SCAFFOLDING_BLOCKS)
             .add(ModBlocks.SCAFFOLDING_CROP_STAND_BLOCK.get())
             .add(Blocks.SCAFFOLDING);
     }

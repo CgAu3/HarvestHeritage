@@ -1,8 +1,8 @@
 {
   "type": "harvestheritage:hyprid",
   "input_seeds": [
-    "minecraft:pumpkin",
-    "minecraft:apple"
+    "minecraft:melon_slice",
+    "minecraft:bamboo"
   ],
   "output_seeds": [
     {
@@ -21,9 +21,9 @@
     },
     {
       "result": [
-        "minecraft:melon"
+        "minecraft:pumpkin"
       ],
-      "seed": "minecraft:melon",
+      "seed": "minecraft:pumpkin_pie",
       "stage": 3
     },
     {
@@ -70,13 +70,6 @@
     },
     {
       "result": [
-        "minecraft:bamboo"
-      ],
-      "seed": "minecraft:bamboo",
-      "stage": 3
-    },
-    {
-      "result": [
         "minecraft:sea_pickle"
       ],
       "seed": "minecraft:sea_pickle",
@@ -88,6 +81,14 @@
       ],
       "seed": "minecraft:kelp",
       "stage": 3
+    },
+    {
+      "result": [
+        "minecraft:oak_log",
+        "minecraft:apple"
+      ],
+      "seed": "minecraft:apple",
+      "stage": 4
     }
   ]
 }

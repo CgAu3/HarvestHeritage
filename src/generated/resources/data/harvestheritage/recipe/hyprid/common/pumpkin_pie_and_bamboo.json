@@ -1,8 +1,8 @@
 {
   "type": "harvestheritage:hyprid",
   "input_seeds": [
-    "minecraft:melon",
-    "minecraft:sugar_cane"
+    "minecraft:pumpkin_pie",
+    "minecraft:bamboo"
   ],
   "output_seeds": [
     {
@@ -21,9 +21,9 @@
     },
     {
       "result": [
-        "minecraft:pumpkin"
+        "minecraft:melon"
       ],
-      "seed": "minecraft:pumpkin",
+      "seed": "minecraft:melon_slice",
       "stage": 3
     },
     {
@@ -63,9 +63,9 @@
     },
     {
       "result": [
-        "minecraft:bamboo"
+        "minecraft:sugar_cane"
       ],
-      "seed": "minecraft:bamboo",
+      "seed": "minecraft:sugar_cane",
       "stage": 3
     },
     {
