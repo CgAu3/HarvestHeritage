@@ -5,8 +5,9 @@ modId = "${mod_id}"
 version = "${mod_version}"
 displayName = "${mod_name}"
 authors = "theabab2333, Abslb, GTriXy"
+logoFile = "harvestheritage_logo_512.png"
 description = '''
-Example mod description.
+A simple hybridization mod... trying to imitate IC2's hybridization....
 '''
 
 [[mixins]]
