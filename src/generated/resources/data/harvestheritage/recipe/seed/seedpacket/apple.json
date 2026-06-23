@@ -1,0 +1,20 @@
+{
+  "type": "harvestheritage:seed_packet",
+  "accept_paper": "minecraft:paper",
+  "category": "misc",
+  "known_seed": "harvestheritage:known_seed",
+  "result": {
+    "components": {
+      "harvestheritage:seed_component": {
+        "result": [
+          "minecraft:oak_log",
+          "minecraft:apple"
+        ],
+        "seed": "minecraft:apple",
+        "stage": 4
+      }
+    },
+    "id": "harvestheritage:seed_packet"
+  },
+  "show_notification": false
+}

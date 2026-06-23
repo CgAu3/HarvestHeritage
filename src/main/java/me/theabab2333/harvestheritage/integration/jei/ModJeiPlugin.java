@@ -27,9 +27,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
-import java.util.ArrayList;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @JeiPlugin
 public class ModJeiPlugin implements IModPlugin {
@@ -44,29 +43,24 @@ public class ModJeiPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         var guiHelper = registration.getJeiHelpers().getGuiHelper();
-
-        registration.addRecipeCategories(
-            new FindRecipeCategory(guiHelper),
-            new HybridRecipeCategory(guiHelper)
-        );
+        registration.addRecipeCategories(new FindRecipeCategory(guiHelper), new HybridRecipeCategory(guiHelper));
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        // find
         registration.addRecipes(FIND_TYPE.get(), ModRecipeReloadAndSyncEvent.FIND_SEED_RECIPES);
 
-        // hyprid
-        var hybrids = ModRecipeReloadAndSyncEvent.HYBRID_RECIPES.stream()
-            .filter(r -> !r.id().identifier().getPath().startsWith("hyprid/common/"))
-            .collect(Collectors.toCollection(ArrayList::new));
         var allSeeds = ModSeeds.CROP_SEED.keySet().stream().map(SeedUtil::getHolder).toList();
-        var allOutputs = ModSeeds.CROP_SEED.entrySet().stream()
-            .map(e -> SeedUtil.createSeedComponent(e.getKey(), e.getValue())).toList();
-        hybrids.add(new RecipeHolder<>(
+        var allOutputs = ModSeeds.CROP_SEED.entrySet().stream().map(e -> SeedUtil.createSeedComponent(e.getKey(), e.getValue())).toList();
+        var commonAll = new RecipeHolder<>(
             ResourceKey.create(Registries.RECIPE, HarvestHeritage.of("hyprid/common/all")),
             new HybridRecipe(allSeeds, allOutputs)
-        ));
+        );
+        var hybrids = Stream.concat(
+            ModRecipeReloadAndSyncEvent.HYBRID_RECIPES.stream()
+                .filter(recipeHolder -> !recipeHolder.id().identifier().getPath().startsWith("hyprid/common/")), Stream.of(commonAll)
+        ).toList();
+
         registration.addRecipes(HYBRID_TYPE.get(), hybrids);
     }
 
@@ -78,7 +72,6 @@ public class ModJeiPlugin implements IModPlugin {
 
     @Override
     public void registerItemSubtypes(ISubtypeRegistration registration) {
-        // seedpacket - seedpacketcomponent and seedcomponent
         registration.registerSubtypeInterpreter(
             ModItems.SEED_PACKET.get(), (stack, _) -> {
                 var packetComponent = stack.get(ModDataComponents.SEED_PACKET_COMPONENT.get());
@@ -92,12 +85,7 @@ public class ModJeiPlugin implements IModPlugin {
                 return null;
             }
         );
-
-        // knownseed - seedcomponent
-        registration.registerFromDataComponentTypes(
-            ModItems.KNOWN_SEED.get(),
-            ModDataComponents.SEED_COMPONENT.get()
-        );
+        registration.registerFromDataComponentTypes(ModItems.KNOWN_SEED.get(), ModDataComponents.SEED_COMPONENT.get());
     }
 
     @Override

@@ -1,0 +1,21 @@
+{
+  "type": "harvestheritage:seed_packet",
+  "accept_paper": "minecraft:paper",
+  "category": "misc",
+  "known_seed": "harvestheritage:known_seed",
+  "result": {
+    "components": {
+      "harvestheritage:seed_component": {
+        "result": [
+          "minecraft:chicken",
+          "minecraft:feather",
+          "minecraft:egg"
+        ],
+        "seed": "minecraft:chicken",
+        "stage": 4
+      }
+    },
+    "id": "harvestheritage:seed_packet"
+  },
+  "show_notification": false
+}
