@@ -37,6 +37,7 @@ public class ModCreativeModeTab {
                 .displayItems((parameters, output) -> ModSeeds.getSeedPackets().forEach(output::accept))
                 .icon(() -> new ItemStack(ModItems.SEED_PACKET.get()))
                 .title(Component.translatable("creativetab.harvestheritage.seed_packet"))
+                .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
                 .withTabsBefore(COMMON_TAB.getKey())
                 .build()
         );
