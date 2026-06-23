@@ -2,7 +2,7 @@ package me.theabab2333.harvestheritage.integration.jei;
 
 import me.theabab2333.harvestheritage.HarvestHeritage;
 import me.theabab2333.harvestheritage.component.SeedComponent;
-import me.theabab2333.harvestheritage.event.ModRecipeSyncEvent;
+import me.theabab2333.harvestheritage.event.ModRecipeReloadAndSyncEvent;
 import me.theabab2333.harvestheritage.init.ModBlocks;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModItems;
@@ -54,10 +54,10 @@ public class ModJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         // find
-        registration.addRecipes(FIND_TYPE.get(), ModRecipeSyncEvent.FIND_SEED_RECIPES);
+        registration.addRecipes(FIND_TYPE.get(), ModRecipeReloadAndSyncEvent.FIND_SEED_RECIPES);
 
         // hyprid
-        var hybrids = ModRecipeSyncEvent.HYBRID_RECIPES.stream()
+        var hybrids = ModRecipeReloadAndSyncEvent.HYBRID_RECIPES.stream()
             .filter(r -> !r.id().identifier().getPath().startsWith("hyprid/common/"))
             .collect(Collectors.toCollection(ArrayList::new));
         var allSeeds = ModSeeds.CROP_SEED.keySet().stream().map(SeedUtil::getHolder).toList();

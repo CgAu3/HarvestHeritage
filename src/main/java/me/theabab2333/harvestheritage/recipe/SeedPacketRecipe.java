@@ -3,7 +3,6 @@ package me.theabab2333.harvestheritage.recipe;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import lombok.Getter;
-import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.init.ModRecipes;
@@ -81,31 +80,17 @@ public class SeedPacketRecipe extends NormalCraftingRecipe {
             boolean hasPaper = false;
             boolean hasSeed = false;
 
-            DataComponentPatch resultPatch = this.result.components();
-
             for (int slot = 0; slot < input.size(); slot++) {
                 ItemStack itemStack = input.getItem(slot);
                 if (!itemStack.isEmpty()) {
                     if (this.acceptPaper.test(itemStack)) {
                         hasPaper = true;
-                        continue;
-                    }
-
-                    if (this.knownSeed.test(itemStack)) {
-                        if (!resultPatch.isEmpty()) {
-                            java.util.Optional<SeedComponent> recipeSeedOpt = resultPatch.getPatch(ModDataComponents.SEED_COMPONENT.get());
-                            if (recipeSeedOpt != null && recipeSeedOpt.isPresent()) {
-                                SeedComponent inputSeed = itemStack.get(ModDataComponents.SEED_COMPONENT.get());
-                                if (!recipeSeedOpt.get().equals(inputSeed)) {
-                                    return false;
-                                }
-                            }
-                        }
+                    } else if (this.knownSeed.test(itemStack)
+                               && itemStack.has(ModDataComponents.SEED_COMPONENT.get())) {
                         hasSeed = true;
-                        continue;
+                    } else {
+                        return false;
                     }
-
-                    return false;
                 }
             }
 

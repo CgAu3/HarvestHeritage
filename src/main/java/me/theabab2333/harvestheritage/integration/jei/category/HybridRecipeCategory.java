@@ -1,6 +1,9 @@
 package me.theabab2333.harvestheritage.integration.jei.category;
 
 import me.theabab2333.harvestheritage.init.ModBlocks;
+import me.theabab2333.harvestheritage.init.ModDataComponents;
+import me.theabab2333.harvestheritage.init.ModItems;
+import me.theabab2333.harvestheritage.init.ModSeeds;
 import me.theabab2333.harvestheritage.integration.jei.ModJeiPlugin;
 import me.theabab2333.harvestheritage.recipe.HybridRecipe;
 import me.theabab2333.harvestheritage.util.SeedUtil;
@@ -10,6 +13,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.AbstractRecipeCategory;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -38,8 +42,28 @@ public class HybridRecipeCategory extends AbstractRecipeCategory<RecipeHolder<Hy
             .map(comp -> new ItemStack(comp.seed()))
             .toList();
 
-        List<ItemStack> inputSeedPackets = SeedUtil.getSeedPackets(inputStacks);
-        List<ItemStack> outputSeedPackets = SeedUtil.getSeedPackets(outputStacks);
+        // 为JEI配方匹配构建不可见种子包物品
+        // 输出种子直接从SeedComponent构建 不查ModSeeds
+        // 因为数据包添加的自定义种子可能不在静态map中
+        List<ItemStack> inputSeedPackets = inputStacks.stream()
+            .map(stack -> {
+                var info = ModSeeds.ALL_SEED.get(stack.getItem());
+                if (info != null) {
+                    var patch = SeedUtil.createSeedComponentPatch(stack.getItem(), info);
+                    return new ItemStack(ModItems.SEED_PACKET, 1, patch);
+                }
+                return ItemStack.EMPTY;
+            })
+            .filter(stack -> !stack.isEmpty())
+            .toList();
+        List<ItemStack> outputSeedPackets = recipe.getOutputSeeds().stream()
+            .map(comp -> {
+                DataComponentPatch patch = DataComponentPatch.builder()
+                    .set(ModDataComponents.SEED_COMPONENT.get(), comp)
+                    .build();
+                return new ItemStack(ModItems.SEED_PACKET, 1, patch);
+            })
+            .toList();
 
         builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStacks(inputSeedPackets);
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStacks(outputSeedPackets);

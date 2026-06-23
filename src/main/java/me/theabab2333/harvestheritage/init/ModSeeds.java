@@ -23,6 +23,8 @@ public class ModSeeds {
     public static Map<Item, SeedInfo> MATERIAL_SEED = new LinkedHashMap<>();
     public static Map<Item, SeedInfo> SPECIAL_SEED = new LinkedHashMap<>();
 
+    public static Map<Item, SeedInfo> MISC_SEED = new LinkedHashMap<>();
+
     static {
         // common
         CROP_SEED.put(Items.WHEAT_SEEDS, new SeedInfo(List.of(Items.WHEAT), 3));
@@ -95,6 +97,20 @@ public class ModSeeds {
         ALL_SEED.putAll(ANIMAL_SEED);
         ALL_SEED.putAll(MOB_SEED);
         ALL_SEED.putAll(MATERIAL_SEED);
+        ALL_SEED.putAll(MISC_SEED);
+    }
+
+    public static void registerSeed(Item item, SeedInfo info, String category) {
+        switch (category) {
+            case "crop" -> CROP_SEED.put(item, info);
+            case "animal" -> ANIMAL_SEED.put(item, info);
+            case "mob" -> MOB_SEED.put(item, info);
+            case "material" -> MATERIAL_SEED.put(item, info);
+            case "special" -> SPECIAL_SEED.put(item, info);
+            case "misc" -> MISC_SEED.put(item, info);
+            default -> throw new IllegalArgumentException("Unknown seed category: " + category);
+        }
+        ALL_SEED.put(item, info);
     }
 
     public static List<ItemStack> getSeedPackets() {

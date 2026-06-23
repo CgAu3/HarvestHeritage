@@ -1,9 +1,14 @@
 package me.theabab2333.harvestheritage.item;
 
 import me.theabab2333.harvestheritage.api.item.IHasTooltips;
+import me.theabab2333.harvestheritage.component.SeedComponent;
+import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.init.ModRecipes;
+import me.theabab2333.harvestheritage.init.ModSeeds;
 import me.theabab2333.harvestheritage.recipe.FindRecipe;
+import me.theabab2333.harvestheritage.util.SeedUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -72,6 +77,18 @@ public class MagnifyingGlassItem extends Item implements IHasTooltips {
                                 itemEntity.setItem(itemStack);
                                 var result = list.get(random.nextInt(list.size())).create();
                                 Containers.dropItemStack(level, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), result);
+                            }
+                        } else {
+                            // fallback for custom seeds from datapack seed_definitions
+                            Item itemInEntity = itemEntity.getItem().getItem();
+                            if (ModSeeds.ALL_SEED.containsKey(itemInEntity)) {
+                                SeedComponent seedComponent = SeedUtil.getSeedComponent(itemInEntity);
+                                DataComponentPatch patch = SeedUtil.createSeedComponentPatch(seedComponent);
+                                ItemStack knownSeed = new ItemStack(ModItems.KNOWN_SEED, 1, patch);
+                                ItemStack stack = itemEntity.getItem().copy();
+                                stack.shrink(1);
+                                itemEntity.setItem(stack);
+                                Containers.dropItemStack(level, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), knownSeed);
                             }
                         }
                     }
