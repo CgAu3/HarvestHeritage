@@ -3,9 +3,13 @@ package me.theabab2333.harvestheritage.recipe;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import lombok.Getter;
-import me.theabab2333.harvestheritage.component.SeedComponent;
+import me.theabab2333.harvestheritage.init.ModDataComponents;
+import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.init.ModRecipes;
+import me.theabab2333.harvestheritage.init.ModSeeds;
+import me.theabab2333.harvestheritage.util.SeedUtil;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -14,6 +18,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -25,23 +30,42 @@ public class HybridRecipe extends BaseAbstractRecipe<RecipeInput> {
 
     public static final MapCodec<HybridRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
         Item.CODEC.listOf().fieldOf("input_seeds").forGetter(HybridRecipe::getInputSeeds),
-        SeedComponent.CODEC.listOf().fieldOf("output_seeds").forGetter(HybridRecipe::getOutputSeeds)
+        Item.CODEC.listOf().fieldOf("output_seeds").forGetter(HybridRecipe::getOutputSeeds)
     ).apply(inst, HybridRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, HybridRecipe> STREAM_CODEC = StreamCodec.composite(
         Item.STREAM_CODEC.apply(ByteBufCodecs.list()),
         HybridRecipe::getInputSeeds,
-        SeedComponent.STREAM_CODEC.apply(ByteBufCodecs.list()),
+        Item.STREAM_CODEC.apply(ByteBufCodecs.list()),
         HybridRecipe::getOutputSeeds,
         HybridRecipe::new
     );
 
     private final List<Holder<Item>> inputSeeds;
-    private final List<SeedComponent> outputSeeds;
+    private final List<Holder<Item>> outputSeeds;
 
-    public HybridRecipe(List<Holder<Item>> inputSeeds, List<SeedComponent> outputSeeds) {
+    public HybridRecipe(List<Holder<Item>> inputSeeds, List<Holder<Item>> outputSeeds) {
         this.inputSeeds = inputSeeds;
         this.outputSeeds = outputSeeds;
+    }
+
+    public List<ItemStack> getInputSeedPacketStacks() {
+        return inputSeeds.stream().map(Holder::value).map(item -> {
+            var info = ModSeeds.ALL_SEED.get(item);
+            if (info != null) {
+                var patch = SeedUtil.createSeedComponentPatch(item, info);
+                return new ItemStack(ModItems.SEED_PACKET, 1, patch);
+            }
+            return ItemStack.EMPTY;
+        }).filter(stack -> !stack.isEmpty()).toList();
+    }
+
+    public List<ItemStack> getOutputSeedPacketStacks() {
+        return outputSeeds.stream().map(h -> {
+            var comp = SeedUtil.getSeedComponent(h.value());
+            DataComponentPatch patch = DataComponentPatch.builder().set(ModDataComponents.SEED_COMPONENT.get(), comp).build();
+            return new ItemStack(ModItems.SEED_PACKET, 1, patch);
+        }).toList();
     }
 
     @Override
@@ -56,18 +80,18 @@ public class HybridRecipe extends BaseAbstractRecipe<RecipeInput> {
 
     public static class Builder {
         private final List<Holder<Item>> inputSeeds;
-        private final List<SeedComponent> outputSeeds;
+        private final List<Holder<Item>> outputSeeds;
 
-        public Builder(List<Holder<Item>> inputSeeds, List<SeedComponent> outputSeeds) {
+        public Builder(List<Holder<Item>> inputSeeds, List<Holder<Item>> outputSeeds) {
             this.inputSeeds = inputSeeds;
             this.outputSeeds = outputSeeds;
         }
 
-        public static Builder builder(List<Holder<Item>> inputSeeds, SeedComponent outputSeed) {
+        public static Builder builder(List<Holder<Item>> inputSeeds, Holder<Item> outputSeed) {
             return new Builder(inputSeeds, List.of(outputSeed));
         }
 
-        public static Builder builder(List<Holder<Item>> inputSeeds, List<SeedComponent> outputSeeds) {
+        public static Builder builder(List<Holder<Item>> inputSeeds, List<Holder<Item>> outputSeeds) {
             return new Builder(inputSeeds, outputSeeds);
         }
 
