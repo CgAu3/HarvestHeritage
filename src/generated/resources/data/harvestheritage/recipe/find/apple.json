@@ -4,14 +4,7 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:oak_log",
-            "minecraft:apple"
-          ],
-          "seed": "minecraft:apple",
-          "stage": 4
-        }
+        "harvestheritage:seed_component": "minecraft:apple"
       },
       "id": "harvestheritage:known_seed"
     }

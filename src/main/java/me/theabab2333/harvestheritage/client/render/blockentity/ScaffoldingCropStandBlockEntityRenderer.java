@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import me.theabab2333.harvestheritage.block.entity.ScaffoldingCropStandBlockEntity;
 import me.theabab2333.harvestheritage.client.render.blockentity.state.ScaffoldingCropStandBlockEntityRenderState;
 import me.theabab2333.harvestheritage.component.SeedComponent;
+import me.theabab2333.harvestheritage.init.ModSeeds;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.BlockModelResolver;
 import net.minecraft.client.renderer.block.model.BlockDisplayContext;
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -55,7 +57,10 @@ public class ScaffoldingCropStandBlockEntityRenderer
 
         BlockState azaleaState = Blocks.AZALEA.defaultBlockState();
         this.blockModelResolver.update(state.block, azaleaState, BLOCK_DISPLAY_CONTEXT);
-        if (state.stage == seedComponent.stage()) {
+
+        Item seedItem = seedComponent.seed().value();
+        var seedInfo = ModSeeds.ALL_SEED.get(seedItem);
+        if (seedInfo != null && state.stage == seedInfo.stage()) {
             BlockState sporeState = Blocks.SPORE_BLOSSOM.defaultBlockState();
             this.blockModelResolver.update(state.block1, sporeState, BLOCK_DISPLAY_CONTEXT);
         }

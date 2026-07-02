@@ -95,14 +95,17 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
     public void tick(ServerLevel level, BlockPos pos, BlockState state, RandomSource random) {
         if (this.seedPacketComponent == null) return;
 
-        int needStage = this.seedPacketComponent.seedComponent().stage();
+        Item seedItem = this.seedPacketComponent.seedComponent().seed().value();
+        var seedInfo = SeedUtil.getSeedInfo(seedItem);
+        if (seedInfo == null) return;
+        int needStage = seedInfo.stage();
+
         if (this.stage == needStage) {
             find(level, pos);
             return;
         }
 
-        var seedInfo = SeedUtil.getSeedInfo(this.seedPacketComponent.seedComponent().seed().value());
-        if (seedInfo != null && seedInfo.block() != Blocks.AIR) {
+        if (seedInfo.block() != Blocks.AIR) {
             BlockPos belowPos = pos.below(2);
             BlockState belowState = level.getBlockState(belowPos);
             if (!belowState.is(seedInfo.block())) return;
@@ -130,7 +133,10 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
                     if (state2.getBlock() instanceof BaseCropStandBlock) {
                         BaseCropStandBlockEntity be2 = (BaseCropStandBlockEntity) level.getBlockEntity(pos2);
                         SeedPacketComponent component = be2.getSeedPacketComponent();
-                        if (component != null && component.seedComponent().stage() == be2.stage) {
+                        if (component == null) continue;
+                        Item be2SeedItem = component.seedComponent().seed().value();
+                        var be2Info = SeedUtil.getSeedInfo(be2SeedItem);
+                        if (be2Info != null && be2Info.stage() == be2.stage) {
                             hybrid(be1, this.seedPacketComponent, component, level);
                             return;
                         }

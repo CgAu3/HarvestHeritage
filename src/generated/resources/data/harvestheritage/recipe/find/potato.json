@@ -4,13 +4,7 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:potato"
-          ],
-          "seed": "minecraft:potato",
-          "stage": 3
-        }
+        "harvestheritage:seed_component": "minecraft:potato"
       },
       "id": "harvestheritage:known_seed"
     }

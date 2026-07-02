@@ -3,13 +3,10 @@ package me.theabab2333.harvestheritage.recipe;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import lombok.Getter;
-import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.init.ModRecipes;
-import me.theabab2333.harvestheritage.init.ModSeeds;
 import me.theabab2333.harvestheritage.util.SeedUtil;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -50,22 +47,15 @@ public class HybridRecipe extends BaseAbstractRecipe<RecipeInput> {
     }
 
     public List<ItemStack> getInputSeedPacketStacks() {
-        return inputSeeds.stream().map(Holder::value).map(item -> {
-            var info = ModSeeds.ALL_SEED.get(item);
-            if (info != null) {
-                var patch = SeedUtil.createSeedComponentPatch(item, info);
-                return new ItemStack(ModItems.SEED_PACKET, 1, patch);
-            }
-            return ItemStack.EMPTY;
-        }).filter(stack -> !stack.isEmpty()).toList();
+        return inputSeeds.stream().map(Holder::value)
+            .map(item -> new ItemStack(ModItems.SEED_PACKET, 1, SeedUtil.createSeedComponentPatch(item)))
+            .toList();
     }
 
     public List<ItemStack> getOutputSeedPacketStacks() {
-        return outputSeeds.stream().map(h -> {
-            var comp = SeedUtil.getSeedComponent(h.value());
-            DataComponentPatch patch = DataComponentPatch.builder().set(ModDataComponents.SEED_COMPONENT.get(), comp).build();
-            return new ItemStack(ModItems.SEED_PACKET, 1, patch);
-        }).toList();
+        return outputSeeds.stream()
+            .map(h -> new ItemStack(ModItems.SEED_PACKET, 1, SeedUtil.createSeedComponentPatch(h.value())))
+            .toList();
     }
 
     @Override

@@ -4,13 +4,7 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:sweet_berries"
-          ],
-          "seed": "minecraft:sweet_berries",
-          "stage": 3
-        }
+        "harvestheritage:seed_component": "minecraft:sweet_berries"
       },
       "id": "harvestheritage:known_seed"
     }

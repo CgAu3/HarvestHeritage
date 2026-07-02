@@ -4,13 +4,7 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:sugar_cane"
-          ],
-          "seed": "minecraft:sugar_cane",
-          "stage": 3
-        }
+        "harvestheritage:seed_component": "minecraft:sugar_cane"
       },
       "id": "harvestheritage:known_seed"
     }

@@ -4,15 +4,7 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:chicken",
-            "minecraft:feather",
-            "minecraft:egg"
-          ],
-          "seed": "minecraft:chicken",
-          "stage": 4
-        }
+        "harvestheritage:seed_component": "minecraft:chicken"
       },
       "id": "harvestheritage:known_seed"
     }

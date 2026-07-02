@@ -4,13 +4,7 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:sea_pickle"
-          ],
-          "seed": "minecraft:sea_pickle",
-          "stage": 3
-        }
+        "harvestheritage:seed_component": "minecraft:sea_pickle"
       },
       "id": "harvestheritage:known_seed"
     }

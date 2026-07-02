@@ -34,7 +34,7 @@ public class FindRecipeProvider extends ModRecipeProvider {
 
     private void buildFindSeeds(RecipeOutput output) {
         FIND_SEEDS.forEach(item -> {
-            DataComponentPatch patch = SeedUtil.createSeedComponentPatch(item, SeedUtil.getSeedInfo(item));
+            DataComponentPatch patch = SeedUtil.createSeedComponentPatch(item);
             ItemStackTemplate stack = new ItemStackTemplate(ModItems.KNOWN_SEED.get(), 1, patch);
             FindRecipe.Builder.builder(ModItems.UNKNOWN_SEED, List.of(stack)).save(output, FIND.withSuffix(SeedUtil.getPath(item)));
         });

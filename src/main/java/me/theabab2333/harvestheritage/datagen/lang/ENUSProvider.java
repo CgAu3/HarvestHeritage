@@ -74,6 +74,7 @@ public class ENUSProvider extends LanguageProvider {
         add("jei.harvestheritage.find", "Let me see see");
         add("jei.harvestheritage.hybrid", "Hybrid");
         add("jei.harvestheritage.hybrid.tooltip", "Will appear in seed packet form!");
+        add("jei.harvestheritage.seed_output", "Seed Output");
         add("advancement.harvestheritage.kfc.title", "Crazy Crazy Thursday");
         add("advancement.harvestheritage.kfc.description", "Eat KFC");
         add("advancement.harvestheritage.fride_seedsack.title", "Snacking Spectator");

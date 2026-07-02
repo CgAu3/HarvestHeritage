@@ -4,13 +4,7 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:glow_berries"
-          ],
-          "seed": "minecraft:glow_berries",
-          "stage": 3
-        }
+        "harvestheritage:seed_component": "minecraft:glow_berries"
       },
       "id": "harvestheritage:known_seed"
     }

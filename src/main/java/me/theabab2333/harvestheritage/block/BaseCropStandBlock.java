@@ -7,9 +7,9 @@ import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
 import me.theabab2333.harvestheritage.init.ModItems;
 import me.theabab2333.harvestheritage.item.GrassShearItem;
+import me.theabab2333.harvestheritage.util.SeedUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.server.level.ServerLevel;
@@ -98,13 +98,16 @@ public abstract class BaseCropStandBlock extends Block implements EntityBlock, I
             blockEntity.setStage(0);
             blockEntity.setChanged();
             return InteractionResult.PASS;
-        } else if (component != null && component.seedComponent().stage() == blockEntity.getStage()) {
-            NonNullList<ItemStack> itemStacks = getSeedOutput(component, level);
-            this.dropContents(level, pos, itemStacks);
-            blockEntity.setStage(0);
-            blockEntity.setChanged();
-            return InteractionResult.PASS;
         } else {
+            if (component == null) return InteractionResult.FAIL;
+            var seedInfo = SeedUtil.getSeedInfo(component.seedComponent().seed().value());
+            if (seedInfo != null && seedInfo.stage() == blockEntity.getStage()) {
+                NonNullList<ItemStack> itemStacks = getSeedOutput(component, level);
+                this.dropContents(level, pos, itemStacks);
+                blockEntity.setStage(0);
+                blockEntity.setChanged();
+                return InteractionResult.PASS;
+            }
             return InteractionResult.FAIL;
         }
     }
@@ -115,8 +118,11 @@ public abstract class BaseCropStandBlock extends Block implements EntityBlock, I
         int output = component.output();
         RandomSource random = level.getRandom();
         int count = random.nextInt(output) + 1;
-        for (Holder<Item> itemHolder : component.seedComponent().result()) {
-            itemStacks.add(new ItemStack(itemHolder, count));
+        var seedInfo = SeedUtil.getSeedInfo(component.seedComponent().seed().value());
+        if (seedInfo != null) {
+            for (Item resultItem : seedInfo.results()) {
+                itemStacks.add(new ItemStack(resultItem, count));
+            }
         }
         return itemStacks;
     }

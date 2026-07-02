@@ -6,6 +6,7 @@ import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModBlocks;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
+import me.theabab2333.harvestheritage.init.ModSeeds;
 import me.theabab2333.harvestheritage.util.SeedUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -52,17 +53,23 @@ public class SeedPacketItem extends KnownSeedItem implements ISeedItem {
         SeedPacketComponent packetComponent = itemStack.get(ModDataComponents.SEED_PACKET_COMPONENT);
         if (packetComponent != null) {
             SeedComponent seedComponent = packetComponent.seedComponent();
-            list.add(Component.translatable("item.harvestheritage.seed.tooltip.seed", SeedUtil.getSeedName(seedComponent.seed().value()))
+            Item seedItem = seedComponent.seed().value();
+            list.add(Component.translatable("item.harvestheritage.seed.tooltip.seed", SeedUtil.getSeedName(seedItem))
                 .withStyle(ChatFormatting.GREEN));
-            list.add(Component.translatable("item.harvestheritage.seed.tooltip.stage", seedComponent.stage())
-                .withStyle(ChatFormatting.LIGHT_PURPLE));
-            StringBuilder resultBuilder = new StringBuilder();
-            for (int i = 0; i < packetComponent.seedComponent().result().size(); i++) {
-                if (i > 0) resultBuilder.append(", ");
-                resultBuilder.append(SeedUtil.getSeedName(packetComponent.seedComponent().result().get(i).value()).getString());
+
+            ModSeeds.SeedInfo info = ModSeeds.ALL_SEED.get(seedItem);
+            if (info != null) {
+                list.add(Component.translatable("item.harvestheritage.seed.tooltip.stage", info.stage())
+                    .withStyle(ChatFormatting.LIGHT_PURPLE));
+                StringBuilder resultBuilder = new StringBuilder();
+                List<Item> results = info.results();
+                for (int i = 0; i < results.size(); i++) {
+                    if (i > 0) resultBuilder.append(", ");
+                    resultBuilder.append(SeedUtil.getSeedName(results.get(i)).getString());
+                }
+                list.add(Component.translatable("item.harvestheritage.seed_packet.tooltip.result", resultBuilder.toString())
+                    .withStyle(ChatFormatting.YELLOW));
             }
-            list.add(Component.translatable("item.harvestheritage.seed_packet.tooltip.result", resultBuilder.toString())
-                .withStyle(ChatFormatting.YELLOW));
 
             list.add(Component.translatable("item.harvestheritage.seed_packet.tooltip.speed", packetComponent.speed())
                 .withStyle(ChatFormatting.BLUE));
@@ -79,8 +86,8 @@ public class SeedPacketItem extends KnownSeedItem implements ISeedItem {
     public Holder<Item> seed(ItemStack itemStack) {
         if (itemStack.get(ModDataComponents.SEED_PACKET_COMPONENT) instanceof SeedPacketComponent seedPacketComponent) {
             return seedPacketComponent.seedComponent().seed();
-        } else if (itemStack.get(ModDataComponents.SEED_COMPONENT) instanceof SeedComponent seedComponent) {
-            return seedComponent.seed();
+        } else if (itemStack.get(ModDataComponents.SEED_COMPONENT) instanceof SeedComponent(Holder<Item> seed)) {
+            return seed;
         } else {
             return Items.AIR.builtInRegistryHolder();
         }

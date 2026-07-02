@@ -4,13 +4,7 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "harvestheritage:grape"
-          ],
-          "seed": "harvestheritage:grape",
-          "stage": 3
-        }
+        "harvestheritage:seed_component": "harvestheritage:grape"
       },
       "id": "harvestheritage:known_seed"
     }

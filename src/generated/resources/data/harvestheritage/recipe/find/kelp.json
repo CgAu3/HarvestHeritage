@@ -4,13 +4,7 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:kelp"
-          ],
-          "seed": "minecraft:kelp",
-          "stage": 3
-        }
+        "harvestheritage:seed_component": "minecraft:kelp"
       },
       "id": "harvestheritage:known_seed"
     }

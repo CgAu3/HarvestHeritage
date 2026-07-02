@@ -35,7 +35,7 @@ public class SeedUtil {
     public static SeedComponent getSeedComponent(Item item) {
         ModSeeds.SeedInfo seedInfo = getSeedInfo(item);
         if (seedInfo != null) {
-            return createSeedComponent(item, seedInfo);
+            return createSeedComponent(item);
         }
         throw new IllegalArgumentException("No seed info found for item: " + item);
     }
@@ -44,22 +44,20 @@ public class SeedUtil {
         return item.builtInRegistryHolder();
     }
 
-    public static SeedComponent createSeedComponent(Item seedItem, ModSeeds.SeedInfo seedInfo) {
-        List<Holder<Item>> resultHolders = seedInfo.results().stream().map(item -> (Holder<Item>) item.builtInRegistryHolder()).toList();
-        return SeedComponent.createSeed(getHolder(seedItem), resultHolders, seedInfo.stage());
+    public static SeedComponent createSeedComponent(Item seedItem) {
+        return SeedComponent.createSeed(getHolder(seedItem));
     }
 
     public static DataComponentPatch createSeedComponentPatch(SeedComponent component) {
         return DataComponentPatch.builder().set(ModDataComponents.SEED_COMPONENT.get(), component).build();
     }
 
-    public static DataComponentPatch createSeedComponentPatch(Item seedItem, ModSeeds.SeedInfo seedInfo) {
-        return createSeedComponentPatch(createSeedComponent(seedItem, seedInfo));
+    public static DataComponentPatch createSeedComponentPatch(Item seedItem) {
+        return createSeedComponentPatch(createSeedComponent(seedItem));
     }
 
     public static ItemStack getSeedPacket(Item item) {
-        ModSeeds.SeedInfo seedInfo = getSeedInfo(item);
-        DataComponentPatch dataComponentPatch = createSeedComponentPatch(item, seedInfo);
+        DataComponentPatch dataComponentPatch = createSeedComponentPatch(item);
         return new ItemStack(ModItems.SEED_PACKET, 1, dataComponentPatch);
     }
 

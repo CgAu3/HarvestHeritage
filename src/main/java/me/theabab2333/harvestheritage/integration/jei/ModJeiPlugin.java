@@ -11,24 +11,34 @@ import me.theabab2333.harvestheritage.init.ModRecipes;
 import me.theabab2333.harvestheritage.init.ModSeeds;
 import me.theabab2333.harvestheritage.integration.jei.category.FindRecipeCategory;
 import me.theabab2333.harvestheritage.integration.jei.category.HybridRecipeCategory;
+import me.theabab2333.harvestheritage.integration.jei.category.SeedOutputRecipeCategory;
+import me.theabab2333.harvestheritage.integration.jei.recipe.SeedOutputRecipe;
 import me.theabab2333.harvestheritage.recipe.FindRecipe;
 import me.theabab2333.harvestheritage.recipe.HybridRecipe;
+import me.theabab2333.harvestheritage.util.SeedUtil;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.types.IRecipeHolderType;
+import mezz.jei.api.recipe.types.IRecipeType;
 import mezz.jei.api.registration.IExtraIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 @JeiPlugin
 public class ModJeiPlugin implements IModPlugin {
     public static final Supplier<IRecipeHolderType<FindRecipe>> FIND_TYPE = IRecipeHolderType.createDeferred(ModRecipes.FIND_TYPE);
     public static final Supplier<IRecipeHolderType<HybridRecipe>> HYBRID_TYPE = IRecipeHolderType.createDeferred(ModRecipes.HYBRID_TYPE);
+
+    public static final IRecipeType<SeedOutputRecipe> SEED_OUTPUT_TYPE = IRecipeType.create(
+        HarvestHeritage.of("seed_output"), SeedOutputRecipe.class
+    );
 
     @Override
     public Identifier getPluginUid() {
@@ -39,13 +49,28 @@ public class ModJeiPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         var guiHelper = registration.getJeiHelpers().getGuiHelper();
 
-        registration.addRecipeCategories(new FindRecipeCategory(guiHelper), new HybridRecipeCategory(guiHelper));
+        registration.addRecipeCategories(
+            new FindRecipeCategory(guiHelper),
+            new HybridRecipeCategory(guiHelper),
+            new SeedOutputRecipeCategory(guiHelper)
+        );
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(FIND_TYPE.get(), ModRecipeReloadAndSyncEvent.FIND_SEED_RECIPES);
         registration.addRecipes(HYBRID_TYPE.get(), ModRecipeReloadAndSyncEvent.HYBRID_RECIPES);
+
+        List<SeedOutputRecipe> seedOutputRecipes = ModSeeds.ALL_SEED.entrySet().stream()
+            .map(entry -> {
+                ItemStack seedPacket = SeedUtil.getSeedPacket(entry.getKey());
+                List<ItemStack> outputs = entry.getValue().results().stream()
+                    .map(ItemStack::new)
+                    .toList();
+                return new SeedOutputRecipe(seedPacket, outputs);
+            })
+            .toList();
+        registration.addRecipes(SEED_OUTPUT_TYPE, seedOutputRecipes);
     }
 
     @Override

@@ -6,6 +6,7 @@ import me.theabab2333.harvestheritage.block.entity.BaseCropStandBlockEntity;
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModItems;
+import me.theabab2333.harvestheritage.init.ModSeeds;
 import me.theabab2333.harvestheritage.util.SeedUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -91,8 +92,12 @@ public class ModRegisterGuiLayersEvent {
                         SeedUtil.getSeedName(seedComponent.seed().value())
                     )
                     .withStyle(ChatFormatting.GREEN));
-                tooltips.add(Component.translatable("item.harvestheritage.seed.tooltip.stage", seedComponent.stage())
-                    .withStyle(ChatFormatting.LIGHT_PURPLE));
+
+                var seedInfo = ModSeeds.ALL_SEED.get(seedComponent.seed().value());
+                if (seedInfo != null) {
+                    tooltips.add(Component.translatable("item.harvestheritage.seed.tooltip.stage", seedInfo.stage())
+                        .withStyle(ChatFormatting.LIGHT_PURPLE));
+                }
                 tooltips.add(Component.translatable("block.harvestheritage.crop_stand.tooltip.stage", cropStandBlockEntity.getStage())
                     .withStyle(ChatFormatting.DARK_PURPLE));
                 tooltips.add(Component.translatable("item.harvestheritage.seed_packet.tooltip.speed", packetComponent.speed())

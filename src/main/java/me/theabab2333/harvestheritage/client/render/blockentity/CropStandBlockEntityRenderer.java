@@ -5,6 +5,7 @@ import me.theabab2333.harvestheritage.block.entity.BaseCropStandBlockEntity;
 import me.theabab2333.harvestheritage.block.entity.CropStandStandBlockEntity;
 import me.theabab2333.harvestheritage.client.render.blockentity.state.CropStandBlockEntityRenderState;
 import me.theabab2333.harvestheritage.component.SeedComponent;
+import me.theabab2333.harvestheritage.init.ModSeeds;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.BlockModelResolver;
 import net.minecraft.client.renderer.block.model.BlockDisplayContext;
@@ -13,6 +14,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -62,7 +64,9 @@ public class CropStandBlockEntityRenderer implements BlockEntityRenderer<CropSta
     public static int getRenderStage(BaseCropStandBlockEntity blockEntity, SeedComponent seedComponent) {
         int maxStage = 7;
         int stateStage = blockEntity.getStage();
-        int seedStage = seedComponent.stage();
+        Item seedItem = seedComponent.seed().value();
+        var seedInfo = ModSeeds.ALL_SEED.get(seedItem);
+        int seedStage = seedInfo != null ? seedInfo.stage() : 0;
 
         int renderStage;
         if (seedStage == 0) {

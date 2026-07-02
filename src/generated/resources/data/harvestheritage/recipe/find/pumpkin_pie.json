@@ -4,13 +4,7 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:pumpkin"
-          ],
-          "seed": "minecraft:pumpkin_pie",
-          "stage": 3
-        }
+        "harvestheritage:seed_component": "minecraft:pumpkin_pie"
       },
       "id": "harvestheritage:known_seed"
     }

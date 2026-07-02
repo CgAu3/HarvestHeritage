@@ -121,7 +121,7 @@ public class ModSeeds {
     public static List<ItemStack> getSeedPackets() {
         List<ItemStack> list = new ArrayList<>();
         for (var entry : ALL_SEED.entrySet()) {
-            DataComponentPatch patch = SeedUtil.createSeedComponentPatch(entry.getKey(), entry.getValue());
+            DataComponentPatch patch = SeedUtil.createSeedComponentPatch(entry.getKey());
             list.add(new ItemStack(ModItems.SEED_PACKET, 1, patch));
         }
         return list;

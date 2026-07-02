@@ -4,13 +4,7 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:porkchop"
-          ],
-          "seed": "minecraft:porkchop",
-          "stage": 4
-        }
+        "harvestheritage:seed_component": "minecraft:porkchop"
       },
       "id": "harvestheritage:known_seed"
     }

@@ -2,6 +2,7 @@ package me.theabab2333.harvestheritage.block.entity;
 
 import me.theabab2333.harvestheritage.component.SeedPacketComponent;
 import me.theabab2333.harvestheritage.init.ModBlockEntities;
+import me.theabab2333.harvestheritage.util.SeedUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -16,7 +17,9 @@ public class ScaffoldingCropStandBlockEntity extends BaseCropStandBlockEntity {
     public void tick(ServerLevel level, BlockPos pos, BlockState state, RandomSource random) {
         if (this.seedPacketComponent != null) {
             int speed = seedPacketComponent.speed();
-            int needStage = seedPacketComponent.seedComponent().stage();
+            var seedInfo = SeedUtil.getSeedInfo(this.seedPacketComponent.seedComponent().seed().value());
+            if (seedInfo == null) return;
+            int needStage = seedInfo.stage();
             if (random.nextInt(3) < speed) {
                 if (this.stage < needStage) {
                     this.stage++;

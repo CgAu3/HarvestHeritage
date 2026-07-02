@@ -32,7 +32,7 @@ public class SeedPacketRecipeProvider extends ModRecipeProvider {
 
     private void build(Map<Item, ModSeeds.SeedInfo> map) {
         for (var entry : map.entrySet()) {
-            var patch = SeedUtil.createSeedComponentPatch(entry.getKey(), entry.getValue());
+            var patch = SeedUtil.createSeedComponentPatch(entry.getKey());
             var path = "seedpacket/" + SeedUtil.getPath(entry.getKey());
 
             output.accept(

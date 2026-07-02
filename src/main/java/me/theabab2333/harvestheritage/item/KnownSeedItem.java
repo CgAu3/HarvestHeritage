@@ -3,6 +3,7 @@ package me.theabab2333.harvestheritage.item;
 import me.theabab2333.harvestheritage.api.item.IHasTooltips;
 import me.theabab2333.harvestheritage.component.SeedComponent;
 import me.theabab2333.harvestheritage.init.ModDataComponents;
+import me.theabab2333.harvestheritage.init.ModSeeds;
 import me.theabab2333.harvestheritage.util.SeedUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -27,8 +28,11 @@ public class KnownSeedItem extends Item implements IHasTooltips {
         } else {
             list.add(Component.translatable("item.harvestheritage.seed.tooltip.seed", SeedUtil.getSeedName(seedInfo.seed().value()))
                 .withStyle(ChatFormatting.GREEN));
-            list.add(Component.translatable("item.harvestheritage.seed.tooltip.stage", seedInfo.stage())
-                .withStyle(ChatFormatting.LIGHT_PURPLE));
+            ModSeeds.SeedInfo info = ModSeeds.ALL_SEED.get(seedInfo.seed().value());
+            if (info != null) {
+                list.add(Component.translatable("item.harvestheritage.seed.tooltip.stage", info.stage())
+                    .withStyle(ChatFormatting.LIGHT_PURPLE));
+            }
         }
         return list;
     }

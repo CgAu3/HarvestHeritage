@@ -4,13 +4,7 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:chorus_fruit"
-          ],
-          "seed": "minecraft:chorus_fruit",
-          "stage": 3
-        }
+        "harvestheritage:seed_component": "minecraft:chorus_fruit"
       },
       "id": "harvestheritage:known_seed"
     }

@@ -8,8 +8,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
 
-import java.util.List;
-
 public record SeedPacketComponent(SeedComponent seedComponent, int speed, int output) {
     public static final Codec<SeedPacketComponent> CODEC = RecordCodecBuilder.create(inst -> inst.group(
         SeedComponent.CODEC.fieldOf("seed_component").forGetter(SeedPacketComponent::seedComponent),
@@ -27,8 +25,8 @@ public record SeedPacketComponent(SeedComponent seedComponent, int speed, int ou
         SeedPacketComponent::new
     );
 
-    public static SeedPacketComponent createSeedPacket(Holder<Item> seed, List<Holder<Item>> holders, int stage, int speed, int output) {
-        return new SeedPacketComponent(SeedComponent.createSeed(seed, holders, stage), speed, output);
+    public static SeedPacketComponent createSeedPacket(Holder<Item> seed, int speed, int output) {
+        return new SeedPacketComponent(SeedComponent.createSeed(seed), speed, output);
     }
 
     public static SeedPacketComponent createSeedPacket(SeedComponent seedComponent, int speed, int output) {

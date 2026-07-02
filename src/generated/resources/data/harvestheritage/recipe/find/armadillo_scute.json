@@ -4,13 +4,7 @@
   "result": [
     {
       "components": {
-        "harvestheritage:seed_component": {
-          "result": [
-            "minecraft:armadillo_scute"
-          ],
-          "seed": "minecraft:armadillo_scute",
-          "stage": 4
-        }
+        "harvestheritage:seed_component": "minecraft:armadillo_scute"
       },
       "id": "harvestheritage:known_seed"
     }

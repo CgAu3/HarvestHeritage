@@ -58,6 +58,7 @@ public class ZHCNProvider extends LanguageProvider {
         add("jei.harvestheritage.find", "让我看看");
         add("jei.harvestheritage.hybrid", "杂交");
         add("jei.harvestheritage.hybrid.tooltip", "将以种子袋形式出战!");
+        add("jei.harvestheritage.seed_output", "种子产出");
         add("advancement.harvestheritage.kfc.title", "疯狂疯狂星期四");
         add("advancement.harvestheritage.kfc.description", "食用疯狂星期四");
         add("advancement.harvestheritage.fride_seedsack.title", "吃瓜群众");
