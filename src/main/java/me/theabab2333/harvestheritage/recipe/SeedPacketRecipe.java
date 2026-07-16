@@ -78,8 +78,8 @@ public class SeedPacketRecipe extends NormalCraftingRecipe {
         if (input.ingredientCount() != 2) {
             return false;
         }
-        SeedComponent targetComp = this.result.get(ModDataComponents.SEED_COMPONENT.get());
-        if (targetComp == null) return false;
+        SeedComponent target = this.result.get(ModDataComponents.SEED_COMPONENT.get());
+        if (target == null) return false;
 
         boolean hasPaper = false;
         boolean hasSeed = false;
@@ -91,8 +91,8 @@ public class SeedPacketRecipe extends NormalCraftingRecipe {
                     hasPaper = true;
                 } else if (this.knownSeed.test(itemStack)
                            && itemStack.has(ModDataComponents.SEED_COMPONENT.get())) {
-                    SeedComponent inputComp = itemStack.get(ModDataComponents.SEED_COMPONENT.get());
-                    if (inputComp != null && inputComp.seed().value().equals(targetComp.seed().value())) {
+                    SeedComponent seedComponent = itemStack.get(ModDataComponents.SEED_COMPONENT.get());
+                    if (seedComponent != null && seedComponent.seed().value().equals(target.getSeed())) {
                         hasSeed = true;
                     }
                 } else {
