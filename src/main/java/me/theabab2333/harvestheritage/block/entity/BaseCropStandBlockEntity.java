@@ -54,6 +54,7 @@ public abstract class BaseCropStandBlockEntity extends BlockEntity {
                 this.seedPacketComponent = component;
                 this.stage = 0;
             }
+            itemStack.shrink(1);
             setChanged();
             level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
         }
